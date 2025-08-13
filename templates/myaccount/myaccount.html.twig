@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Covoiturage{% endblock %}
+
+{% block body %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="{{ asset('script/main.js') }}" defer></script>
+{% endblock %}
+    <header>
+        <nav class="container titleshadow">
+            <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
+            <div><a href="" class="decoration navlink">Covoiturage</a></div>
+            <div><a href="#" class="decoration navlink">Contact</a></div>
+            <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
+            <div><a href="" class="decoration navlink">Deconnexion</a></div>
+        </nav>
+    </header>
+
+                
+<div class="userprofil">
+    <div class="mainuser">
+        <div><p><strong>Pseudo</strong></p></div>
+        <div><img src="/ecoridee/image/voiturier.jpg" alt="" class="userimg"></div>
+        <div><p><strong> Kirrua Zoldik</strong></p></div>
+        <div><p><u>kukurumontain@gmail.com</u></p></div>
+
+        <div>
+            <div class="driverpassengers">
+                <div>
+                    <button class="driverpassenger navlink2" id="btn">Chauffeur</button>
+                </div>
+                <div>
+                    <button class="driverpassenger navlink2" id="btnpassager" >Passager</button>
+                </div>
+            </div>
+            
+
+
+            <div action="" class="userform hidden" id="filter"  >
+                <div>
+                    <p style="font-size: 30px;" ><strong><u>Profile Voiture</u></strong></p>
+                </div>  
+
+
+                <div class="accountext">
+                    <div><label for="">Numéro de la plaque :</label></div>
+                    <div>   </div>
+                </div>
+
+                <div class="accountext">
+                    <div><label for=""> première imatriculation :</label></div>
+                    <div>    </div>
+                </div>
+
+                <div class="accountext">
+                    <div><label for="">Modèle,marque,couleur  :</label></div>
+                    <div>   </div>
+                </div>
+
+                <div class="accountext">
+                    <div><label for="">Places disponibles :</label></div>
+                    <div>   </div>
+                </div>
+            <div class="accountext">
+                <div><label for="">Préférences :</label></div>
+                <div>  </div>
+            </div>
+
+            </div>
+                
+            </div>
+        </div>
+
+    
+    <div class="currentjourney">
+        <div class="journey">
+            <div><strong><a href="{{ path('newroute') }}" class="createlook routestyle">Créer un trajet</a></strong></div>
+            <div><strong><a href="" class="createlook routestyle ">Trajet en cours</a></strong></div>
+        </div>
+
+        <div class="historical">
+            <div>
+                <p><strong><u>Historique trajets</u></strong></p>
+            </div>
+<div class="historicals">                    
+
+    <div>
+        <div href="/ecoridee/HTML/renseignement.html" class="reserved">        
+            <div class="backgroundhistorical">
+                <div class="profilhistorical">
+
+                    <div class="destination">
+                        <div>
+                            <div class="time">
+                                
+                                <p><img src="/ecoridee/tools/voiture-electrique.png" alt="eleccar" class="eleccar">
+                                    <strong> Durée : 1H15 🕒</strong>
+                                </p>
+                                    
+                            </div>
+                            <div class="startfinish">
+                            
+                                <div>
+                                    <p><strong> 🏁 Départ 🏁: 10H Manosque gare routière </strong></p>
+                                </div>
+                            </div> 
+                            
+                            <div >------------------------------------------------------------</div>
+                            <div class="startfinish">
+                                <div>
+                                    <p><strong> 🎯 Arrivée 🎯: 11H15 Marseille gare saint charle </strong></p>
+                                </div>
+                            </div> 
+                        </div>                               
+                    </div>
+
+                    <div class="priceplacehistorical">
+                        <div>
+                            <p><strong>3 Passagers</strong></p>
+                        </div>
+                        <div>
+                            <strong>15/05/2025</strong>
+                        </div>
+                    </div>               
+                </div>
+            </div>  
+        </div> 
+    </div>
+</div>
+
+{% endblock %}
