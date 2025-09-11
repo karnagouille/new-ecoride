@@ -16,14 +16,13 @@
     <header>
         <nav class="container titleshadow">
             <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
-            <div><a href="" class="decoration navlink">Covoiturage</a></div>
+            <div><a href="{{ path('carpool') }}" class="decoration navlink">Covoiturage</a></div>
             <div><a href="#" class="decoration navlink">Contact</a></div>
             <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
             <div><a href="" class="decoration navlink">Deconnexion</a></div>
         </nav>
     </header>
 
-                
 <div class="userprofil">
     <div class="mainuser">
         <div><p><strong>Pseudo</strong></p></div>
@@ -42,7 +41,7 @@
             </div>
             
 
-
+{{ form_start(form) }}
             <div action="" class="userform hidden" id="filter"  >
                 <div>
                     <p style="font-size: 30px;" ><strong><u>Profile Voiture</u></strong></p>
@@ -51,30 +50,54 @@
 
                 <div class="accountext">
                     <div><label for="">Numéro de la plaque :</label></div>
-                    <div>   </div>
+                    <div>{{ form_widget(form.registration) }}   </div>
                 </div>
 
                 <div class="accountext">
-                    <div><label for=""> première imatriculation :</label></div>
-                    <div>    </div>
+                    <div><label for=""> Première imatriculation :</label></div>
+                    <div>{{ form_widget(form.date_first_registration) }}    </div>
                 </div>
 
                 <div class="accountext">
-                    <div><label for="">Modèle,marque,couleur  :</label></div>
-                    <div>   </div>
+                    <div><label for="">Modèle:</label></div>
+                    <div>{{ form_widget(form.model) }}   </div>
                 </div>
 
                 <div class="accountext">
-                    <div><label for="">Places disponibles :</label></div>
-                    <div>   </div>
+                    <div><label for="">Couleur  :</label></div>
+                    <div>{{ form_widget(form.color) }}   </div>
                 </div>
-            <div class="accountext">
-                <div><label for="">Préférences :</label></div>
-                <div>  </div>
+
+                <div class="accountext">
+                    <div><label for="">Marque  :</label></div>
+                    <div>{{ form_widget(form.brand) }}  </div>
+                </div>
+
+                <div class="accountext">
+                    <div><label for="">Energy :</label></div>
+                    <div>{{ form_widget(form.energy) }}  </div>
+                </div>
+
+                <div class="accountext">
+                    <div><label for="">Préférences :</label></div>
+                    <div>{{ form_widget(form.preference) }}  </div>
+                </div>
+{{ form_end(form) }}
+                <h2>Mes voitures</h2>
+    <ul>
+        {% for car in cars %}
+            <li>
+                {{ car.model }} - 
+                {{ car.brand ? car.brand.libelle : 'Pas de marque' }}
+                <a href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a>
+            </li>
+        {% else %}
+            <li>Aucune voiture enregistrée</li>
+        {% endfor %}
             </div>
 
-            </div>
-                
+
+
             </div>
         </div>
 

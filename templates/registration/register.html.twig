@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+
+
+
+{{ form_errors(registrationForm) }}
+    {{ form_start(registrationForm) }}
+<div class="log  ">
+            <div>
+                <div><img src="/image/connexion.png" alt="" class="imglog"></div>
+            </div>
+
+            <div>
+                <h1 class="h3 mb-3 font-weight-normal infolog titleshadow">S'ENREGISTRER</h1>
+            </div>
+        
+        <div class="log">
+
+            <div class="accountext">
+                <div>{{ form_row(registrationForm.pseudo,{
+            label:"Pseudo"}) }}</div>
+            </div>
+
+            <div class="accountext">
+                <div>{{ form_row(registrationForm.lastname,{
+            label:"Nom de Famille"}) }}</div>
+            </div>
+
+            <div class="accountext">
+                <div>{{ form_row(registrationForm.name,{
+            label:"Prénom"}) }}</div>
+            </div>
+
+            <div class="accountext">
+                <div>{{ form_row(registrationForm.email,{
+            label:"Adresse Mail"}) }}</div>
+            </div>
+
+            <div class="accountext">
+                <div>{{ form_row(registrationForm.plainPassword,{
+            label:"Mot de Passe"}) }}</div>
+            </div>
+        
+
+            {{ form_row(registrationForm.agreeTerms,{
+            label:"accepter les conditions"
+        }) }}
+        </div>
+        <button type="submit" class="btn">s'enregistré</button>
+    </div>
+
+
+
+
+    {{ form_end(registrationForm) }}
+{% endblock %}

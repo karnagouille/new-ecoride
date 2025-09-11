@@ -87,44 +87,59 @@
         </div>
     </div>
 
-
+{{ form_start(form) }}
     <form action="" class="trajetcreation">
             <div class="accountext">
                 <div>
-                    <label for="">Départ :</label>
+                    <label for="">Ville de Départ :</label>
                 </div>
                 <div>
-                    <input type="text" class="inputaccount">
+                    {{ form_widget(form.startTown) }}
                 </div>
             </div>
 
             <div class="accountext">
                 <div>
-                    <label for="" >Arrivée :</label>
+                    <label for="">Heure de départ :</label>
                 </div>
                 <div>
-                    <input type="text" class="inputaccount">
+                    {{ form_widget(form.hour) }}
                 </div>
             </div>
 
             <div class="accountext">
                 <div>
-                    <label for="">Véhicule :</label>
+                    <label for="" >Ville d'Arrivée :</label>
                 </div>
                 <div>
-                    <select class="inputroute">
-                        <option value="select"> Batmobile</option>
-                        <option value=""></option>
-                    </select>
+                    {{ form_widget(form.endTown) }}
                 </div>
             </div>
+
+            <div class="accountext">
+                <div>
+                    <label for="">Date de Départ:</label>
+                </div>
+                <div>
+                    {{ form_widget(form.startAt) }}
+                </div>
+            </div>
+
+
+            <div class="accountext">
+    <label for="">Véhicule :</label>
+    <div>
+        {{ form_widget(form.car, {'attr': {'class': 'inputroute'}}) }}
+    </div>
+</div>
+
 
             <div class="accountext">
                 <div>
                     <label for="">Prix :</label>
                 </div>
                 <div>
-                    <input type="text" class="inputaccount">
+                <input type="text">
                 </div>
             </div>
             <div class="submitbutton">
@@ -134,4 +149,5 @@
             </div>
         </form>
     </div>
+    {{ form_end(form) }}
     {% endblock %}

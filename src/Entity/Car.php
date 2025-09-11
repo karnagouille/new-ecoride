@@ -2,8 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CarRepository;
+use App\Entity\User;
+use App\Entity\Brand;
+use App\Entity\Carpooling;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CarRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
@@ -28,11 +33,54 @@ class Car
     #[ORM\Column(length: 255)]
     private ?string $date_first_registration = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $preference = null;
+
+    #[ORM\Column(length: 255, unique: true)]
+private ?string $slug = null;
+
+#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'cars')]
+#[ORM\JoinColumn(nullable: false)]
+private ?User $user = null;
+public function getUser(): ?User
+{
+    return $this->user;
+}
+
+public function setUser(?User $user): static
+{
+    $this->user = $user;
+    return $this;
+}
+
+
+public function getSlug(): ?string
+{
+    
+    return $this->slug;
+}
+
+public function setSlug(string $slug): static
+{
+    $this->slug = $slug;
+    return $this;
+}
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
     
     private ?Brand $brand = null;
+
+    /**
+     * @var Collection<int, Carpooling>
+     */
+    #[ORM\OneToMany(targetEntity: Carpooling::class, mappedBy: 'Car')]
+    private Collection $carpoolings;
+
+    public function __construct()
+    {
+        $this->carpoolings = new ArrayCollection();
+    }
 
     public function getBrand(): ?Brand
     {
@@ -98,6 +146,18 @@ class Car
         return $this;
     }
 
+    public function getPreference(): ?string
+    {
+        return $this->preference;
+    }
+
+    public function setPreference(string $preference): static
+    {
+        $this->preference = $preference;
+
+        return $this;
+    }
+
     public function getDateFirstRegistration(): ?string
     {
         return $this->date_first_registration;
@@ -106,6 +166,36 @@ class Car
     public function setDateFirstRegistration(string $date_first_registration): static
     {
         $this->date_first_registration = $date_first_registration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Carpooling>
+     */
+    public function getCarpoolings(): Collection
+    {
+        return $this->carpoolings;
+    }
+
+    public function addCarpooling(Carpooling $carpooling): static
+    {
+        if (!$this->carpoolings->contains($carpooling)) {
+            $this->carpoolings->add($carpooling);
+            $carpooling->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCarpooling(Carpooling $carpooling): static
+    {
+        if ($this->carpoolings->removeElement($carpooling)) {
+            // set the owning side to null (unless already changed)
+            if ($carpooling->getCar() === $this) {
+                $carpooling->setCar(null);
+            }
+        }
 
         return $this;
     }

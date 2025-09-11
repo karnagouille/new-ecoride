@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la voiture{% endblock %}
+
+{% block body %}
+<h1>Détails de la voiture</h1>
+
+<div class="card">
+    {% if car.brand %}
+    Marque : {{ car.brand.libelle }}
+{% else %}
+    Marque : Non définie
+{% endif %}
+    <p><strong>Modèle :</strong> {{ car.model }}</p>
+    <p><strong>Numéro de plaque :</strong> {{ car.registration }}</p>
+    <p><strong>Couleur :</strong> {{ car.color }}</p>
+    <p><strong>Énergie :</strong> {{ car.energy }}</p>
+    <p><strong>Première immatriculation :</strong> {{ car.dateFirstRegistration }}</p>
+    <p><strong>Préférences :</strong> {{ car.preference }}</p>
+    <button type="submit">modifier</button>
+
+    <form method="post" action="{{ path('car_remove', {'id': car.id}) }}">
+    {# <input type="hidden" name="_method" value="DELETE"> #}
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ car.id) }}">
+    <button type="submit">Supprimer</button>
+</form>
+</div>
+
+<a href="{{ path('myaccount') }}">Retour</a>
+{% endblock %}

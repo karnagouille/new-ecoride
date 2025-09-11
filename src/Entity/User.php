@@ -2,13 +2,20 @@
 
 namespace App\Entity;
 
+use App\Entity\Car;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-class User
+#[UniqueEntity(fields: ['email'], message: 'il y a déjà un compte avec ce pseudo')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,26 +28,108 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $passwaord = null;
+    private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $phonenumber = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $date_birth = null;
 
-    #[ORM\Column(type: Types::BLOB)]
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
     private $photo = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $pseudo = null;
+
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Car::class)]
+    private Collection $cars;
+
+    #[ORM\Column]
+    private bool $isVerified = false;
+
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email ?? '';
+    }
+
+
+    public function getUsername(): string
+    {
+        return $this->getUserIdentifier();
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
+
+    }
+
+    
+    /**
+     * @return Collection|Car[]
+     */
+    public function getCars(): Collection
+    {
+        return $this->cars;
+    }
+
+    public function addCar(Car $car): static
+    {
+        if (!$this->cars->contains($car)) {
+            $this->cars->add($car);
+            $car->setUser($this);
+        }
+        return $this;
+    }
+
+    public function removeCar(Car $car): static
+    {
+        if ($this->cars->removeElement($car)) {
+            if ($car->getUser() === $this) {
+                $car->setUser(null);
+            }
+        }
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -55,7 +144,6 @@ class User
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -67,7 +155,6 @@ class User
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
         return $this;
     }
 
@@ -79,19 +166,6 @@ class User
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPasswaord(): ?string
-    {
-        return $this->passwaord;
-    }
-
-    public function setPasswaord(string $passwaord): static
-    {
-        $this->passwaord = $passwaord;
-
         return $this;
     }
 
@@ -103,7 +177,6 @@ class User
     public function setPhonenumber(string $phonenumber): static
     {
         $this->phonenumber = $phonenumber;
-
         return $this;
     }
 
@@ -115,7 +188,6 @@ class User
     public function setAdresse(string $adresse): static
     {
         $this->adresse = $adresse;
-
         return $this;
     }
 
@@ -127,7 +199,6 @@ class User
     public function setDateBirth(string $date_birth): static
     {
         $this->date_birth = $date_birth;
-
         return $this;
     }
 
@@ -139,7 +210,6 @@ class User
     public function setPhoto($photo): static
     {
         $this->photo = $photo;
-
         return $this;
     }
 
@@ -151,6 +221,17 @@ class User
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
