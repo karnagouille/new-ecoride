@@ -16,28 +16,48 @@ class CarpoolingRepository extends ServiceEntityRepository
         parent::__construct($registry, Carpooling::class);
     }
 
-//    /**
-//     * @return Carpooling[] Returns an array of Carpooling objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+public function searchCarpool($startTown, $endTown, $passenger, $startAt,$hour,$price,$traveltime,$electric,$note)
+{
+    $qb = $this->createQueryBuilder('c');
 
-//    public function findOneBySomeField($value): ?Carpooling
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    if ($startTown) {
+        $qb->andWhere('c.startTown = :startTown')->setParameter('startTown', $startTown);
+    }
+    if ($endTown) {
+        $qb->andWhere('c.endTown = :endTown')->setParameter('endTown', $endTown);
+    }
+    if ($passenger) {
+        $qb->andWhere('c.passenger >= :passenger')->setParameter('passenger', $passenger);
+    }
+    if ($startAt) {
+        $qb->andWhere('c.startAt = :startAt')->setParameter('startAt', $startAt);
+    }
+    if ($hour) {
+        $qb->andWhere('c.hour = :hour')->setParameter('hour', $hour);
+    }
+
+    if ($price) {
+    if ($price === 'asc') {
+        $qb->orderBy('c.price', 'ASC');
+    } else {
+        $qb->orderBy('c.price', 'DESC');
+    }
+    }
+    if ($traveltime) {
+        [$min, $max] = explode('-', $traveltime);
+        $qb->andWhere('c.traveltime BETWEEN :min AND :max')
+            ->setParameter('min', $min)
+            ->setParameter('max', $max);
+    }
+
+    if ($electric !== null) {
+        $qb->andWhere('c.electric = :electric')->setParameter('electric', $electric);
+    }
+
+    if ($note) {
+        $qb->andWhere('c.note >= :note')->setParameter('note', $note);
+    }
+
+    return $qb->getQuery()->getResult();
+}
 }

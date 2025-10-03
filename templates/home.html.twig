@@ -14,33 +14,42 @@
     <header>
         <nav class="container titleshadow">
             <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
-            <div><a href="{{ path('carpool') }}" class="decoration navlink">Covoiturage</a></div>
+            <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
             <div><a href="#" class="decoration navlink">Contact</a></div>
             <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
-            <div><a href="{{ path('connection') }}" class="decoration navlink">Connexion</a></div>
+
+            {% if app.user %}
+            <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
+            {% else %}        
+            <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
+            {% endif %}
         </nav>
     </header>
-<main>
+
+
 <div class="search">
     <div class="tittle">
         <h1>EcoRide</h1>
         <h2>Le Covoiturage 100% voiture</h2>
     </div>
+    
+    <div class="searchcar">
+    
+    {{ form_start(form, {'action': path('searchcarpool'), 'method': 'POST'}) }}
 
-    <form class="form">
-        <input class="input" type="search" placeholder="Départ">
-        <input class="input" type="search" placeholder="Destination">
+            {{form_widget(form.startTown) }}
+            {{ form_widget(form.endTown) }}
+            {{ form_widget(form.passenger) }}
+            {{ form_widget(form.startAt) }}
+            {{ form_widget(form.hour) }}
+                <button class="find" type="submit">Rechercher</button>
+                {{ form_end(form, {'render_rest': false}) }}
 
-        <select  class="input"> 
-            <option value="select">1 passager</option>
-            <option >2 passagers</option>
-            <option >3 passagers</option>
-            <option class="input2">4 passagers</option>
-        </select>    
-            <input  class="inputdate" type="date">
-            <button class="find" type="submit">Rechercher</button>
-    </form>      
+        
+    </div>
 </div>
+
+
 
 <section class="advantages">
     <h2>Pourquoi choisir le covoiturage ?</h2>

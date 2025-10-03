@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Covoiturage{% endblock %}
+
+{% block body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="{{ asset('script/main.js') }}" defer></script>
+{% endblock %}
+    <header>
+        <nav class="container titleshadow">
+            <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
+            <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
+            <div><a href="#" class="decoration navlink">Contact</a></div>
+            <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
+            
+            {% if app.user %}
+            <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
+            {% else %}        
+            <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
+            {% endif %}
+        </nav>
+    </header>
+
+{% for trajet in trajets %}
+{% if trajet.statut == constant('App\\Entity\\Carpooling::STATUT_RIEN')or trajet.statut == constant('App\\Entity\\Carpooling::STATUT_EN_COURS') %}
+
+    <div class="information">  
+        <div>            
+            <div class=pseudo> 
+                <div>
+                    <p><strong>{{user.pseudo}}</strong></p>
+                </div>
+            </div>
+            <div >
+                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" ></div>
+            </div>
+            <div>
+                <p><strong>5/5</strong></p>
+            </div>
+        </div>
+
+        <div class="info">
+                <div style="font-size:25px;"></p><strong>{{ trajet.startAt|date('d/m/Y') }}</strong><p></div>
+            <div class="pricetime">
+                <div>
+                    <div>Durée environ {{trajet.traveltime}} </div> 
+                </div>
+                <div>  
+                    <div>{{trajet.price}} €</div>
+                </div>
+                <div>
+                    <div>{{trajet.passenger}} Passager(s)</div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="info2">
+                    <div>
+                        <div><strong>🏁 10H</strong></div> 
+                    </div>
+                    <div>
+                        <div><strong>MANOSQUE GARE ROUTIERE </strong></div>
+                    </div>
+                </div>
+
+                <div class="info2">
+                    <div>
+                        <div><strong>🎯 11H15</strong></div>
+                    </div>
+                    <div>
+                        <div><strong>MARSEILLE GARE SAINT CHARLE</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="preference">
+                <div>
+                    <strong>préférence: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo eum reiciendis optio quod suscipit odit? Accusantium veritatis laudantium porro, nesciunt rem ratione nam corporis quae cupiditate dolor nulla, tenetur et?</strong>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="car"> 
+
+            <div class="places">
+                
+                <div>
+                    <p><strong>{{user.name}}</strong></p>
+                    <p><strong>{{user.lastname}}</strong></p>
+                </div>               
+            </div>
+
+            <div>
+                <img src="/ecoridee/image/batmobile.jpg" alt="voiture ecologique" class="carimg2">
+            </div>
+
+            <div class="brand">
+                <div><strong>Batlmobile</strong>,</div>
+                <div><strong>Renault</strong></div>
+            </div>
+
+            <div>
+                <img src="/ecoridee/tools/voiture-electrique.png" alt="electric car" class="eleccar">
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endfor %}
+<div class="titlecomment">
+    <div>
+        <strong>COMMENTAIRES</strong>
+    </div>
+</div>
+
+    <div class="comment1" >
+        <div class="comment">
+            <div>
+                <div><img src="/ecoridee/image/voiturier3.jpg" alt="usercomment" class="userimg"></div>
+            </div>
+            <div>
+                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio facilis numquam eum officia modi perspiciatis, ut dicta, quae voluptates, quasi pariatur rerum doloribus voluptate assumenda accusantium nesciunt quaerat error harum.</div>
+            </div>
+        </div>
+
+        <div class="notecomment">
+        <div>
+            <strong>4/5</strong>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

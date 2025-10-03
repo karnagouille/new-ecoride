@@ -43,14 +43,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $date_birth = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $photo = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photo = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pseudo = null;
 
     #[ORM\Column(type: 'json')]
+
     private array $roles = [];
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Carpooling::class)]
+    private Collection $carpoolings;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Car::class)]
     private Collection $cars;
@@ -58,10 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    public function __construct()
-    {
-        $this->cars = new ArrayCollection();
-    }
+    
 
     public function getUserIdentifier(): string
     {
@@ -207,7 +207,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->photo;
     }
 
-    public function setPhoto($photo): static
+    public function setPhoto(?string $photo): static
     {
         $this->photo = $photo;
         return $this;
@@ -235,4 +235,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+    public function __construct()
+{
+    $this->cars = new ArrayCollection();
+    $this->carpoolings = new ArrayCollection();
+}
+
+public function getCarpoolings(): Collection
+{
+    return $this->carpoolings;
+}
 }

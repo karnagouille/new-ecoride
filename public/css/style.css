@@ -41,6 +41,13 @@ body {
     color: rgb(48, 219, 57);
 }
 
+.navlink2:hover{
+    color: rgb(243, 247, 243);
+    transition: all 0.3s ease-out;
+}
+.navlink2:focus{
+    color: rgb(244, 250, 244);
+}
 .decoration {
     text-decoration: none;
 }
@@ -48,7 +55,6 @@ body {
 
 
 /* BODY PAGE D'ACCUEIL*/
-
 
 .search {
     background-image: url(/image/covoit.jpg);
@@ -68,7 +74,6 @@ body {
     color: rgb(216, 149, 26);
     text-shadow: 2px 2px 5px rgb(7, 7, 7);
     font-size: 2em;
-    position: relative;
     top: -250px;
 }
 
@@ -253,8 +258,7 @@ button{
 
 
 .filtered {
-    display: flex;
-    
+    display: flex;    
     gap: 20px;
     background-color: #f3f7f4;
     border-radius: 20px;
@@ -316,19 +320,26 @@ a {
 /****** Premier block : pseudo;image,note ******/
 
 .userimg {
-    width: 100px;
-    border-radius: 50%;
-    margin-left: 10px;
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 10px 5px 5px rgb(73, 73, 73);
-}
 
+    border-radius:50%;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 10px 5px 5px  rgb(20, 20, 20);
+     
+}
+.userimg img {
+    width: 100%;
+    height: 100%;
+    
+    object-fit: cover; /* recadre l’image sans déformation */
+    display: block;    /* supprime l’espace blanc sous img */
+}
 .carimg:hover {
     transform: scale(1.05);
 }
 
 .profil {
     display: flex;
+    flex-direction: column;
     text-align: center;
     
 }
@@ -346,6 +357,9 @@ a {
     font-size: 20px;  
     gap: 20px; 
     padding-bottom: 20px;
+    justify-content: center;
+    margin-top: 1em;
+    
 }
 
 .reservedbutton{
@@ -368,25 +382,23 @@ a {
 }
 
 .destination {
-    display: flex;
-    justify-content: end;
-    gap: 50px;
     margin-bottom: 25px;
-    text-align: center;
+    
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center; 
+    text-align: center;      
+    gap: 10px;              
 }
 
-.time {
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-}
+
 
 .startfinish {
     display: flex;
-    gap: 20px;
-    font-size: 20px;
-    padding-left: 20px;
 
+    font-size: 20px;
+    justify-content: center; 
+    align-items: center;     
 }
 
 .start{
@@ -452,7 +464,6 @@ html, body {
     box-shadow: 2px 2px 5px;
     padding-left: 50px;
     padding-right: 50px;
-    padding-top: 50px;
     border-radius: 50px;
 }
 
@@ -554,15 +565,25 @@ html, body {
     margin: 0;
 }
 
-.inputlog {
-    width:500px ; 
-    height: 30px;
-    display:flex ;
-    justify-content: center;
-    background-color: #f9f9f9;
-    font-size: 15px;
+.inputlog{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    gap: 10px;
+    
+}
+.inputlog > div:first-child {
+    width: 125px;
+    text-align: left;
+    margin-left: 10px;
 }
 
+.inputsize{
+    width: 250px;
+    height: 25px;
+    border-radius: 50px;
+}
 .username{
     padding-bottom: 10px;
 }
@@ -574,10 +595,6 @@ html, body {
     gap: 10px;
 }
 
-.loginmargin{
-    display: flex;
-    justify-content: left;
-}
 .imglog{
     width: 200px;
     padding-top: 80px;
@@ -592,6 +609,8 @@ html, body {
     margin-right: 20%;
     padding-top: 20px;
     padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .connexion{
@@ -714,18 +733,27 @@ html, body {
 /* photo et information personnelle */
 .userprofil{
     display: flex;
-    text-align: center;
-    width: 100%;
+    text-align: center;    width: 100%;
 
 }
 
 .mainuser{
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    width: 500px;
-    height: 880px;
+    width: 450px;
+    min-height: 880px;
     text-align: center;
+    padding: 20px;
+    position: fixed;
+    padding-bottom: 10%;
 }
 
+
+
+.pictures{
+    max-width: 150px;
+    border-radius: 75px;
+
+}
 /* chauffeur / passager */
 
 .driverpassenger{
@@ -763,7 +791,7 @@ html, body {
 .userform{
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     
 }
 
@@ -772,9 +800,11 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 100px;
-    margin-top: 200px;
+    margin-top: 10%;
+    margin-left: 25%;
     font-size: 30px;
-    flex-grow: 1
+    flex-grow: 1;
+    
 }
 
 .createlook:hover{
@@ -794,7 +824,7 @@ color: rgb(48, 219, 57);
 /* Historique */
 
 .backgroundhistorical {
-    display: flex;
+
     background: linear-gradient(rgb(69, 157, 216), rgb(23, 218, 55));
     width: 800px;
     border: 1px solid rgb(153, 102, 255);
@@ -809,6 +839,17 @@ color: rgb(48, 219, 57);
     padding-left: 100px;
     display: flex;
     flex-direction: column;
+
+
+}
+.historical2{
+    font-size: 40px;
+    width: 1000px;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 25%;
+
 }
 
 .journey{
@@ -819,7 +860,7 @@ color: rgb(48, 219, 57);
 }
 
 .historicals{
-    background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
+    
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -832,7 +873,7 @@ color: rgb(48, 219, 57);
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .driverhistorical{
@@ -841,9 +882,7 @@ color: rgb(48, 219, 57);
 
 .profilhistorical {
     display: flex;
-    text-align: center;
-    padding-left: 75px;
-    
+    justify-content: center;
 }
 
 .priceplacehistorical {
@@ -851,7 +890,7 @@ color: rgb(48, 219, 57);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding-left: 30px;
+    padding-left: 50px;
 }
 
 .reservedstartstop {
@@ -869,7 +908,7 @@ color: rgb(48, 219, 57);
 .start{
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 0.7em;
     border-radius: 10px;   
     background-color: rgb(14, 241, 67);
     border: none;
@@ -882,7 +921,7 @@ color: rgb(48, 219, 57);
 .stop{
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 0.7em;
     border-radius: 10px;   
     background-color: #d41818;
     border: none;
@@ -895,11 +934,10 @@ color: rgb(48, 219, 57);
 .finish {
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 0.7em;
     border-radius: 10px;   
     background-color: rgb(69, 157, 216);
     border: none;
-    gap: 30px;
     box-shadow: 2px 2px 5px;
     padding: 5px 10px 5px 10px;
     border: solid black;   
@@ -918,8 +956,8 @@ color: rgb(48, 219, 57);
 .startstop{
     display: flex;
     justify-content: center;
-    gap: 100px;
-    margin-left: 150px;
+    gap: 2em;
+    margin-left: 0.5em;
 
 }
 
@@ -939,13 +977,13 @@ color: rgb(48, 219, 57);
     gap: 30px;
     font-size: 20px;
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    margin-left: 200px ;
+    margin-left: 700px;
     margin-right: 300px ;
     padding-top: 50px;
     padding-bottom: 30px;
     padding-right: 120px;
     border-radius: 30px;
-    margin-top: 200px;
+    margin-top: 100px;
     margin-bottom: 300px;
 }
 

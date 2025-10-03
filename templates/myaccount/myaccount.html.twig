@@ -1,161 +1,253 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock %}
+{% block title %}Covoiturage
+{% endblock %}
 
 {% block body %}
 
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	{% endblock %}
+
+	{% block javascripts %}
+    
     <script src="{{ asset('script/main.js') }}" defer></script>
-{% endblock %}
-    <header>
-        <nav class="container titleshadow">
-            <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
-            <div><a href="{{ path('carpool') }}" class="decoration navlink">Covoiturage</a></div>
-            <div><a href="#" class="decoration navlink">Contact</a></div>
-            <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
-            <div><a href="" class="decoration navlink">Deconnexion</a></div>
-        </nav>
-    </header>
+	{% endblock %}
+	<header>
+		<nav class="container titleshadow">
+			<div>
+				<a href="{{ path('home') }}" class="decoration navlink">Accueil</a>
+			</div>
+			<div>
+				<a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a>
+			</div>
+			<div>
+				<a href="#" class="decoration navlink">Contact</a>
+			</div>
+			<div>
+				<a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a>
+			</div>
 
-<div class="userprofil">
-    <div class="mainuser">
-        <div><p><strong>Pseudo</strong></p></div>
-        <div><img src="/ecoridee/image/voiturier.jpg" alt="" class="userimg"></div>
-        <div><p><strong> Kirrua Zoldik</strong></p></div>
-        <div><p><u>kukurumontain@gmail.com</u></p></div>
+			{% if app.user %}
+				<div>
+					<a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a>
+				</div>
+			{% else %}
+				<div>
+					<a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a>
+				</div>
+			{% endif %}
+		</nav>
+	</header>
 
-        <div>
-            <div class="driverpassengers">
-                <div>
-                    <button class="driverpassenger navlink2" id="btn">Chauffeur</button>
-                </div>
-                <div>
-                    <button class="driverpassenger navlink2" id="btnpassager" >Passager</button>
-                </div>
-            </div>
+	<div class="userprofil">
+		<div class="mainuser">
+			<div><strong>{{user.pseudo}}</strong></div>
+			<img class="pictures" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" >
+			<div>{{user.lastname}},{{user.name}}</div>
+			<div>{{user.email}}</div>
+			<strong><a href="{{ path('profile_edit', {'id': user.id}) }}">Modifier</a></strong>
+
+
+			<div>
+				<div class="driverpassengers">
+					<div>
+						<button class="driverpassenger navlink2" id="btn">Chauffeur</button>
+					</div>
+					<div>
+						<button class="driverpassenger navlink2" id="btnpassager">Passager</button>
+					</div>
+				</div>
+ 
+					{{ form_start(form) }}
+				<div action="" class="userform hidden" id="filter">
+					<div>
+						<p style="font-size: 30px;">
+							<strong><u>Profile Voiture</u></strong>
+						</p>
+					</div>
+
+
+					<div class="accountext">
+						<div>
+							<label for="">Numéro de la plaque :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.registration) }}
+                        </div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Première imatriculation :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.date_first_registration) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Modèle:</label>
+						</div>
+						<div>
+                            {{ form_widget(form.model) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Couleur  :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.color) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Marque  :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.brand) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Energie :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.energy) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Préférences :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.preference) }}
+						</div>
+					</div>
+					{{ form_end(form) }}-
+					<h2>Mes voitures</h2>
+					<ul>
+						{% for car in cars %}
+							<li>
+								{{ car.model }}
+								-
+								{{ car.brand ? car.brand.libelle : 'Pas de marque' }}
+								<a href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a>
+							</li>
+						{% else %}
+							<li>Aucune voiture enregistrée</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="currentjourney">
+			<div class="journey">
+				<div>
+					<strong><a href="{{ path('newroute') }}" class="createlook routestyle">Créer un trajet</a></strong>
+				</div>
+				<strong>
+					<a href="{{path('currentjourney')}}" class="createlook routestyle ">Trajet en cours</a>
+				</strong>
+			</div>
+			<div class="historical">
+				<div>
+					<p><strong><u>Historique trajets</u></strong></p>
+				</div>
+				{% for t in trajets %}
+				
+				<div class="historicals">
+
+						<div href="/ecoridee/HTML/renseignement.html" class="reserved">
+							<div class="backgroundhistorical">
+								<div class="profilhistorical">
+
+									<div class="destination">
+										<div>
+											<div>
+												<div>
+													<p>
+														<strong>{{ t.startAt|date('d/m/Y') }}
+														</strong>
+													</p>
+												</div>
+
+												<div>
+													<p>
+														<strong>Durée environ
+															{{ t.traveltime }}
+															H
+														</strong>
+													</p>
+												</div>
+											</div>
+											<div class="startfinish">
+
+												<div>
+													<p>
+														<strong>🏁 Départ 🏁{{ t.startTown }}</strong>
+													</p>
+												</div>
+											</div>
+
+											<div>------------------------------------------------------------</div>
+											<div class="startfinish">
+												<div>
+													<p>
+														<strong>🎯 Arrivée 🎯:
+															{{ t.endTown }}</strong>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="priceplacehistorical">
+										<div>
+											<p><strong>{{ t.hour ? t.hour|date('H:i') : '' }} H</strong></p>
+										</div>
+										<div>
+											<p>
+												<strong>{{ t.passenger }}
+													Passager</strong>
+											</p>
+										</div>
+										<div>
+											<p>
+												<strong>{{ t.price }}€</strong>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
             
-
-{{ form_start(form) }}
-            <div action="" class="userform hidden" id="filter"  >
-                <div>
-                    <p style="font-size: 30px;" ><strong><u>Profile Voiture</u></strong></p>
-                </div>  
-
-
-                <div class="accountext">
-                    <div><label for="">Numéro de la plaque :</label></div>
-                    <div>{{ form_widget(form.registration) }}   </div>
-                </div>
-
-                <div class="accountext">
-                    <div><label for=""> Première imatriculation :</label></div>
-                    <div>{{ form_widget(form.date_first_registration) }}    </div>
-                </div>
-
-                <div class="accountext">
-                    <div><label for="">Modèle:</label></div>
-                    <div>{{ form_widget(form.model) }}   </div>
-                </div>
-
-                <div class="accountext">
-                    <div><label for="">Couleur  :</label></div>
-                    <div>{{ form_widget(form.color) }}   </div>
-                </div>
-
-                <div class="accountext">
-                    <div><label for="">Marque  :</label></div>
-                    <div>{{ form_widget(form.brand) }}  </div>
-                </div>
-
-                <div class="accountext">
-                    <div><label for="">Energy :</label></div>
-                    <div>{{ form_widget(form.energy) }}  </div>
-                </div>
-
-                <div class="accountext">
-                    <div><label for="">Préférences :</label></div>
-                    <div>{{ form_widget(form.preference) }}  </div>
-                </div>
-{{ form_end(form) }}
-                <h2>Mes voitures</h2>
-    <ul>
-        {% for car in cars %}
-            <li>
-                {{ car.model }} - 
-                {{ car.brand ? car.brand.libelle : 'Pas de marque' }}
-                <a href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a>
-            </li>
-        {% else %}
-            <li>Aucune voiture enregistrée</li>
-        {% endfor %}
-            </div>
-
-
-
-            </div>
-        </div>
+            
+			{% endfor %}
 
     
-    <div class="currentjourney">
-        <div class="journey">
-            <div><strong><a href="{{ path('newroute') }}" class="createlook routestyle">Créer un trajet</a></strong></div>
-            <div><strong><a href="" class="createlook routestyle ">Trajet en cours</a></strong></div>
         </div>
-
-        <div class="historical">
-            <div>
-                <p><strong><u>Historique trajets</u></strong></p>
-            </div>
-<div class="historicals">                    
-
-    <div>
-        <div href="/ecoridee/HTML/renseignement.html" class="reserved">        
-            <div class="backgroundhistorical">
-                <div class="profilhistorical">
-
-                    <div class="destination">
-                        <div>
-                            <div class="time">
-                                
-                                <p><img src="/ecoridee/tools/voiture-electrique.png" alt="eleccar" class="eleccar">
-                                    <strong> Durée : 1H15 🕒</strong>
-                                </p>
-                                    
-                            </div>
-                            <div class="startfinish">
-                            
-                                <div>
-                                    <p><strong> 🏁 Départ 🏁: 10H Manosque gare routière </strong></p>
-                                </div>
-                            </div> 
-                            
-                            <div >------------------------------------------------------------</div>
-                            <div class="startfinish">
-                                <div>
-                                    <p><strong> 🎯 Arrivée 🎯: 11H15 Marseille gare saint charle </strong></p>
-                                </div>
-                            </div> 
-                        </div>                               
-                    </div>
-
-                    <div class="priceplacehistorical">
-                        <div>
-                            <p><strong>3 Passagers</strong></p>
-                        </div>
-                        <div>
-                            <strong>15/05/2025</strong>
-                        </div>
-                    </div>               
-                </div>
-            </div>  
-        </div> 
     </div>
 </div>
+		</div>
+    </div>
+	{% endblock %}
 
-{% endblock %}

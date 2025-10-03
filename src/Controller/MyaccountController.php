@@ -3,24 +3,100 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\User;
 use App\Form\NewcarType;
+use App\Entity\Carpooling;
+use App\Form\ProfileFormType;
+use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 final class MyaccountController extends AbstractController
 {
+
+
+    #[Route('/profile', name: 'profile_show')]
+    public function profileshow(): Response
+    { 
+         /** @var \App\Entity\User $user */
+        $user = $this->getUser(); 
+        $car = new Car();    
+        $form = $this->createForm(NewcarType::class, $car);
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        return $this->render('myaccount/myaccount.html.twig', [
+        'user' => $user,
+        'form' => $form->createView(),  // <-- ajouter
+        'cars' => [],
+        'trajets' => [],
+        
+    ]);
+
+    }
+
+
+#[Route('/profil/{id}/edit', name: 'profile_edit',methods:['GET','POST'])]
+    public function profileedit(Request $request,EntityManagerInterface $em,SluggerInterface $slugger,CarpoolingRepository $carpoolingRepository,#[Autowire('%uploads_directory%')] string $uploadDirectory): Response
+    { 
+
+          /** @var \App\Entity\User $user */
+        $user = $this->getUser(); 
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        $profileform = $this->createForm(ProfileFormType::class, $user);
+        $profileform->handleRequest($request);
+
+        if ($profileform->isSubmitted() && $profileform->isValid()) {
+            /** @var UploadedFile $photo */
+            $photoFile = $profileform->get('photo')->getData();
+
+            
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+
+                try {
+                    $photoFile->move($uploadDirectory, $newFilename);
+                } catch (FileException $e) {
+                                    }
+
+                $user->setPhoto($newFilename);
+                $em->flush();
+            }
+            return $this->redirectToRoute('myaccount');
+            }
+        return $this->render('myaccount/profile.html.twig', [
+            'profileform' => $profileform->createView(),
+            'user' => $user,
+        ]);
+    }
+
+
+
+
     #[Route('/myaccount', name: 'myaccount',methods:['GET','POST'])]
-    public function index(Request $request,EntityManagerInterface $em,SluggerInterface $slugger): Response
+    public function index(Request $request,EntityManagerInterface $em,SluggerInterface $slugger,CarpoolingRepository $carpoolingRepository,#[Autowire('%uploads_directory%')] string $uploadDirectory): Response
 {
-    $car = new Car();    
-    $form = $this->createForm(NewcarType::class,$car);
-    $form->handleRequest($request);
-    
-    if($form->isSubmitted() && $form->isValid()){
+
+        $car = new Car();    
+        $form = $this->createForm(NewcarType::class,$car);
+        $form->handleRequest($request);
+                
+        if($form->isSubmitted() && $form->isValid()){
 
 
         $brandName = $form->get('brand')->getData(); 
@@ -33,8 +109,7 @@ final class MyaccountController extends AbstractController
             $em->persist($brand);
         }
 
-        $car->setBrand($brand); 
-
+        $car->setBrand($brand);
         $car->setUser($this->getUser());
 
         $slug = strtolower($slugger->slug($car->getModel() . '-' . uniqid()));
@@ -43,18 +118,30 @@ final class MyaccountController extends AbstractController
         $em->persist($car);
         $em->flush();
 
-        $this->addFlash('success', 'Formulaire enregistré !');
         return $this->redirectToRoute('myaccount');
     }
-    $cars = $em->getRepository(Car::class)->findAll();
+    $user = $this->getUser();
+    $cars = $em->getRepository(Car::class)->findBy([
+        'user'=>$user,
+    ]);
+
+        $trajetTerminé = $carpoolingRepository->findBy([
+            'user'=>$user,
+            'statut'=> Carpooling::STATUT_TERMINE
+        ]);
 
     return $this->render('myaccount/myaccount.html.twig',[
-    
+        
         'form'=>$form->createView(),
         'cars'=>$cars,
         'car'=>$car,
+        'trajets' => $trajetTerminé, 
+        'user'=>$user,
         ]);
     }
+
+                                // Formulaire Voiture
+                                
 
     #[Route('/car/{slug}', name: 'car_show')]
 public function show(Car $car, EntityManagerInterface $em, string $slug): Response
@@ -65,9 +152,8 @@ public function show(Car $car, EntityManagerInterface $em, string $slug): Respon
         throw $this->createNotFoundException('Voiture introuvable.');
     }
 
-    return $this->render('myaccount/mycars.html.twig', [
-        'car' => $car
-    ]);
+    return $this->redirectToRoute('car_edit', ['id' => $car->getId()]);
+    
 }
 
 #[Route('car/{id}/remove', name: 'car_remove',methods:['POST'])]
@@ -83,9 +169,34 @@ public function remove(EntityManagerInterface $em,Request $request,Car $car): Re
 
 }
 
+#[Route('/car/{id}/edit', name: 'car_edit',)]
+public function edit(Request $request, Car $car, EntityManagerInterface $em): Response
+{ 
 
+    $form = $this->createForm(NewcarType::class, $car);
+    $form->handleRequest($request);
 
+    if($form->isSubmitted()&& $form->isValid()){
+
+        $brandName = $form->get('brand')->getData();
+        $brand = $em->getRepository(\App\Entity\Brand::class)->findOneBy(['libelle' => $brandName]);
+        if (!$brand) {
+            $brand = new \App\Entity\Brand();
+            $brand->setLibelle($brandName);
+            $em->persist($brand);
+        }
+
+        $car->setBrand($brand);
+        $em->flush();
+    }
+        return $this->render('myaccount/mycars.html.twig', [
+        'form' => $form->createView(),
+        'car' => $car,
+        ]);
+    }
 
 
 
 }
+
+

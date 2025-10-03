@@ -14,10 +14,15 @@
     <header>
         <nav class="container titleshadow">
             <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
-            <div><a href="" class="decoration navlink">Covoiturage</a></div>
+            <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
             <div><a href="#" class="decoration navlink">Contact</a></div>
             <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
-            <div><a href="" class="decoration navlink">Deconnexion</a></div>
+            
+            {% if app.user %}
+            <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
+            {% else %}        
+            <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
+            {% endif %}
         </nav>
     </header>
 
@@ -39,56 +44,12 @@
                 </div>
             </div>
             
-            <form action="" class="userform hidden" id="filter"  >
-                <div>
-                    <p style="font-size: 30px;"><strong><u>Profile Voiture</u></strong></p>
-                </div>                
-                <div class="accountext">
-                    <div>
-                        <label for="">Numéro de la plaque :</label>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="AA-123-AA" class="inputaccount">
-                    </div>
-                </div>
-                <div class="accountext">
-                    <div>
-                        <label for=""> première imatriculation :</label>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="15/11/1992" class="inputaccount">
-                    </div>
-                </div>
-                <div class="accountext">
-                    <div>
-                        <label for="">Modèle,marque,couleur : :</label>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Batmobile,Renault,Noire" class="inputaccount">
-                    </div>
-                </div>
-                <div class="accountext">
-                    <div>
-                        <label for="">Places disponibles :</label>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="4" class="inputaccount"> 
-                    </div>
-                </div>
-                <div class="accountext">
-                    <div>
-                        <label for="">Préférences :</label>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Adore le noire" class="inputaccount preference">
-                    </div>
-                </div>
-            </form>
+
         </div>
     </div>
 
 {{ form_start(form) }}
-    <form action="" class="trajetcreation">
+    <div action="" class="trajetcreation">
             <div class="accountext">
                 <div>
                     <label for="">Ville de Départ :</label>
@@ -104,6 +65,15 @@
                 </div>
                 <div>
                     {{ form_widget(form.hour) }}
+                </div>
+            </div>
+
+            <div class="accountext">
+                <div>
+                    <label for="">Temps de trajet:</label>
+                </div>
+                <div>
+                    {{ form_widget(form.traveltime) }}
                 </div>
             </div>
 
@@ -127,27 +97,43 @@
 
 
             <div class="accountext">
-    <label for="">Véhicule :</label>
-    <div>
-        {{ form_widget(form.car, {'attr': {'class': 'inputroute'}}) }}
-    </div>
-</div>
+                <label for="">Véhicule :</label>
+                <div>{{ form_widget(form.car, {'attr': {'class': 'inputroute'}}) }}</div>
+            </div>
+
+            <div class="accountext">
+                <div>
+                    <label for="">Véhicule électrique:</label>
+                </div>
+                <div>
+                    {{ form_widget(form.electric) }}
+                </div>
+            </div>
+
+            <div class="accountext">
+                <div>
+                    <label for="">Place disponible:</label>
+                </div>
+                <div>
+                    {{ form_widget(form.passenger) }}
+                </div>
+            </div>
 
 
             <div class="accountext">
                 <div>
-                    <label for="">Prix :</label>
+                    <label for="">Prix:</label>
                 </div>
                 <div>
-                <input type="text">
+                    {{ form_widget(form.price) }}
                 </div>
             </div>
             <div class="submitbutton">
                 <div>
-                    <button class="find"><strong>Enregistrer</strong></button>
+                    <button type="submit" class="btn">Enregistré</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
     {{ form_end(form) }}
     {% endblock %}

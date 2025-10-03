@@ -74,7 +74,7 @@ public function setSlug(string $slug): static
     /**
      * @var Collection<int, Carpooling>
      */
-    #[ORM\OneToMany(targetEntity: Carpooling::class, mappedBy: 'Car')]
+    #[ORM\OneToMany(targetEntity: Carpooling::class, mappedBy: 'car')]
     private Collection $carpoolings;
 
     public function __construct()

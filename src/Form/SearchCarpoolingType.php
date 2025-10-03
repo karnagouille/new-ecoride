@@ -2,20 +2,16 @@
 
 namespace App\Form;
 
-
-use App\Entity\Car;
-
 use App\Entity\Carpooling;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class CarpoolingType extends AbstractType
+class SearchCarpoolingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     { $builder
@@ -31,6 +27,7 @@ class CarpoolingType extends AbstractType
             ])
             ->add('passenger', ChoiceType::class, [
                 'label' => false,
+                'required'=>false,
                 'choices' => [
                     '1 passager' => 1,
                     '2 passagers' => 2,
@@ -38,7 +35,7 @@ class CarpoolingType extends AbstractType
                     '4 passagers' => 4,
                 ],
                 'attr' => ['class' => 'input'],
-                'required'=>false,
+                'required'=>true,
             ])
             ->add('startAt', DateType::class, [
                 'label' => false,
@@ -49,17 +46,24 @@ class CarpoolingType extends AbstractType
 
             ->add('hour', TimeType::class, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Heure de départ', 'class' => 'order2'],
                 'required'=>false,
+                'attr' => ['placeholder' => 'Heure de départ', 'class' => 'order2']
             ])
 
-            ->add('price', TextType::class, [
+            ->add('price', ChoiceType::class, [
                 'label' => false,
                 'required'=>false,
-
+                'multiple' => false,
+                'mapped' => false,
+                'choices' => [
+                    'Croissant' => 'asc',
+                    'Décroissant' => 'desc',
+                ]
             ])
             ->add('traveltime', ChoiceType::class, [
                 'label' => false,
+                'required'=>false,
+                'mapped' => false,
                 'choices' => [
                     '1–2 h' => '1-2',
                     '2–3 h' => '2-3',
@@ -73,59 +77,39 @@ class CarpoolingType extends AbstractType
                     '10–11 h' => '10-11',
                     '11–12 h' => '11-12',
                 ],
-                'required'=>false,                
+                
                 'attr' => ['class' => 'input']
             ])
             ->add('electric', ChoiceType::class, [
                 'label' => false,
                 'required'=>false,
-                'expanded' => true,
                 'multiple' => false,
+                'mapped' => false,
                 'choices' => [
                     'Oui' => true,
                     'Non' => false,
-                ],
-                
+                ]
             ])
-
-            ->add('car', EntityType::class, [
-                'class' => Car::class,
-                'choice_label' => 'model', 
-                'placeholder' => 'Choisissez un véhicule',
-            ])
-
-            ->add('note',ChoiceType::class,[
-                'label'=>false,
+            ->add('note', ChoiceType::class, [
+                'label' => false,
                 'required'=>false,
-                'choices'=>[
-                    '5' => '5',
-                    '4+'=> '4+',
-                    '3+'=> '3+',
-                    '2+'=> '2+',
-                    '1+'=> '1+',
-                ],
-                
+                'multiple' => false,
+                'mapped' => false,
+                'choices' => [
+                    '5' => 5,
+                    '4 ou +' => 4,
+                    '3 ou +' => 3,
+                    '2 ou +' => 2,
+                    '1 ou +' => 1,
+                ]
                 ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Carpooling::class,
+            'csrf_protection' => false,
         ]);
     }
 }

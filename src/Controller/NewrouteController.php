@@ -17,8 +17,8 @@ final class NewrouteController extends AbstractController
     #[Route('/newroute', name: 'newroute')]
     public function index(Request $request,EntityManagerInterface $em,): Response
     {
-        $carpooling = new Carpooling();
-        $form = $this->createForm(CarpoolingType::class,$carpooling);
+        $trajet = new Carpooling();
+        $form = $this->createForm(CarpoolingType::class,$trajet);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){ 
@@ -29,18 +29,18 @@ final class NewrouteController extends AbstractController
             $userCars = $user->getCars();
 
             if (!$userCars->isEmpty()) {
-                $carpooling->setCar($userCars->first());
+                $trajet->setCar($userCars->first());
 
             } else {
                 $this->addFlash('error', 'Vous devez avoir une voiture pour créer un trajet.');
                 return $this->redirectToRoute('newroute');
             }
-
-            $em->persist($carpooling);
+            $trajet->setUser($user);
+            $em->persist($trajet);
             $em->flush();
 
             $this->addFlash('success', 'Trajet enregistré !');
-            return $this->redirectToRoute('newroute');
+            return $this->redirectToRoute('myaccount');
         }
 
 

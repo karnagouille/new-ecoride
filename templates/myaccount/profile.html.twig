@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du profile{% endblock %}
+
+{% block body %}
+<h1>Détails du profile</h1>
+
+<div class="card">
+
+
+{{ form_start(profileform) }}
+    {{ form_row(profileform.name) }}
+    {{ form_row(profileform.lastname) }}
+    {{ form_row(profileform.email) }}
+    {{ form_row(profileform.photo) }}
+    {{ form_row(profileform.pseudo) }}
+{{ form_end(profileform) }}
+
+<form method="post" action="{{ path('profile_show', {'id': user.id}) }}">
+    {# <input type="hidden" name="_method" value="DELETE"> #}
+    <input type="hidden" name="_token" >
+    <button type="submit">Supprimer</button>
+    
+</div>
+
+<a href="{{ path('myaccount') }}">Retour</a>
+{% endblock %}

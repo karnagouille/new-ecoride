@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Carpooling;
-use App\Form\CarpoolingType;
+use App\Form\SearchCarpoolingType;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,42 +14,77 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CarpoolController extends AbstractController
 {
-    #[Route('/carpool', name: 'carpool')]
-    public function index(Request $request, EntityManagerInterface $em, CarpoolingRepository $carpoolingRepository): Response
+    #[Route('/carpool', name: 'searchcarpool' ,methods: [ 'GET','POST'])]
+    public function index(Request $request, CarpoolingRepository $carpoolingRepository): Response
     {
-    
-        $form = $this->createForm(CarpoolingType::class);
+        $user = $this->getuser();
+        $form = $this->createForm(SearchCarpoolingType::class);
         $form->handleRequest($request);
 
-        $trajets =$carpoolingRepository->findAll();
+        $trajets = [];
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $carpooling = $form->getData(); // ton entité partielle
+            $priceOrder = $form->get('price')->getData();
+            $travelTime = $form->get('traveltime')->getData();
+            $isElectric = $form->get('electric')->getData();
+            $note = $form->get('note')->getData();
 
-            // Récupérer les filtres non mappés
-            $priceOrder  = $form->get('price')->getData();
-            $traveltime  = $form->get('traveltime')->getData();
-            $electric    = $form->get('electric')->getData();
-            $note        = $form->get('note')->getData();
 
-            $trajets = array_filter($trajets, function($trajet) use ($traveltime, $electric, $note) {
-                if ($traveltime && $trajet->getTraveltime() != $traveltime) return false;
-                if ($electric !== null && $trajet->getElectric() != $electric) return false;
-                if ($note && $trajet->getNote() < $note) return false;
-                return true;
-            });
-
-            if ($priceOrder) {
-                usort($trajets, function($a, $b) use ($priceOrder) {
-                    $prixA = floatval($a->getPrice());
-                    $prixB = floatval($b->getPrice());
-                    return ($priceOrder === 'asc') ? $prixA <=> $prixB : $prixB <=> $prixA;
-                });
-            }
+        $trajets = $carpoolingRepository->searchCarpool(
+            $carpooling->getStartTown(),
+            $carpooling->getEndTown(),
+            $carpooling->getPassenger(),
+            $carpooling->getStartAt(),
+            $carpooling->getHour(),
+            $priceOrder,
+            $travelTime,
+            $isElectric,
+            $note
+);
         }
-        return $this->render('carpool.html.twig', [
+        return $this->render('searchcarpool.html.twig', [
             'form' => $form->createView(),
             'trajets' => $trajets,
+            'user'=> $user
         ]);
     }
+
+    #[Route('/trajet/{id}/changer-statut', name: 'changer_statut')]
+    public function changerStatut(Carpooling $trajet, EntityManagerInterface $em): Response
+        {
+        if ($trajet->getStatut() === Carpooling::STATUT_RIEN || $trajet->getStatut() === null) {
+            $trajet->setStatut(Carpooling::STATUT_EN_COURS);
+        } elseif ($trajet->getStatut() === Carpooling::STATUT_EN_COURS) {
+            $trajet->setStatut(Carpooling::STATUT_TERMINE);
+        }
+            $em->flush();
+
+    // Redirection vers la page principale des trajets
+    return $this->redirectToRoute('searchcarpool.html.twig');
+}
+
+
+    #[Route('/trajet/{id}/participer', name: 'participer')]
+    public function participer(EntityManagerInterface $em, int $id): Response
+        {
+            $trajet = $em->getRepository(Carpooling::class)->find($id);
+
+        if(!$trajet){
+                throw $this->createNotFoundException('
+                Trajet non trouvé'.$id
+            );
+        }
+        if ($trajet->getPassenger() > 0) {
+            $trajet->setPassenger($trajet->getPassenger() - 1);
+}
+        $em->flush();
+
+        return $this->redirectToRoute('currentjourney');
+
+}
+
+
 }

@@ -6,18 +6,16 @@
 <h1>Détails de la voiture</h1>
 
 <div class="card">
-    {% if car.brand %}
-    Marque : {{ car.brand.libelle }}
-{% else %}
-    Marque : Non définie
-{% endif %}
-    <p><strong>Modèle :</strong> {{ car.model }}</p>
-    <p><strong>Numéro de plaque :</strong> {{ car.registration }}</p>
-    <p><strong>Couleur :</strong> {{ car.color }}</p>
-    <p><strong>Énergie :</strong> {{ car.energy }}</p>
-    <p><strong>Première immatriculation :</strong> {{ car.dateFirstRegistration }}</p>
-    <p><strong>Préférences :</strong> {{ car.preference }}</p>
-    <button type="submit">modifier</button>
+
+{{ form_start(form) }}
+    {{ form_row(form.registration) }}
+    {{ form_row(form.date_first_registration) }}
+    {{ form_row(form.model) }}
+    {{ form_row(form.color) }}
+    {{ form_row(form.brand) }}
+    {{ form_row(form.energy) }}
+    {{ form_row(form.preference) }}    
+{{ form_end(form) }}
 
     <form method="post" action="{{ path('car_remove', {'id': car.id}) }}">
     {# <input type="hidden" name="_method" value="DELETE"> #}
