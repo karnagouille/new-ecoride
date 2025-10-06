@@ -61,6 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participant::class)]
+private Collection $participants;
+
     
 
     public function getUserIdentifier(): string
@@ -236,7 +239,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
     
-    public function __construct()
+    public function _construct()
 {
     $this->cars = new ArrayCollection();
     $this->carpoolings = new ArrayCollection();
@@ -246,4 +249,42 @@ public function getCarpoolings(): Collection
 {
     return $this->carpoolings;
 }
+
+
+
+
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+        $this->carpoolings = new ArrayCollection();
+        $this->participants = new ArrayCollection(); // ⚠️ ne pas oublier
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participant $participant): static
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants->add($participant);
+            $participant->setUser($this);
+        }
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): static
+    {
+        if ($this->participants->removeElement($participant)) {
+            if ($participant->getUser() === $this) {
+                $participant->setUser(null);
+            }
+        }
+        return $this;
+    }
+
 }

@@ -33,7 +33,7 @@ security:
     access_control:
         # Exemple : protection des pages
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/myaccount, roles: ROLE_USER }
 
 # Configuration spécifique pour l'environnement de test
 when@test:

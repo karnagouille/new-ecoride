@@ -13,11 +13,11 @@ class Participant
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'participants')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'participants')]
+    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'participants')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Carpooling $carpooling = null;
 
@@ -64,4 +64,6 @@ class Participant
 
         return $this;
     }
+
+
 }

@@ -127,7 +127,7 @@ final class MyaccountController extends AbstractController
 
         $trajetTerminé = $carpoolingRepository->findBy([
             'user'=>$user,
-            'statut'=> Carpooling::STATUT_TERMINE
+            'statut'=> Carpooling::STATUT_TERMINE,
         ]);
 
     return $this->render('myaccount/myaccount.html.twig',[

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Carpooling;
 use App\Form\SearchCarpoolingType;
 use App\Repository\CarpoolingRepository;

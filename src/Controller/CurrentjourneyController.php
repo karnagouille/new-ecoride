@@ -9,10 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 final class CurrentjourneyController extends AbstractController
 {
     #[Route('/currentjourney', name: 'currentjourney')]
-    public function index(CarpoolingRepository $carpoolingRepository, EntityManagerInterface $em): Response
+    public function index(CarpoolingRepository $carpoolingRepository): Response
     {
         
 
@@ -40,6 +41,10 @@ final class CurrentjourneyController extends AbstractController
     // Redirection vers la page principale des trajets
     return $this->redirectToRoute('currentjourney');
 }
+
+
+
+
 
 
 }

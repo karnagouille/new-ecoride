@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Factory;
+
+use App\Entity\Car;
+use App\Repository\CarRepository;
+use Doctrine\ORM\EntityRepository;
+use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use Zenstruck\Foundry\Persistence\Proxy;
+use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
+
+/**
+ * @extends PersistentProxyObjectFactory<Car>
+ */
+final class CarFactory extends PersistentProxyObjectFactory{
+    /**
+     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
+     *
+     * @todo inject services if required
+     */
+    public function __construct()
+    {
+    }
+
+    #[\Override]    public static function class(): string
+    {
+        return Car::class;
+    }
+
+        /**
+     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     *
+     * @todo add your default values here
+     */
+    #[\Override]    protected function defaults(): array|callable    {
+        return [
+            'brand' => BrandFactory::new(),
+            'color' => self::faker()->text(255),
+            'date_first_registration' => self::faker()->text(255),
+            'energy' => self::faker()->text(255),
+            'model' => self::faker()->text(255),
+            'preference' => self::faker()->text(255),
+            'registration' => self::faker()->text(255),
+            'slug' => self::faker()->text(255),
+            'user' => UserFactory::new(),
+        ];
+    }
+
+        /**
+     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     */
+    #[\Override]    protected function initialize(): static
+    {
+        return $this
+            // ->afterInstantiate(function(Car $car): void {})
+        ;
+    }
+}
