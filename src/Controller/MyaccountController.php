@@ -27,8 +27,7 @@ final class MyaccountController extends AbstractController
     { 
          /** @var \App\Entity\User $user */
         $user = $this->getUser(); 
-        $car = new Car();    
-        $form = $this->createForm(NewcarType::class, $car);
+
 
         if (!$user) {
             throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
@@ -36,9 +35,7 @@ final class MyaccountController extends AbstractController
 
         return $this->render('myaccount/myaccount.html.twig', [
         'user' => $user,
-        'form' => $form->createView(),  // <-- ajouter
-        'cars' => [],
-        'trajets' => [],
+        
         
     ]);
 
@@ -56,7 +53,9 @@ final class MyaccountController extends AbstractController
             throw $this->createAccessDeniedException('Vous devez être connecté pour accéder à cette page.');
         }
 
-        $profileform = $this->createForm(ProfileFormType::class, $user);
+        $profileform = $this->createForm(ProfileFormType::class, $user, [
+        'csrf_token_id' => 'profile_form',
+        ]);
         $profileform->handleRequest($request);
 
         if ($profileform->isSubmitted() && $profileform->isValid()) {
@@ -93,7 +92,9 @@ final class MyaccountController extends AbstractController
 {
 
         $car = new Car();    
-        $form = $this->createForm(NewcarType::class,$car);
+        $form = $this->createForm(NewcarType::class, $car, [
+        'csrf_token_id' => 'new_car_form', // ID unique
+        ]);
         $form->handleRequest($request);
                 
         if($form->isSubmitted() && $form->isValid()){
@@ -117,7 +118,7 @@ final class MyaccountController extends AbstractController
 
         $em->persist($car);
         $em->flush();
-
+        
         return $this->redirectToRoute('myaccount');
     }
     $user = $this->getUser();
@@ -164,6 +165,7 @@ public function remove(EntityManagerInterface $em,Request $request,Car $car): Re
     {
         $em->remove($car);
         $em->flush();
+        
     }
     return $this->redirectToRoute('myaccount');
 

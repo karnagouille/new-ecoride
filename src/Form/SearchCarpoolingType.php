@@ -109,7 +109,7 @@ class SearchCarpoolingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Carpooling::class,
-            'csrf_protection' => false,
+            'csrf_protection' => true,
         ]);
     }
 }

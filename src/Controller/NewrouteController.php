@@ -18,7 +18,9 @@ final class NewrouteController extends AbstractController
     public function index(Request $request,EntityManagerInterface $em,): Response
     {
         $trajet = new Carpooling();
-        $form = $this->createForm(CarpoolingType::class,$trajet);
+        $form = $this->createForm(CarpoolingType::class, $trajet, [
+        'csrf_token_id' => 'form',
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){ 

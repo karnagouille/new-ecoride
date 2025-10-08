@@ -64,10 +64,6 @@ class Carpooling
     #[ORM\OneToMany(targetEntity: Participant::class, mappedBy: 'carpooling')]
     private Collection $participants;
 
-    public function __construct()
-    {
-        $this->participants = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -234,12 +230,15 @@ class Carpooling
     public function removeParticipant(Participant $participant): static
     {
         if ($this->participants->removeElement($participant)) {
-            // set the owning side to null (unless already changed)
             if ($participant->getCarpooling() === $this) {
                 $participant->setCarpooling(null);
             }
         }
-
         return $this;
     }
+
+    public function __construct()
+{
+    $this->participants = new ArrayCollection();
+}
 }

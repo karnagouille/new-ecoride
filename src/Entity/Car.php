@@ -184,19 +184,16 @@ public function setSlug(string $slug): static
             $this->carpoolings->add($carpooling);
             $carpooling->setCar($this);
         }
-
         return $this;
     }
 
     public function removeCarpooling(Carpooling $carpooling): static
     {
         if ($this->carpoolings->removeElement($carpooling)) {
-            // set the owning side to null (unless already changed)
             if ($carpooling->getCar() === $this) {
                 $carpooling->setCar(null);
             }
         }
-
         return $this;
     }
 }

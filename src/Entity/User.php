@@ -239,11 +239,6 @@ private Collection $participants;
         return $this;
     }
     
-    public function _construct()
-{
-    $this->cars = new ArrayCollection();
-    $this->carpoolings = new ArrayCollection();
-}
 
 public function getCarpoolings(): Collection
 {

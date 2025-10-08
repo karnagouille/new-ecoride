@@ -17,7 +17,7 @@ class Participant
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'participants')]
+    #[ORM\ManyToOne(targetEntity: Carpooling::class,inversedBy: 'participants')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Carpooling $carpooling = null;
 
@@ -65,5 +65,9 @@ class Participant
         return $this;
     }
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
 }
