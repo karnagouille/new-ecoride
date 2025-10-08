@@ -13,37 +13,39 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CarpoolController extends AbstractController
 {
-    #[Route('/carpool', name: 'searchcarpool' ,methods: [ 'GET','POST'])]
+    #[Route('/carpool', name: 'searchcarpool' ,methods: [ 'GET'])]
     public function index(Request $request, CarpoolingRepository $carpoolingRepository): Response
     {
         $user = $this->getuser();
-        $form = $this->createForm(SearchCarpoolingType::class);
+        $form = $this->createForm(SearchCarpoolingType::class, null, [
+            'method' => 'GET',
+        ]);
         $form->handleRequest($request);
 
         $trajets = [];
-        
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $carpooling = $form->getData(); // ton entité partielle
+            $carpooling = $form->getData(); 
             $priceOrder = $form->get('price')->getData();
             $travelTime = $form->get('traveltime')->getData();
             $isElectric = $form->get('electric')->getData();
             $note = $form->get('note')->getData();
 
 
-        $trajets = $carpoolingRepository->searchCarpool(
-            $carpooling->getStartTown(),
-            $carpooling->getEndTown(),
-            $carpooling->getPassenger(),
-            $carpooling->getStartAt(),
-            $carpooling->getHour(),
-            $priceOrder,
-            $travelTime,
-            $isElectric,
-            $note
-);
+            $trajets = $carpoolingRepository->searchCarpool(
+                $carpooling->getStartTown(),
+                $carpooling->getEndTown(),
+                $carpooling->getPassenger(),
+                $carpooling->getStartAt(),
+                $carpooling->getHour(),
+                $priceOrder,
+                $travelTime,
+                $isElectric,
+                $note,
+            );
         }
+
         return $this->render('searchcarpool.html.twig', [
             'form' => $form->createView(),
             'trajets' => $trajets,
@@ -62,7 +64,7 @@ final class CarpoolController extends AbstractController
             $em->flush();
 
     // Redirection vers la page principale des trajets
-    return $this->redirectToRoute('searchcarpool.html.twig');
+    return $this->redirectToRoute('searchcarpool');
 }
 
 

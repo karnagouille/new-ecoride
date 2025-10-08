@@ -31,7 +31,7 @@
 
 <div class="searchcar">
     <div class="searchcar">
-        {{ form_start(form,{'action': path('searchcarpool'), 'method': 'POST'}) }}
+        {{ form_start(form, {attr: { 'data-turbo': "false" }}) }}
 
             {{form_widget(form.startTown) }}
             {{ form_widget(form.endTown) }}

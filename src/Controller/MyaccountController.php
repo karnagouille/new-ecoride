@@ -95,6 +95,7 @@ final class MyaccountController extends AbstractController
         $form = $this->createForm(NewcarType::class, $car, [
         'csrf_token_id' => 'new_car_form', // ID unique
         ]);
+
         $form->handleRequest($request);
                 
         if($form->isSubmitted() && $form->isValid()){
@@ -142,7 +143,7 @@ final class MyaccountController extends AbstractController
     }
 
                                 // Formulaire Voiture
-                                
+
 
     #[Route('/car/{slug}', name: 'car_show')]
 public function show(Car $car, EntityManagerInterface $em, string $slug): Response

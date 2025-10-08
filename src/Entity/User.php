@@ -240,6 +240,7 @@ private Collection $participants;
     }
     
 
+
 public function getCarpoolings(): Collection
 {
     return $this->carpoolings;
@@ -252,7 +253,7 @@ public function getCarpoolings(): Collection
     {
         $this->cars = new ArrayCollection();
         $this->carpoolings = new ArrayCollection();
-        $this->participants = new ArrayCollection(); // ⚠️ ne pas oublier
+        $this->participants = new ArrayCollection(); 
     }
 
     /**
