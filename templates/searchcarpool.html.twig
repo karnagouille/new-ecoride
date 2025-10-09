@@ -81,7 +81,10 @@
                         <div>{{trajet.user.pseudo}}</div>
                     </div>
                     <div>
-                        <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></div>
+                        <div class="userimg">
+                            <a href="{{ path('renseignement', {'id': trajet.id}) }}"><img class="pictures" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></a>
+                            
+                        </div>
                     </div>
                     <div>
                         <div></div>

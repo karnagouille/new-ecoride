@@ -26,8 +26,6 @@
         </nav>
     </header>
 
-{% for trajet in trajets %}
-{% if trajet.statut == constant('App\\Entity\\Carpooling::STATUT_RIEN')or trajet.statut == constant('App\\Entity\\Carpooling::STATUT_EN_COURS') %}
 
     <div class="information">  
         <div>            
@@ -37,7 +35,7 @@
                 </div>
             </div>
             <div >
-                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" ></div>
+                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></div>
             </div>
             <div>
                 <p><strong>5/5</strong></p>
@@ -110,8 +108,7 @@
             </div>
         </div>
     </div>
-{% endif %}
-{% endfor %}
+
 <div class="titlecomment">
     <div>
         <strong>COMMENTAIRES</strong>

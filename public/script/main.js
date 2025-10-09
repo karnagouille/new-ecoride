@@ -38,19 +38,32 @@ document.querySelectorAll('.start').forEach(startBtn => {
 // Photo de profil
 
     const profil = document.getElementById('profil');
-    const preview = document.getElementById('preview');
+const preview = document.getElementById('preview');
 
+if (profil) {
     profil.addEventListener('change', handleFiles, false);
+}
 
-    function handleFiles() {
+function handleFiles() {
     const file = this.files[0];
     if (file) {
         preview.src = URL.createObjectURL(file);
         preview.style.display = 'block';
-
-      // Libérer l'URL quand l'image est chargée (bonne pratique)
-        preview.onload = function() {
-        URL.revokeObjectURL(preview.src);
-        }
+        preview.onload = () => URL.revokeObjectURL(preview.src);
     }
-};
+}
+
+
+    document.querySelectorAll('.arrived').forEach(button => {
+    button.addEventListener('click', (event) => {
+        const url = event.currentTarget.dataset.url;
+        window.location.href = url;
+    });
+});
+
+document.querySelector('.arrived').forEach(btn => {
+    btn.addEventListener('click', e => {
+    window.location.href = e.currentTarget.dataset.url;
+});
+});
+

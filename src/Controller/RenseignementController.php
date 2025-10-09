@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Carpooling;
+use App\Form\SearchCarpoolingType;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,41 +12,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class RenseignementController extends AbstractController
 {
-    #[Route('/renseignement', name: 'renseignement')]
-    public function index(CarpoolingRepository $carpoolingRepository): Response
+    #[Route('/renseignement/{id}', name: 'renseignement',methods: [ 'GET'])]
+    public function index(Carpooling $trajet,):response
     {
-        $user = $this->getuser();
 
-            $trajets = $carpoolingRepository->findby([
-            'user'=> $this->getUser()
-        ]);
         return $this->render('renseignement.html.twig', [
-            'user'=>$user,
-            'trajets'=>$trajets,
+            'user'=>$this->getUser(),
+            'trajet'=>$trajet,
 
         ]);
     }
 
-    #[Route('/trajet/{id}/changer-statut', name: 'changer_statut')]
-    public function changerStatut(Carpooling $trajet, EntityManagerInterface $em,CarpoolingRepository $carpoolingRepository): Response
-        {
-            $user = $this->getuser();
-            $trajets = $carpoolingRepository->findby([
-            'user'=> $this->getUser()
-        ]);
+    
 
-        if ($trajet->getStatut() === Carpooling::STATUT_RIEN || $trajet->getStatut() === null) {
-            $trajet->setStatut(Carpooling::STATUT_EN_COURS);
-        } elseif ($trajet->getStatut() === Carpooling::STATUT_EN_COURS) {
-            $trajet->setStatut(Carpooling::STATUT_TERMINE);
-        }
-            $em->flush();
-
-    // Redirection vers la page principale des trajets
-    return $this->render('renseignement.html.twig',[
-        'trajets'=>$trajets,
-        'user'=>$user
-    ]);
-
-}
 }
