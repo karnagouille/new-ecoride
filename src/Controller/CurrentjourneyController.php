@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Carpooling;
+use Doctrine\ORM\Mapping\Id;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +19,7 @@ final class CurrentjourneyController extends AbstractController
         
 
         $user = $this->getuser();
-        $trajets = $carpoolingRepository->findby([
-            'user'=> $this->getUser()
-        ]);
+        $trajets = $carpoolingRepository->findByUserOrParticipation($this->getUser());
 
         return $this->render('route/currentjourney.html.twig',[
         'user'=>$user, 
@@ -28,9 +27,14 @@ final class CurrentjourneyController extends AbstractController
         ]);
         }
 
+ // Changement de statut et vérification de l'utilisateur connecté
         #[Route('/trajet/{id}/changer-statut', name: 'change_statut')]
     public function changerStatut(Carpooling $trajet, EntityManagerInterface $em): Response
         {
+            if ($trajet->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+    }
+
         if ($trajet->getStatut() === Carpooling::STATUT_RIEN || $trajet->getStatut() === null) {
             $trajet->setStatut(Carpooling::STATUT_EN_COURS);
         } elseif ($trajet->getStatut() === Carpooling::STATUT_EN_COURS) {
@@ -39,11 +43,8 @@ final class CurrentjourneyController extends AbstractController
             $em->flush();
 
     // Redirection vers la page principale des trajets
-    return $this->redirectToRoute('currentjourney');
+    return $this->render('currentjourney');
 }
-
-
-
 
 
 

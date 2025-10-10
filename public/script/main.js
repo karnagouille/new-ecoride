@@ -61,9 +61,5 @@ function handleFiles() {
     });
 });
 
-document.querySelector('.arrived').forEach(btn => {
-    btn.addEventListener('click', e => {
-    window.location.href = e.currentTarget.dataset.url;
-});
-});
+
 

@@ -450,6 +450,12 @@ html, body {
     box-shadow: 2px 2px 5px;
 }
 
+
+.infopseudo{
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 100px;
+}
 /*  PSEUDO, PHOTO DE PROFIL ET NOTE    */
 .pseudo {
     margin-top: 10px;
@@ -466,6 +472,8 @@ html, body {
     padding-right: 50px;
     border-radius: 50px;
 }
+
+
 
 .pricetime {
     display: flex;
@@ -492,6 +500,8 @@ html, body {
     padding-top: 20px;
     text-align: center;
     padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 100px;
 }
 
 .carimg2 {
@@ -747,10 +757,13 @@ html, body {
     padding-bottom: 10%;
 }
 
-
+.picturesprofil{
+    max-width: 150px;
+    border-radius: 75px;
+}
 
 .pictures{
-    max-width: 150px;
+    max-width: 500px;
     border-radius: 75px;
 
 }

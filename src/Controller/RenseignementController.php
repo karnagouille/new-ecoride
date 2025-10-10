@@ -13,11 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class RenseignementController extends AbstractController
 {
     #[Route('/renseignement/{id}', name: 'renseignement',methods: [ 'GET'])]
-    public function index(Carpooling $trajet,):response
-    {
+    public function index(carpoolingRepository $carpoolingRepository, int $id):response
+    { 
+        
+        $trajet = $carpoolingRepository->find($id);
+        $conducteur = $trajet->getUser();
+
+
 
         return $this->render('renseignement.html.twig', [
-            'user'=>$this->getUser(),
+            'conducteur'=>$conducteur,
             'trajet'=>$trajet,
 
         ]);

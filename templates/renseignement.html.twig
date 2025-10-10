@@ -28,14 +28,14 @@
 
 
     <div class="information">  
-        <div>            
+        <div class="infopseudo">            
             <div class=pseudo> 
                 <div>
-                    <p><strong>{{user.pseudo}}</strong></p>
+                    <div><strong>{{conducteur.pseudo}}</strong></div>
                 </div>
             </div>
             <div >
-                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></div>
+                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
             </div>
             <div>
                 <p><strong>5/5</strong></p>
@@ -43,13 +43,13 @@
         </div>
 
         <div class="info">
-                <div style="font-size:25px;"></p><strong>{{ trajet.startAt|date('d/m/Y') }}</strong><p></div>
             <div class="pricetime">
-                <div>
-                    <div>Durée environ {{trajet.traveltime}} </div> 
+
+                <div>  
+                    <div><strong>{{trajet.price}} €</strong></div>
                 </div>
                 <div>  
-                    <div>{{trajet.price}} €</div>
+                    <div style="font-size:25px;" ><strong>{{ trajet.startAt|date('d/m/Y') }}</div>
                 </div>
                 <div>
                     <div>{{trajet.passenger}} Passager(s)</div>
@@ -59,22 +59,28 @@
 
             <div>
                 <div class="info2">
+                    
                     <div>
-                        <div><strong>🏁 10H</strong></div> 
-                    </div>
-                    <div>
-                        <div><strong>MANOSQUE GARE ROUTIERE </strong></div>
+                        <div><u><strong>Départ {{ trajet.hour ? trajet.hour|date('H:i') : '' }} de {{trajet.startTown}} </strong></u></div>
                     </div>
                 </div>
 
                 <div class="info2">
                     <div>
-                        <div><strong>🎯 11H15</strong></div>
+                        <div><strong></strong></div>
                     </div>
                     <div>
-                        <div><strong>MARSEILLE GARE SAINT CHARLE</strong></div>
+                        <div><u><strong>Arrivée {{trajet.endTown}}</strong></u></div>
                     </div>
                 </div>
+
+                <div class="info2">
+                    
+                    <div>
+                        <div><em><strong>Durée environ {{trajet.traveltime}} </strong></em></div>
+                    </div>
+                </div>
+
             </div>
             <div class="preference">
                 <div>
@@ -89,8 +95,7 @@
             <div class="places">
                 
                 <div>
-                    <p><strong>{{user.name}}</strong></p>
-                    <p><strong>{{user.lastname}}</strong></p>
+                    <p ><strong>{{conducteur.lastname}}/{{conducteur.name}}</strong></p>
                 </div>               
             </div>
 

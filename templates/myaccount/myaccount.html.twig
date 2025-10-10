@@ -49,7 +49,7 @@
 	<div class="userprofil">
 		<div class="mainuser">
 			<div><strong>{{user.pseudo}}</strong></div>
-			<img class="pictures" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" >
+			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" >
 			<div>{{user.lastname}},{{user.name}}</div>
 			<div>{{user.email}}</div>
 			<strong><a href="{{ path('profile_edit', {'id': user.id}) }}">Modifier</a></strong>

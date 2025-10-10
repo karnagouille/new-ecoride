@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Carpooling;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Carpooling>
@@ -60,4 +61,16 @@ public function searchCarpool($startTown, $endTown, $passenger, $startAt,$hour,$
 
     return $qb->getQuery()->getResult();
 }
+
+public function findByUserOrParticipation(User $user)
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.participants', 'p')
+        ->where('c.user = :user')
+        ->orWhere('p.user = :user')
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getResult();
+}
+
 }

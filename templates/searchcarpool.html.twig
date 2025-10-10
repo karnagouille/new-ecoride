@@ -82,7 +82,7 @@
                     </div>
                     <div>
                         <div class="userimg">
-                            <a href="{{ path('renseignement', {'id': trajet.id}) }}"><img class="pictures" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></a>
+                            <a href="{{ path('renseignement', {'id': trajet.id}) }}"><img class="picturesprofil" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></a>
                             
                         </div>
                     </div>
@@ -119,12 +119,12 @@
 
                     <div class="priceplacehistorical">
                         <div>
+                                <strong>{{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong>
                             {% if trajet.electric %}
                             <img class ="eleccar" src="{{ asset('image/voiture-electrique.png') }}" alt="icone voiture electrique">
                             {% endif %}
                         </div>
                             <div>
-                                <strong>{{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong>
                             </div>
                         <div>
                             <p><strong>{{ trajet.passenger }} place(s)</strong></p>

@@ -143,6 +143,7 @@
 						</div>
 					</div>
 
+					{% if app.user.id == t.user.id %}
 					<form method="post" action="{{ path('changer_statut', {'id': t.id}) }}">
 						{% if t.statut == 'rien' or t.statut is null %}
 							<button type="submit">Démarrer</button>
@@ -150,7 +151,7 @@
 							<button type="submit" >Arrivée</button>
 						{% endif %}
 					</form>
-
+					{% endif %}
 			{% endif %}
 			{% endfor %}
 			</div>

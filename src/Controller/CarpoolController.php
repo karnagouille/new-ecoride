@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Carpooling;
+use App\Entity\Participant;
 use App\Form\SearchCarpoolingType;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -63,8 +64,7 @@ final class CarpoolController extends AbstractController
         }
             $em->flush();
 
-    // Redirection vers la page principale des trajets
-    return $this->redirectToRoute('searchcarpool');
+    return $this->redirectToRoute('currentjourney');
 }
 
 
@@ -78,10 +78,18 @@ final class CarpoolController extends AbstractController
                 Trajet non trouvé'.$id
             );
         }
+
+
+            $participant = new Participant();
+            $participant->setUser($this->getUser());
+            $participant->setCarpooling($trajet);
+            $em->persist($participant);
+
+    
         if ($trajet->getPassenger() > 0) {
             $trajet->setPassenger($trajet->getPassenger() - 1);
 }
-        $em->flush();
+            $em->flush();
 
         return $this->redirectToRoute('currentjourney');
 

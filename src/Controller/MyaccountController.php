@@ -126,11 +126,10 @@ final class MyaccountController extends AbstractController
     $cars = $em->getRepository(Car::class)->findBy([
         'user'=>$user,
     ]);
+            $user = $this->getUser();
+            $trajetTerminé = $carpoolingRepository->findByUserOrParticipation($user);
 
-        $trajetTerminé = $carpoolingRepository->findBy([
-            'user'=>$user,
-            'statut'=> Carpooling::STATUT_TERMINE,
-        ]);
+
 
     return $this->render('myaccount/myaccount.html.twig',[
         
