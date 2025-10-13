@@ -152,6 +152,12 @@
 						{% endif %}
 					</form>
 					{% endif %}
+					
+    <form method="post" action="{{ path('annulation', {'id': t.id}) }}">
+        <button type="submit">Annuler</button>
+    </form>
+
+
 			{% endif %}
 			{% endfor %}
 			</div>

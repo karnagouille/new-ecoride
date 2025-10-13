@@ -57,16 +57,22 @@ final class CarpoolController extends AbstractController
     #[Route('/trajet/{id}/changer-statut', name: 'changer_statut')]
     public function changerStatut(Carpooling $trajet, EntityManagerInterface $em): Response
         {
-        if ($trajet->getStatut() === Carpooling::STATUT_RIEN || $trajet->getStatut() === null) {
+        switch ($trajet->getStatut()) {
+        case Carpooling::STATUT_RIEN:
+        case null:
             $trajet->setStatut(Carpooling::STATUT_EN_COURS);
-        } elseif ($trajet->getStatut() === Carpooling::STATUT_EN_COURS) {
+            break;
+        case Carpooling::STATUT_EN_COURS:
             $trajet->setStatut(Carpooling::STATUT_TERMINE);
+            break;
+        case Carpooling::STATUT_ANNULEE:
+            $trajet->setStatut(Carpooling::STATUT_RIEN);
+            break;
+            
         }
-            $em->flush();
-
-    return $this->redirectToRoute('currentjourney');
-}
-
+        $em->flush();
+        return $this->redirectToRoute('currentjourney');
+    }
 
     #[Route('/trajet/{id}/participer', name: 'participer')]
     public function participer(EntityManagerInterface $em, int $id): Response

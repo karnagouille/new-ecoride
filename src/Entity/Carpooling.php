@@ -54,6 +54,7 @@ class Carpooling
     public const STATUT_RIEN = 'rien';
     public const STATUT_EN_COURS = 'en_cours';
     public const STATUT_TERMINE = 'termine';
+    public const STATUT_ANNULEE = 'annulee';
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $statut = self::STATUT_RIEN;
