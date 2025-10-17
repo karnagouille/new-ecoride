@@ -90,10 +90,9 @@ class CarpoolingType extends AbstractType
 
             ->add('car', EntityType::class, [
                 'class' => Car::class,
-                'choice_label' => 'model', 
-                'placeholder' => 'Choisissez un véhicule',
-            ])
-
+                'choices' => $options['user_cars'], // options filtrées par user
+                'choice_label' => fn(Car $car) => $car->getModel(), // nom affiché
+])
             ->add('note',ChoiceType::class,[
                 'label'=>false,
                 'required'=>false,
@@ -126,6 +125,7 @@ class CarpoolingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Carpooling::class,
+            'user_cars' => [],
         ]);
     }
 }

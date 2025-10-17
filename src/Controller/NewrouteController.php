@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 
+use App\Entity\Car;
 use App\Entity\Carpooling;
 use App\Form\CarpoolingType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,26 +18,21 @@ final class NewrouteController extends AbstractController
     #[Route('/newroute', name: 'newroute')]
     public function index(Request $request,EntityManagerInterface $em,): Response
     {
-        $trajet = new Carpooling();
-        $form = $this->createForm(CarpoolingType::class, $trajet, [
-        'csrf_token_id' => 'form',
-        ]);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){ 
-
         /** @var \App\Entity\User $user */
-
+    
             $user = $this->getUser(); 
-            $userCars = $user->getCars();
+            $userCars = $em->getRepository(Car::class)->findBy(['user' => $user]);
 
-            if (!$userCars->isEmpty()) {
-                $trajet->setCar($userCars->first());
+            $trajet = new Carpooling();
+            $form = $this->createForm(CarpoolingType::class, $trajet, [
+            'csrf_token_id' => 'form',
+            'user_cars' => $userCars,
+            ]);
 
-            } else {
-                $this->addFlash('error', 'Vous devez avoir une voiture pour créer un trajet.');
-                return $this->redirectToRoute('newroute');
-            }
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){ 
+
             $trajet->setUser($user);
             $em->persist($trajet);
             $em->flush();

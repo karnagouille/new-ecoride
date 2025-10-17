@@ -52,7 +52,7 @@ final class CurrentjourneyController extends AbstractController
 #[Route('/trajet/{id}/cancel', name: 'annulation')]
     public function canceltrajet(int $id,CarpoolingRepository $CarpoolingRepository,ParticipantRepository $participantRepository, EntityManagerInterface $em): Response
         {
-            $user = $this->getUser();
+
             $trajet = $CarpoolingRepository->find($id);
 
             if (!$trajet) {

@@ -148,7 +148,7 @@
 						{% if t.statut == 'rien' or t.statut is null %}
 							<button type="submit">Démarrer</button>
 						{% elseif t.statut == 'en_cours' %}
-							<button type="submit" >Arrivée</button>
+							<button type="submit" action="{{ path('changer_statut', {'id': t.id}) }}">Arrivée</button>
 						{% endif %}
 					</form>
 					{% endif %}
