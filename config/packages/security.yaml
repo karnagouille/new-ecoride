@@ -32,7 +32,8 @@ security:
     # Contrôle d'accès
     access_control:
         # Exemple : protection des pages
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/employe, roles: ROLE_EMPLOYE }
         - { path: ^/myaccount, roles: ROLE_USER }
 
 # Configuration spécifique pour l'environnement de test

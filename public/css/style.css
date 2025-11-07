@@ -1013,3 +1013,19 @@ color: rgb(48, 219, 57);
 }
 
 /*#endregion créer un trajet*/
+
+/*#region  Admin*/
+
+
+.table{
+    margin-top: 7em;
+}
+
+.employeform{
+    margin-top: 7em;
+    margin-left:40%;
+    
+}
+
+
+/*#endregion Admin*/
