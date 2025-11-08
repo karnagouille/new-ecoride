@@ -16,6 +16,20 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+
+        public function findAllEmployees()
+{
+    $allUsers = $this->findAll(); // récupère tous les utilisateurs
+
+    // ne garde que ceux qui ont ROLE_EMPLOYE
+    return array_filter($allUsers, function($user) {
+        return in_array('ROLE_EMPLOYE', $user->getRoles());
+    });
+}
+
+
+
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

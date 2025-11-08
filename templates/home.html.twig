@@ -18,11 +18,16 @@
             <div><a href="#" class="decoration navlink">Contact</a></div>
             <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
 
+            {% if is_granted('ROLE_ADMIN') %}
+            <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
+            {% endif %}
+
             {% if app.user %}
             <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
             {% else %}        
             <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
             {% endif %}
+
         </nav>
     </header>
 
