@@ -11,6 +11,11 @@ use App\Repository\CarpoolingRepository;
 #[ORM\Entity(repositoryClass: CarpoolingRepository::class)]
 class Carpooling
 {
+    public const STATUT_RIEN = 'rien';
+    public const STATUT_EN_COURS = 'en_cours';
+    public const STATUT_TERMINE = 'termine';
+    public const STATUT_ANNULEE = 'annulee';
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -33,7 +38,7 @@ class Carpooling
     #[ORM\JoinColumn(nullable: false)]
     private ?Car $car = null;
 
-    #[ORM\Column( nullable: true)]
+    #[ORM\Column(nullable: true)]
     private ?int $passenger = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
@@ -51,22 +56,32 @@ class Carpooling
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $note = null;
 
-    public const STATUT_RIEN = 'rien';
-    public const STATUT_EN_COURS = 'en_cours';
-    public const STATUT_TERMINE = 'termine';
-    public const STATUT_ANNULEE = 'annulee';
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $statut = self::STATUT_RIEN;
+    private ?string $statut = 'rien';
 
     /**
      * @var Collection<int, Participant>
-    */
+     */
     #[ORM\OneToMany(targetEntity: Participant::class, mappedBy: 'carpooling')]
     private Collection $participants;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(mappedBy: 'trajet', targetEntity: Comment::class)]
+    private Collection $comments;
 
+    // ------------------
+    // Constructeur
+    // ------------------
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
 
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -124,7 +139,6 @@ class Carpooling
     public function setPassenger(?int $passenger): static
     {
         $this->passenger = $passenger;
-
         return $this;
     }
 
@@ -136,7 +150,6 @@ class Carpooling
     public function setHour(?\DateTime $hour): static
     {
         $this->hour = $hour;
-
         return $this;
     }
 
@@ -148,7 +161,6 @@ class Carpooling
     public function setPrice(?string $price): static
     {
         $this->price = $price;
-
         return $this;
     }
 
@@ -160,7 +172,6 @@ class Carpooling
     public function setTraveltime(?string $traveltime): static
     {
         $this->traveltime = $traveltime;
-
         return $this;
     }
 
@@ -172,7 +183,6 @@ class Carpooling
     public function setElectric(?bool $electric): static
     {
         $this->electric = $electric;
-
         return $this;
     }
 
@@ -184,7 +194,6 @@ class Carpooling
     public function setNote(?string $note): static
     {
         $this->note = $note;
-
         return $this;
     }
 
@@ -196,7 +205,6 @@ class Carpooling
     public function setStatut(string $statut): static
     {
         $this->statut = $statut;
-
         return $this;
     }
 
@@ -225,7 +233,6 @@ class Carpooling
             $this->participants->add($participant);
             $participant->setCarpooling($this);
         }
-
         return $this;
     }
 
@@ -239,8 +246,30 @@ class Carpooling
         return $this;
     }
 
-    public function __construct()
-{
-    $this->participants = new ArrayCollection();
-}
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setTrajet($this);
+        }
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->getTrajet() === $this) {
+                $comment->setTrajet(null);
+            }
+        }
+        return $this;
+    }
 }

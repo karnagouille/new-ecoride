@@ -119,22 +119,46 @@
         <strong>COMMENTAIRES</strong>
     </div>
 </div>
+{% if canComment %}
 
+{{form_start(form)}}
     <div class="comment1" >
         <div class="comment">
             <div>
-                <div><img src="/ecoridee/image/voiturier3.jpg" alt="usercomment" class="userimg"></div>
+                </div>
+            <div>
+                {{form_widget(form.comment)}}
+            </div>
+        </div>
+
+        <div class="comment">
+            <div>
+                <div>Note {{form_widget(form.note)}}</div>
+            </div>
+        </div>
+        <button type="submit">Valider</button>
+    </div>
+{{form_end(form)}}
+{% endif %}
+{% for comment in comments %}
+    <div class="comment1" >
+        <div class="comment">
+            <div>
+                <div><img class="picturesprofil" src="{{ asset('uploads/' ~ participant.photo) }}" alt="Photo de profil" ></div>
+                <div><p><strong>{{ comment.user.pseudo }}</strong></p></div>
             </div>
             <div>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio facilis numquam eum officia modi perspiciatis, ut dicta, quae voluptates, quasi pariatur rerum doloribus voluptate assumenda accusantium nesciunt quaerat error harum.</div>
+                <div>{{comment.comment}}</div>
             </div>
         </div>
 
-        <div class="notecomment">
-        <div>
-            <strong>4/5</strong>
+        <div class="comment">
+            <div>
+                <div>{{comment.note}}/5</div>
+            </div>
         </div>
-        </div>
+        
     </div>
 
+{% endfor %}
 {% endblock %}
