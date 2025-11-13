@@ -46,6 +46,8 @@
 					<a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a>
 				</div>
 			{% endif %}
+
+			<div class="credit">{{user.credit}} Crédits</div>
 		</nav>
 	</header>
 
@@ -67,7 +69,7 @@
 						<button class="driverpassenger navlink2" id="btnpassager">Passager</button>
 					</div>
 				</div>
- 
+
 					{{ form_start(form) }}
 				<div action="" class="userform hidden" id="filter">
 					<div>

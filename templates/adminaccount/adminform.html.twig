@@ -45,7 +45,8 @@
 			{% endif %}
 		</nav>
 
-{{ form_start(form) }}
+{{ form_start(form, {'method': 'POST'}) }}
+
 
 
 <div class="employeform">
@@ -79,5 +80,7 @@
 </div>
 
 {{ form_end(form) }}
+
+
 
         {% endblock %}

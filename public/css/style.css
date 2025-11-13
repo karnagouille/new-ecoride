@@ -737,10 +737,16 @@ html, body {
 }
 /*#endregion réinitialiser le mdp*/
 
-/*#region  Utilisateur*/
+/*#region  Mon Compte */
 
 
 /* photo et information personnelle */
+
+
+.credit{
+color: rgb(23, 161, 30) ;
+}
+
 .userprofil{
     display: flex;
     text-align: center;    width: 100%;
@@ -1016,7 +1022,9 @@ color: rgb(48, 219, 57);
 
 /*#region  Admin*/
 
-
+.canvas {
+    width: 500px;
+}
 .table{
     margin-top: 7em;
 }

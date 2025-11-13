@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Carpooling;
 use App\Repository\UserRepository;
 use App\Form\NewemployeaccountType;
+use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +39,8 @@ final class AdminController extends AbstractController
         $user = new User();
         $form = $this->createForm(NewemployeaccountType::class,$user);
         $form->handleRequest($request);
-        
+
+
 
 
         if ( $form->isSubmitted() && $form->isValid()){
@@ -45,6 +48,8 @@ final class AdminController extends AbstractController
             $user->setroles(['ROLE_EMPLOYE']);
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hashedPassword);
+            
+            $user->setCredit(20); // Ajout de crédit à la création du compte
 
             $em->persist($user);
             $em->flush();
@@ -58,4 +63,33 @@ final class AdminController extends AbstractController
     }
 
 
-}
+
+    #[Route('/admin/chart', name: 'chart')]
+    public function chart(CarpoolingRepository $CarpoolingRepository): Response
+    {
+        $trajets = $CarpoolingRepository->findBy(['statut'=> Carpooling::STATUT_TERMINE]);
+
+        $today = new \DateTime('today');     // 2025-11-12 00:00:00
+        $tomorrow = new \DateTime('tomorrow'); // 2025-11-13 00:00:00
+
+        $trajetsDuJour = [];
+
+        foreach($trajets as $trajet){
+            if($trajet->getStartAt()>= $today && $trajet->getStartAt()<$tomorrow){
+                $trajetsDuJour[]= $trajet;
+            }
+        }
+
+        $nbTrajetsAujourdHui = count($trajetsDuJour);
+
+            return $this->json([
+        'today' => $nbTrajetsAujourdHui
+]);
+
+
+
+        }
+    }
+
+
+

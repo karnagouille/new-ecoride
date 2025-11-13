@@ -144,12 +144,11 @@
 					</div>
 
 					{% if app.user.id == t.user.id %}
-					<form method="post" action="{{ path('changer_statut', {'id': t.id}) }}">
-						{% if t.statut == 'rien' or t.statut is null %}
-							<button type="submit">Démarrer</button>
-						{% elseif t.statut == 'en_cours' %}
-							<button type="submit" action="{{ path('changer_statut', {'id': t.id}) }}">Arrivée</button>
-						{% endif %}
+					<form method="post" action="{{ path('change_statut', {'id': t.id}) }}">
+					<input type="hidden" name="_token" value="{{ csrf_token('change_statut' ~ t.id) }}">
+
+						<button type="submit">{% if t.statut == 'rien' or t.statut is null %} Démarrer {% else %} Arrivée {% endif %}
+    </button>
 					</form>
 					{% endif %}
 					

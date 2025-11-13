@@ -84,8 +84,6 @@ final class CarpoolController extends AbstractController
                 Trajet non trouvé'.$id
             );
         }
-
-
             $participant = new Participant();
             $participant->setUser($this->getUser());
             $participant->setCarpooling($trajet);
