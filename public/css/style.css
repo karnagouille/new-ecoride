@@ -1021,9 +1021,11 @@ color: rgb(48, 219, 57);
 /*#endregion créer un trajet*/
 
 /*#region  Admin*/
-
-.canvas {
-    width: 500px;
+.canvas{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    text-align: center;
 }
 .table{
     margin-top: 7em;

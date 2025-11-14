@@ -71,11 +71,11 @@ window.addEventListener('DOMContentLoaded', () => {
     fetch('/admin/chart')
         .then(response => response.json())
         .then(data => {
-            const labels1 = ['Today'];
+            const labels1 = ["Aujourd'hui"];
             const data1 = {
                 labels: labels1,
                 datasets: [{
-                    label: 'Nombre de covoiturage par jour',
+                    label: 'Nombre de covoiturage ',
                     data: [data.today],
                     backgroundColor: ['rgba(54, 162, 235,1)'],
                     borderColor: ['rgb(54, 162, 235)'],
@@ -104,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const data2 = {
         labels: labels2,
         datasets: [{
-            label: 'Nombre de trajets terminés par jour',
+            label: 'Nombre de crédit',
             data: [65, 59, 80, 81, 56, 55, 40],
             backgroundColor: [
                 'rgba(255, 99, 132,1)',
@@ -132,6 +132,8 @@ window.addEventListener('DOMContentLoaded', () => {
         type: 'bar',
         data: data2,
         options: {
+             responsive: false,  
+            maintainAspectRatio: false,
             scales: {
                 x: { ticks: { color: '#fcf6f6ff', font: { size: 14, weight: 'bold' } }, grid: { color: '#ddd' } },
                 y: { ticks: { color: '#f7f4f4ff', font: { size: 14 } }, grid: { color: '#ddd' } }

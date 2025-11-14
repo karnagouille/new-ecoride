@@ -75,6 +75,12 @@ private Collection $participants;
     #[ORM\OneToMany(targetEntity: CreditTransaction::class, mappedBy: 'receiver')]
     private Collection $receivedTransactions;
 
+    #[ORM\Column]
+    private ?float $platformCredit = 0;
+
+    #[ORM\Column(nullable: false)]
+    private ?float $credit = 20;
+
 
 
     public function getUserIdentifier(): string
@@ -347,6 +353,30 @@ public function getCarpoolings(): Collection
                 $receivedTransaction->setReceiver(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlatformCredit(): ?float
+    {
+        return $this->platformCredit;
+    }
+
+    public function setPlatformCredit(float $platformCredit): static
+    {
+        $this->platformCredit = $platformCredit;
+
+        return $this;
+    }
+
+    public function getCredit(): ?float
+    {
+        return $this->credit;
+    }
+
+    public function setCredit(?float $credit): static
+    {
+        $this->credit = $credit;
 
         return $this;
     }

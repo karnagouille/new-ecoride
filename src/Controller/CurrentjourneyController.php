@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Carpooling;
+use App\Entity\CreditTransaction;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ParticipantRepository;
@@ -45,13 +46,38 @@ final class CurrentjourneyController extends AbstractController
 
             case Carpooling::STATUT_EN_COURS:
                 $trajet->setStatut(Carpooling::STATUT_TERMINE);
+                
 
                 // Décrémentation de tous les participants
                 foreach ($trajet->getParticipants() as $participant) {
                     $userParticipant = $participant->getUser();
-                    $userParticipant->setCredit($userParticipant->getCredit() - 2);
-                    $em->persist($userParticipant);
-                }
+                    $chauffeur = $this->getUser();
+                    $amount = $trajet->getCreditTransaction()->first()->getAmount(); // récupére la première transaction du trajet
+                    $platform = 2;
+                    $chauffeurAmount = $amount - $platform; // crédit du participant - crédit de la plaforme = crédit du chauffeur
+
+
+                    $transactionplatform = new CreditTransaction();
+                    $transactionplatform->setSender($userParticipant);
+                    $transactionplatform->setReceiver($chauffeur);
+                    $transactionplatform->setAmount($amount);
+                    $transactionplatform->setCarpooling($trajet);
+                    $userParticipant->setCredit($userParticipant->getCredit()-$amount);
+
+                        $em->persist($transactionplatform);
+                        
+                    /** @var \App\Entity\User $chauffeur */
+                    $transactionchauffeur = new CreditTransaction();
+                    $transactionchauffeur->setSender($participant->getUser());
+                    $transactionchauffeur->setReceiver($chauffeur);
+                    $transactionchauffeur->setAmount($chauffeurAmount);
+                    $transactionchauffeur->setCarpooling($trajet);
+                    $chauffeur->setCredit($chauffeur->getCredit() + $chauffeurAmount);
+
+                        $em->persist($transactionchauffeur);
+
+                        $em->flush();
+                };
 
                 break;
 
