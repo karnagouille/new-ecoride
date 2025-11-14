@@ -5,6 +5,7 @@ namespace App\Form;
 
 use App\Entity\Car;
 
+use App\Entity\Credit;
 use App\Entity\Carpooling;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CarpoolingType extends AbstractType
@@ -53,11 +55,14 @@ class CarpoolingType extends AbstractType
                 'required'=>false,
             ])
 
-            ->add('price', TextType::class, [
-                'label' => false,
-                'required'=>false,
-
+            ->add('price',MoneyType::class,[
+            'label' => 'Prix du trajet (€)',
+            'required' => true,
+            'currency' => 'EUR',
+            'mapped' => false,
             ])
+
+            
             ->add('traveltime', ChoiceType::class, [
                 'label' => false,
                 'choices' => [
@@ -106,19 +111,6 @@ class CarpoolingType extends AbstractType
                 
                 ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function configureOptions(OptionsResolver $resolver): void

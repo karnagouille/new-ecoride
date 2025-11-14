@@ -6,7 +6,6 @@ use App\Entity\Car;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -65,10 +64,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 private Collection $participants;
 
     /**
-     * @var Collection<int, Credit>
+     * @var Collection<int, CreditTransaction>
      */
-    #[ORM\OneToMany(targetEntity: Credit::class, mappedBy: 'user')]
-    private Collection $credits;
+    #[ORM\OneToMany(targetEntity: CreditTransaction::class, mappedBy: 'sender')]
+    private Collection $sentTransactions;
+
+    /**
+     * @var Collection<int, CreditTransaction>
+     */
+    #[ORM\OneToMany(targetEntity: CreditTransaction::class, mappedBy: 'receiver')]
+    private Collection $receivedTransactions;
+
 
 
     public function getUserIdentifier(): string
@@ -243,23 +249,19 @@ private Collection $participants;
 
         return $this;
     }
-    
-
 
 public function getCarpoolings(): Collection
 {
     return $this->carpoolings;
 }
 
-
-
-
     public function __construct()
     {
         $this->cars = new ArrayCollection();
         $this->carpoolings = new ArrayCollection();
         $this->participants = new ArrayCollection();
-        $this->credits = new ArrayCollection(); 
+        $this->sentTransactions = new ArrayCollection();
+        $this->receivedTransactions = new ArrayCollection(); 
     }
 
     /**
@@ -290,34 +292,63 @@ public function getCarpoolings(): Collection
     }
 
     /**
-     * @return Collection<int, Credit>
+     * @return Collection<int, CreditTransaction>
      */
-    public function getCredits(): Collection
+    public function getSentTransactions(): Collection
     {
-        return $this->credits;
+        return $this->sentTransactions;
     }
 
-    public function addCredit(Credit $credit): static
+    public function addSentTransaction(CreditTransaction $sentTransaction): static
     {
-        if (!$this->credits->contains($credit)) {
-            $this->credits->add($credit);
-            $credit->setUser($this);
+        if (!$this->sentTransactions->contains($sentTransaction)) {
+            $this->sentTransactions->add($sentTransaction);
+            $sentTransaction->setSender($this);
         }
 
         return $this;
     }
 
-    public function removeCredit(Credit $credit): static
+    public function removeSentTransaction(CreditTransaction $sentTransaction): static
     {
-        if ($this->credits->removeElement($credit)) {
+        if ($this->sentTransactions->removeElement($sentTransaction)) {
             // set the owning side to null (unless already changed)
-            if ($credit->getUser() === $this) {
-                $credit->setUser(null);
+            if ($sentTransaction->getSender() === $this) {
+                $sentTransaction->setSender(null);
             }
         }
 
         return $this;
     }
 
+    /**
+     * @return Collection<int, CreditTransaction>
+     */
+    public function getReceivedTransactions(): Collection
+    {
+        return $this->receivedTransactions;
+    }
+
+    public function addReceivedTransaction(CreditTransaction $receivedTransaction): static
+    {
+        if (!$this->receivedTransactions->contains($receivedTransaction)) {
+            $this->receivedTransactions->add($receivedTransaction);
+            $receivedTransaction->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceivedTransaction(CreditTransaction $receivedTransaction): static
+    {
+        if ($this->receivedTransactions->removeElement($receivedTransaction)) {
+            // set the owning side to null (unless already changed)
+            if ($receivedTransaction->getReceiver() === $this) {
+                $receivedTransaction->setReceiver(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

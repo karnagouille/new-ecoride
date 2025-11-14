@@ -72,6 +72,7 @@
 			</div>
 
 			{% for t in trajets %}
+			{% set transaction = t.creditTransactions.first %}
 				{% if t.statut == 'rien' or t.statut == 'en_cours'%}
 					<div class="historicals">
 
@@ -134,7 +135,7 @@
 										</div>
 										<div>
 											<p>
-												<strong>{{ t.price }}€</strong>
+												<strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong>
 											</p>
 										</div>
 									</div>

@@ -18,6 +18,7 @@ final class CurrentjourneyController extends AbstractController
         $user = $this->getUser();
         $trajets = $carpoolingRepository->findByUserOrParticipation($user);
 
+
         return $this->render('route/currentjourney.html.twig', [
             'user' => $user,
             'trajets' => $trajets,

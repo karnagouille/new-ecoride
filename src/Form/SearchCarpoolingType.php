@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class SearchCarpoolingType extends AbstractType
@@ -49,17 +50,15 @@ class SearchCarpoolingType extends AbstractType
                 'required'=>false,
                 'attr' => ['placeholder' => 'Heure de départ', 'class' => 'order2']
             ])
-
-            ->add('price', ChoiceType::class, [
-                'label' => false,
-                'required'=>false,
-                'multiple' => false,
-                'mapped' => false,
-                'choices' => [
+            ->add('price',ChoiceType::class, [
+            'label' => 'Prix du trajet (€)',
+            'required' => false,
+            'mapped' => false,
+            'choices' => [
                     'Croissant' => 'asc',
                     'Décroissant' => 'desc',
-                ]
-            ])
+            ]])
+
             ->add('traveltime', ChoiceType::class, [
                 'label' => false,
                 'required'=>false,

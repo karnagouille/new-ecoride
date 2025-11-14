@@ -49,7 +49,7 @@
             <div class="filtered hidden" id="filters">
                     <label class="souligne"><strong>PRIX</strong></label>
                 <div class="title">
-                    <div>!!!!!!!!!!!!!!!!!!!!!!!!!</div> 
+                    <strong> {{ form_widget(form.price) }}€</strong>
                 </div>
 
                 <div class="title">
@@ -132,9 +132,11 @@
                         <div>
                             <p><strong>{{ trajet.passenger }} place(s)</strong></p>
                         </div>
+                        {% set transaction = trajet.creditTransactions.first %}
                         <div>
-                            <div><strong>!!!!!!!!!!!!!! €</div>
+                            <strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong>
                         </div>
+
                     </div>               
                 </div>
             </div>  

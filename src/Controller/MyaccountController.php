@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
-use App\Entity\User;
 use App\Form\NewcarType;
-use App\Entity\Carpooling;
 use App\Form\ProfileFormType;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,8 +33,7 @@ final class MyaccountController extends AbstractController
 
         return $this->render('myaccount/myaccount.html.twig', [
         'user' => $user,
-        
-        
+
     ]);
 
     }
@@ -93,7 +90,7 @@ final class MyaccountController extends AbstractController
 
         $car = new Car();    
         $form = $this->createForm(NewcarType::class, $car, [
-        'csrf_token_id' => 'new_car_form', // ID unique
+        'csrf_token_id' => 'new_car_form',
         ]);
 
         $form->handleRequest($request);
@@ -123,11 +120,13 @@ final class MyaccountController extends AbstractController
         return $this->redirectToRoute('myaccount');
     }
     $user = $this->getUser();
+    $trajets = $carpoolingRepository->findByUserOrParticipation($user);
+
     $cars = $em->getRepository(Car::class)->findBy([
         'user'=>$user,
     ]);
             $user = $this->getUser();
-            $trajetTerminé = $carpoolingRepository->findByUserOrParticipation($user);
+
 
 
 
@@ -136,10 +135,15 @@ final class MyaccountController extends AbstractController
         'form'=>$form->createView(),
         'cars'=>$cars,
         'car'=>$car,
-        'trajets' => $trajetTerminé, 
         'user'=>$user,
+        'trajets' => $trajets,
         ]);
     }
+
+
+
+
+
 
                                 // Formulaire Voiture
 

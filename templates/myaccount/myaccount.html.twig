@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage
+{% block title %}Mon compte
 {% endblock %}
 
 {% block body %}
@@ -47,7 +47,7 @@
 				</div>
 			{% endif %}
 
-			<div class="credit">{{user.credit}} Crédits</div>
+			<div class="credit">crédits</div>
 		</nav>
 	</header>
 
@@ -174,7 +174,7 @@
 					<p><strong><u>Historique trajets</u></strong></p>
 				</div>
 				{% for t in trajets %}
-				
+				{% set transaction = t.creditTransactions.first %}
 				<div class="historicals">
 
 						<div href="/ecoridee/HTML/renseignement.html" class="reserved">
@@ -232,9 +232,7 @@
 											</p>
 										</div>
 										<div>
-											<p>
-												<strong>{{ t.price }}€</strong>
-											</p>
+											<p>Prix : {{ transaction ? transaction.amount : 'Non défini' }} €</p>
 										</div>
 									</div>
 								</div>

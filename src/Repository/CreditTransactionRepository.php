@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Credit;
+use App\Entity\CreditTransaction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Credit>
+ * @extends ServiceEntityRepository<CreditTransaction>
  */
-class CreditRepository extends ServiceEntityRepository
+class CreditTransactionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Credit::class);
+        parent::__construct($registry, CreditTransaction::class);
     }
 
 //    /**
-//     * @return Credit[] Returns an array of Credit objects
+//     * @return CreditTransaction[] Returns an array of CreditTransaction objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class CreditRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Credit
+//    public function findOneBySomeField($value): ?CreditTransaction
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

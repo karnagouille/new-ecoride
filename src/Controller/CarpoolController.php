@@ -23,12 +23,13 @@ final class CarpoolController extends AbstractController
         ]);
         $form->handleRequest($request);
 
+
         $trajets = [];
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $carpooling = $form->getData(); 
-            $priceOrder = $form->get('price')->getData();
+            $priceOrder = $form->get('price')->getData(); // 'asc' ou 'desc'
             $travelTime = $form->get('traveltime')->getData();
             $isElectric = $form->get('electric')->getData();
             $note = $form->get('note')->getData();
@@ -46,7 +47,7 @@ final class CarpoolController extends AbstractController
                 $note,
             );
         }
-
+        
         return $this->render('searchcarpool.html.twig', [
             'form' => $form->createView(),
             'trajets' => $trajets,

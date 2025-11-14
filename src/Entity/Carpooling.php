@@ -40,9 +40,6 @@ class Carpooling
     private ?\DateTime $hour = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $price = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $traveltime = null;
 
     #[ORM\Column(nullable: true)]
@@ -50,6 +47,7 @@ class Carpooling
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $note = null;
+
 
     public const STATUT_RIEN = 'rien';
     public const STATUT_EN_COURS = 'en_cours';
@@ -64,6 +62,12 @@ class Carpooling
     */
     #[ORM\OneToMany(targetEntity: Participant::class, mappedBy: 'carpooling')]
     private Collection $participants;
+
+    /**
+     * @var Collection<int, CreditTransaction>
+     */
+    #[ORM\OneToMany(targetEntity: CreditTransaction::class, mappedBy: 'carpooling')]
+    private Collection $creditTransactions;
 
 
 
@@ -140,17 +144,6 @@ class Carpooling
         return $this;
     }
 
-    public function getPrice(): ?string
-    {
-        return $this->price;
-    }
-
-    public function setPrice(?string $price): static
-    {
-        $this->price = $price;
-
-        return $this;
-    }
 
     public function getTraveltime(): ?string
     {
@@ -242,5 +235,38 @@ class Carpooling
     public function __construct()
 {
     $this->participants = new ArrayCollection();
+    $this->creditTransactions = new ArrayCollection();
 }
+
+    /**
+     * @return Collection<int, CreditTransaction>
+     */
+    public function getCreditTransactions(): Collection
+    {
+        return $this->creditTransactions;
+    }
+
+    public function addCreditTransaction(CreditTransaction $creditTransaction): static
+    {
+        if (!$this->creditTransactions->contains($creditTransaction)) {
+            $this->creditTransactions->add($creditTransaction);
+            $creditTransaction->setCarpooling($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreditTransaction(CreditTransaction $creditTransaction): static
+    {
+        if ($this->creditTransactions->removeElement($creditTransaction)) {
+            // set the owning side to null (unless already changed)
+            if ($creditTransaction->getCarpooling() === $this) {
+                $creditTransaction->setCarpooling(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
