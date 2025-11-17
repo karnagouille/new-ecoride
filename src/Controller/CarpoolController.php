@@ -58,6 +58,8 @@ final class CarpoolController extends AbstractController
     #[Route('/trajet/{id}/changer-statut', name: 'changer_statut')]
     public function changerStatut(Carpooling $trajet, EntityManagerInterface $em): Response
         {
+
+ dd("ici");
         switch ($trajet->getStatut()) {
         case Carpooling::STATUT_RIEN:
         case null:

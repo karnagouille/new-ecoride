@@ -145,8 +145,8 @@
 					</div>
 
 					{% if app.user.id == t.user.id %}
-					<form method="post" action="{{ path('change_statut', {'id': t.id}) }}">
-					<input type="hidden" name="_token" value="{{ csrf_token('change_statut' ~ t.id) }}">
+					<form method="post" action="{{ path('statut', {'id': t.id}) }}">
+					<input type="hidden" name="_token" value="{{ csrf_token('statut' ~ t.id) }}">
 
 						<button type="submit">{% if t.statut == 'rien' or t.statut is null %} Démarrer {% else %} Arrivée {% endif %}
     </button>

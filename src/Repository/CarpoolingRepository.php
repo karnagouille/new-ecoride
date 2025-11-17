@@ -66,11 +66,13 @@ public function findByUserOrParticipation(User $user)
 {
     return $this->createQueryBuilder('c')
         ->leftJoin('c.participants', 'p')
+        ->addSelect('p') 
         ->where('c.user = :user')
         ->orWhere('p.user = :user')
         ->setParameter('user', $user)
         ->getQuery()
         ->getResult();
 }
+
 
 }
