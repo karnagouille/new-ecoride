@@ -55,12 +55,12 @@ class CarpoolingType extends AbstractType
                 'required'=>false,
             ])
 
-            ->add('price',MoneyType::class,[
-            'label' => 'Prix du trajet (€)',
-            'required' => true,
-            'currency' => 'EUR',
-            'mapped' => false,
-            ])
+    // ->add('price',MoneyType::class,[
+    // 'label' => 'Prix du trajet (€)',
+    // 'required' => true,
+    // 'currency' => 'EUR',
+    // 'mapped' => false,
+    // ])
 
             
             ->add('traveltime', ChoiceType::class, [

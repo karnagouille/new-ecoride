@@ -259,7 +259,7 @@ class Carpooling
     public function removeCreditTransaction(CreditTransaction $creditTransaction): static
     {
         if ($this->creditTransactions->removeElement($creditTransaction)) {
-            // set the owning side to null (unless already changed)
+
             if ($creditTransaction->getCarpooling() === $this) {
                 $creditTransaction->setCarpooling(null);
             }

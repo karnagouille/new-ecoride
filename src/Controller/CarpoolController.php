@@ -91,15 +91,15 @@ final class CarpoolController extends AbstractController
             $participant->setUser($this->getUser());
             $participant->setCarpooling($trajet);
 
-            $amount = $trajet->getCreditTransaction()->first()->getAmount();
+            $transaction = $trajet->getCreditTransactions()->first();
+            $amount = $transaction ? $transaction->getAmount() : 0; // 0 ou une valeur par défaut si aucune transaction
+
             
             if($participant->getUser()->getcredit() < $amount){
                 $this->addFlash('error', "Crédits insuffisants : vous devez recharger.");
 
                 
             return $this->redirectToRoute('currentjourney');
-
-
             }
 
 
