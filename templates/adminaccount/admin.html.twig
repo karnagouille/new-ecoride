@@ -75,15 +75,19 @@
 
 <div><a href="{{ path('admin_form') }}" type="button" class="btn btn-primary">Ajoutez un compte</a></div>
 
-<br>
-<div>
-	<canvas id="myChart" width="500" height="100"  style="background-color: #2c2c2cff; border-radius: 10px;"></canvas>
+<div class="canvas">
+	<br>
+	<div>
+		<canvas id="myChart" width="800" height="300"  style="background-color: #2c2c2cff; border-radius: 10px;"></canvas>
+	</div>
+
+	<br>
+	<div>
+		<canvas id="myCharts" width="800" height="300"  style="background-color: #2c2c2cff; border-radius: 10px;"></canvas>
+	</div>
+
 </div>
 
-<br>
-<div>
-	<canvas id="myCharts" width="500" height="100"  style="background-color: #2c2c2cff; border-radius: 10px;"></canvas>
-</div>
 
 
 <script src="{{ asset('script/main.js') }}"></script>
