@@ -31,8 +31,6 @@ final class NewrouteController extends AbstractController
             'user_cars' => $userCars,
             ]);
 
-            
-
             $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()){ 
@@ -40,18 +38,7 @@ final class NewrouteController extends AbstractController
             $trajet->setUser($user);
             $em->persist($trajet);
 
-            $amount = $form->get('price')->getData();
-            
-            $transaction = new CreditTransaction();
-            $transaction->setAmount($amount);
-            $transaction->setSender($user);
-            $transaction->setReceiver($user); // ou un autre utilisateur si nécessaire
-            $transaction->setCarpooling($trajet);
-            $em->persist($transaction);
-
             $em->flush();
-
-            $this->addFlash('success', 'Trajet enregistré !');
             return $this->redirectToRoute('myaccount');
         }
 
