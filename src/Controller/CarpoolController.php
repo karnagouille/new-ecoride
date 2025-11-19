@@ -59,7 +59,7 @@ final class CarpoolController extends AbstractController
     public function changerStatut(Carpooling $trajet, EntityManagerInterface $em): Response
         {
 
- dd("ici");
+
         switch ($trajet->getStatut()) {
         case Carpooling::STATUT_RIEN:
         case null:
@@ -90,6 +90,19 @@ final class CarpoolController extends AbstractController
             $participant = new Participant();
             $participant->setUser($this->getUser());
             $participant->setCarpooling($trajet);
+
+            $amount = $trajet->getCreditTransaction()->first()->getAmount();
+            
+            if($participant->getUser()->getcredit() < $amount){
+                $this->addFlash('error', "Crédits insuffisants : vous devez recharger.");
+
+                
+            return $this->redirectToRoute('currentjourney');
+
+
+            }
+
+
             $em->persist($participant);
 
     
