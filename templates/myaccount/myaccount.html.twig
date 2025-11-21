@@ -37,6 +37,10 @@
             <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
             {% endif %}
 
+			{% if is_granted('ROLE_EMPLOYEE') %}
+            <div><a href="{{ path('employe') }}" class="decoration navlink">Gestion</a></div>
+            {% endif %}
+
 			{% if app.user %}
 				<div>
 					<a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a>
