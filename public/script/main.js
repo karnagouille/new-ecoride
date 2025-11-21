@@ -1,60 +1,45 @@
+// ---------------- FORMULAIRES ----------------
 
-
-//Formulaire Profil voiture
-
+// Formulaire Profil voiture
 const filter = document.getElementById("filter");
 const btn = document.getElementById("btn");
-
 btn?.addEventListener("click", (event) => {
     event.preventDefault();
     filter?.classList.remove("hidden");
 });
 
-
-//Formulaire critéres de recherche
-
+// Formulaire critères de recherche
 const filters = document.getElementById("filters");
 const btns = document.getElementById("btns");
-
 btns?.addEventListener("click", (event) => {
     event.preventDefault();
     filters?.classList.toggle("hidden");
 });
 
-
-
-// Boutton démarrer/arrivée
+// Boutons démarrer/arrivée
 document.querySelectorAll('.start').forEach(startBtn => {
     startBtn.addEventListener('click', () => {
-
         const finishBtn = startBtn.closest('.startstop').querySelector('.finish');
-        if (finishBtn) {
-            finishBtn.classList.toggle('hidden');
-        }
+        if (finishBtn) finishBtn.classList.toggle('hidden');
     });
 });
 
-
 // Photo de profil
-
-    const profil = document.getElementById('profil');
+const profil = document.getElementById('profil');
 const preview = document.getElementById('preview');
-
 if (profil) {
-    profil.addEventListener('change', handleFiles, false);
+    profil.addEventListener('change', function handleFiles() {
+        const file = this.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+            preview.onload = () => URL.revokeObjectURL(preview.src);
+        }
+    }, false);
 }
 
-function handleFiles() {
-    const file = this.files[0];
-    if (file) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-        preview.onload = () => URL.revokeObjectURL(preview.src);
-    }
-}
-
-
-    document.querySelectorAll('.arrived').forEach(button => {
+// Boutons “arrived”
+document.querySelectorAll('.arrived').forEach(button => {
     button.addEventListener('click', (event) => {
         const url = event.currentTarget.dataset.url;
         window.location.href = url;
@@ -63,86 +48,66 @@ function handleFiles() {
 
 
 
-
-
-
+// ---------------- GRAPH CHART ----------------
 window.addEventListener('DOMContentLoaded', () => {
-    // ----- Graphique 1 : Aujourd'hui -----
-    fetch('/admin/chart')
-        .then(response => response.json())
-        .then(data => {
-            const labels1 = ["Aujourd'hui"];
-            const data1 = {
-                labels: labels1,
+
+    let weeklyTrajetsChart;
+    let weeklyCreditsChart;
+
+    async function fetchAndRenderCharts() {
+        try {
+            // Trajets
+            const respTrajets = await fetch('/admin/week');
+            const dataTrajets = await respTrajets.json();
+
+            const ctxTrajets = document.getElementById('myChartsTrajets');
+            const trajetsData = {
+                labels: ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
                 datasets: [{
-                    label: 'Nombre de covoiturage ',
-                    data: [data.today],
-                    backgroundColor: ['rgba(54, 162, 235,1)'],
-                    borderColor: ['rgb(54, 162, 235)'],
+                    label: 'Nombre de trajets par jour',
+                    data: dataTrajets.weekTrajets,
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    borderColor: 'rgb(54, 162, 235)',
                     borderWidth: 1
                 }]
             };
 
-            const config1 = {
-                type: 'bar',
-                data: data1,
-                options: {
-                    scales: {
-                        x: { ticks: { color: '#fcf6f6ff', font: { size: 14, weight: 'bold' } }, grid: { color: '#ddd' } },
-                        y: { ticks: { color: '#f7f4f4ff', font: { size: 14 } }, grid: { color: '#ddd' } }
-                    },
-                    plugins: { legend: { labels: { color: '#f0ededff' } } }
-                }
+            if (!weeklyTrajetsChart) {
+                weeklyTrajetsChart = new Chart(ctxTrajets, { type: 'bar', data: trajetsData });
+            } else {
+                weeklyTrajetsChart.data.datasets[0].data = dataTrajets.weekTrajets;
+                weeklyTrajetsChart.update();
+            }
+
+            // Crédits
+            const respCredits = await fetch('/admin/credit');
+            const dataCredits = await respCredits.json();
+
+            const ctxCredits = document.getElementById('myChartsCredits');
+            const creditsData = {
+                labels: ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
+                datasets: [{
+                    label: 'Nombre de crédits par jour',
+                    data: dataCredits.weekCredits,
+                    backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                    borderColor: 'rgb(255, 159, 64)',
+                    borderWidth: 1
+                }]
             };
 
-            const ctx1 = document.getElementById('myChart');
-            if (ctx1) new Chart(ctx1, config1);
-        });
+            if (!weeklyCreditsChart) {
+                weeklyCreditsChart = new Chart(ctxCredits, { type: 'bar', data: creditsData });
+            } else {
+                weeklyCreditsChart.data.datasets[0].data = dataCredits.weekCredits;
+                weeklyCreditsChart.update();
+            }
 
-    // ----- Graphique 2 : Par jour de la semaine -----
-    const labels2 = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-    const data2 = {
-        labels: labels2,
-        datasets: [{
-            label: 'Nombre de crédit',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            backgroundColor: [
-                'rgba(255, 99, 132,1)',
-                'rgba(255, 159, 64,1)',
-                'rgba(255, 205, 86,1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(54, 162, 235,1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(201, 203, 207, 1)'
-            ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
-            ],
-            borderWidth: 1
-        }]
-    };
-
-    const config2 = {
-        type: 'bar',
-        data: data2,
-        options: {
-             responsive: false,  
-            maintainAspectRatio: false,
-            scales: {
-                x: { ticks: { color: '#fcf6f6ff', font: { size: 14, weight: 'bold' } }, grid: { color: '#ddd' } },
-                y: { ticks: { color: '#f7f4f4ff', font: { size: 14 } }, grid: { color: '#ddd' } }
-            },
-            plugins: { legend: { labels: { color: '#f0ededff' } } }
+        } catch (error) {
+            console.error(error);
         }
-    };
+    }
 
-    const ctx2 = document.getElementById('myCharts');
-    if (ctx2) new Chart(ctx2, config2);
+    fetchAndRenderCharts();
+    setInterval(fetchAndRenderCharts, 3600000); // maj toutes les heures
 });
 

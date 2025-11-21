@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Carpooling;
+use App\Entity\CreditTransaction;
 use App\Repository\UserRepository;
 use App\Form\NewemployeaccountType;
 use App\Repository\CarpoolingRepository;
@@ -62,34 +63,81 @@ final class AdminController extends AbstractController
         ]);
     }
 
+// graphique du nombre de covoiturage journalier et hebdo
+
+  #[Route('/admin/week', name: 'week')]
+public function week(CarpoolingRepository $carpoolingRepository): Response
+{
+    $trajets = $carpoolingRepository->findBy(['statut' => Carpooling::STATUT_TERMINE]);
+
+    $week = [];
+    $monday = new \DateTime('monday this week');
+    for ($i = 0; $i < 7; $i++) {
+        $week[] = (clone $monday)->modify("+$i day");
+    }
+
+    $nbTrajetsParJour = [];
+    foreach ($week as $day) {
+        $start = (clone $day)->setTime(0,0,0);
+        $end   = (clone $day)->modify('+1 day')->setTime(0,0,0);
+        $nbTrajetsParJour[] = count(array_filter($trajets, fn($t) => $t->getStartAt() >= $start && $t->getStartAt() < $end));
+    }
+
+    return $this->json([
+        'weekTrajets' => $nbTrajetsParJour
+    ]);
+}
 
 
-    #[Route('/admin/chart', name: 'chart')]
-    public function chart(CarpoolingRepository $CarpoolingRepository): Response
-    {
-        $trajets = $CarpoolingRepository->findBy(['statut'=> Carpooling::STATUT_TERMINE]);
 
-        $today = new \DateTime('today');     // 2025-11-12 00:00:00
-        $tomorrow = new \DateTime('tomorrow'); // 2025-11-13 00:00:00
 
-        $trajetsDuJour = [];
+// graphique de gain de crédits journalier et hebdo
 
-        foreach($trajets as $trajet){
-            if($trajet->getStartAt()>= $today && $trajet->getStartAt()<$tomorrow){
-                $trajetsDuJour[]= $trajet;
+#[Route('/admin/credit', name: 'credit')]
+public function credit(CarpoolingRepository $carpoolingRepository, EntityManagerInterface $doctrine): Response
+{
+    $trajets = $carpoolingRepository->findBy(['statut' => Carpooling::STATUT_TERMINE]);
+
+    // Admin platform user
+    $platformUser = $doctrine->getRepository(User::class)->find(1);
+
+    $week = [];
+    $monday = new \DateTime('monday this week');
+    for ($i = 0; $i < 7; $i++) {
+        $week[] = (clone $monday)->modify("+$i day");
+    }
+
+    $creditsParJour = [];
+    foreach ($week as $day) {
+        $start = (clone $day)->setTime(0,0,0);
+        $end   = (clone $day)->modify('+1 day')->setTime(0,0,0);
+
+        $totalCredits = 0;
+        foreach ($trajets as $trajet) {
+            if ($trajet->getStartAt() >= $start && $trajet->getStartAt() < $end) {
+                $totalCredits += count($trajet->getParticipants()) * 2; // 2 crédits par participant
             }
         }
+        $creditsParJour[] = $totalCredits;
+    }
 
-        $nbTrajetsAujourdHui = count($trajetsDuJour);
-
-            return $this->json([
-        'today' => $nbTrajetsAujourdHui
-]);
+    return $this->json([
+        'weekCredits' => $creditsParJour
+    ]);
+}
 
 
 
         }
-    }
+
+
+
+
+
+    
+
+
+
 
 
 
