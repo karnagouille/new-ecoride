@@ -55,13 +55,6 @@ class Carpooling
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $note = null;
 
-<<<<<<< Updated upstream
-    public const STATUT_RIEN = 'rien';
-    public const STATUT_EN_COURS = 'en_cours';
-    public const STATUT_TERMINE = 'termine';
-
-=======
->>>>>>> Stashed changes
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $statut = 'rien';
 

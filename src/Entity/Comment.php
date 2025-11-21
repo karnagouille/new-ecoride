@@ -8,10 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
+    public const STATUT_NOT_CHECKED = 'not_checked';
+    public const STATUT_CHECKED = 'checked';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(length: 20)]
+    private string $statut = self::STATUT_NOT_CHECKED;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $comment = null;
@@ -90,6 +96,18 @@ class Comment
 
         return $this;
     }
+
+    public function getStatut(): string
+{
+    return $this->statut;
+}
+
+public function setStatut(string $statut): static
+{
+    $this->statut = $statut;
+    return $this;
+}
+
 
 
 }

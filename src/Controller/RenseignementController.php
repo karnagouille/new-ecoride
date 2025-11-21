@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Form\CommentaireType;
+use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +32,7 @@ final class RenseignementController extends AbstractController
         $comment->setDriver($conducteur);
         $comment->setTrajet($trajet); // 👈 important pour relier le commentaire au trajet
 
-        $form = $this->createForm(CommentaireType::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
