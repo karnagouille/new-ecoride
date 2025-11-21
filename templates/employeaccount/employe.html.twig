@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Covoiturage
+{% endblock %}
+
+{% block body %}
+
+
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	{% endblock %}
+
+	{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+	{% endblock %}
+	<header>
+		<nav class="container titleshadow">
+			<div>
+				<a href="{{ path('home') }}" class="decoration navlink">Accueil</a>
+			</div>
+			<div>
+				<a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a>
+			</div>
+			<div>
+				<a href="#" class="decoration navlink">Contact</a>
+			</div>
+			{% if is_granted('ROLE_ADMIN') %}
+            <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
+            {% endif %}
+
+			{% if app.user %}
+				<div>
+					<a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a>
+				</div>
+			{% else %}
+				<div>
+					<a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a>
+				</div>
+			{% endif %}
+
+            {% if is_granted('ROLE_EMPLOYEE') %}
+            <div><a href="{{ path('admin') }}" class="decoration navlink">Gestion</a></div>
+            {% endif %}
+		</nav>
+
+ <div class="information">  
+        <div class="infopseudo">            
+            <div class=pseudo> 
+                <div>
+                    <div><strong>{{conducteur.pseudo}}</strong></div>
+                </div>
+            </div>
+            <div >
+                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
+            </div>
+            <div>
+                <p><strong>5/5</strong></p>
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="pricetime">
+
+                <div>  
+                    <div><strong>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! €</strong></div>
+                </div>
+                <div>  
+                    <div style="font-size:25px;" ><strong>{{ trajet.startAt|date('d/m/Y') }}</div>
+                </div>
+                <div>
+                    <div>{{trajet.passenger}} Passager(s)</div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="info2">
+                    
+                    <div>
+                        <div><u><strong>Départ {{ trajet.hour ? trajet.hour|date('H:i') : '' }} de {{trajet.startTown}} </strong></u></div>
+                    </div>
+                </div>
+
+                <div class="info2">
+                    <div>
+                        <div><strong></strong></div>
+                    </div>
+                    <div>
+                        <div><u><strong>Arrivée {{trajet.endTown}}</strong></u></div>
+                    </div>
+                </div>
+
+                <div class="info2">
+                    
+                    <div>
+                        <div><em><strong>Durée environ {{trajet.traveltime}} </strong></em></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="preference">
+                <div>
+                    <strong>préférence: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo eum reiciendis optio quod suscipit odit? Accusantium veritatis laudantium porro, nesciunt rem ratione nam corporis quae cupiditate dolor nulla, tenetur et?</strong>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="car"> 
+
+            <div class="places">
+                
+                <div>
+                    <p ><strong>{{conducteur.lastname}}/{{conducteur.name}}</strong></p>
+                </div>               
+            </div>
+
+            <div>
+                <img src="/ecoridee/image/batmobile.jpg" alt="voiture ecologique" class="carimg2">
+            </div>
+
+            <div class="brand">
+                <div><strong>Batlmobile</strong>,</div>
+                <div><strong>Renault</strong></div>
+            </div>
+
+            <div>
+                <img src="/ecoridee/tools/voiture-electrique.png" alt="electric car" class="eleccar">
+            </div>
+        </div>
+    </div>
+
+<div class="titlecomment">
+    <div>
+        <strong>COMMENTAIRES</strong>
+    </div>
+</div>
+
+    <div class="comment1" >
+        <div class="comment">
+            <div>
+                <div><img src="/ecoridee/image/voiturier3.jpg" alt="usercomment" class="userimg"></div>
+            </div>
+            <div>
+                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio facilis numquam eum officia modi perspiciatis, ut dicta, quae voluptates, quasi pariatur rerum doloribus voluptate assumenda accusantium nesciunt quaerat error harum.</div>
+            </div>
+        </div>
+
+        <div class="notecomment">
+        <div>
+            <strong>4/5</strong>
+        </div>
+        </div>
+    </div>
+
+
+		
+		{% endblock %}

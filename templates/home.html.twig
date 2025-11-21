@@ -18,6 +18,10 @@
             <div><a href="#" class="decoration navlink">Contact</a></div>
             <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
 
+            {% if is_granted('ROLE_EMPLOYE') %}
+            <div><a href="{{ path('employe') }}" class="decoration navlink">Gestion</a></div>
+            {% endif %}
+
             {% if is_granted('ROLE_ADMIN') %}
             <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
             {% endif %}
@@ -28,9 +32,7 @@
             <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
             {% endif %}
             
-            {% if is_granted('ROLE_EMPLOYEE') %}
-            <div><a href="{{ path('admin') }}" class="decoration navlink">Gestion</a></div>
-            {% endif %}
+            
         </nav>
     </header>
 
