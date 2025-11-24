@@ -38,7 +38,7 @@
                 <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
             </div>
             <div>
-                <p><strong>5/5</strong></p>
+                <p><strong>{{ average|round(2) }}/5</strong></p>
             </div>
         </div>
 
