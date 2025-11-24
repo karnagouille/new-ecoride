@@ -16,7 +16,7 @@ final class EmployeController extends AbstractController
 
 
     #[IsGranted('ROLE_EMPLOYE')]
-    #[Route('/employecomment', name: 'employecomment', methods: ['POST'])]
+    #[Route('/employecomment', name: 'employecomment')]
     public function employecomment(CommentRepository $CommentRepository): Response
     {
         $comments = $CommentRepository->findBy(['statut'=> Comment::STATUT_NOT_CHECKED ]);

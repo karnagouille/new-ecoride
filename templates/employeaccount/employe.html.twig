@@ -52,31 +52,35 @@
 
 
 
+			{% for c in comments %}
+<div class="employecomment1">
+		<div class="employecomment2" >
+			<div class="comment">
+				<div>
+					<div><img class="pictureemploye" src="{{ asset('uploads/' ~ c.user.photo) }}" alt="Photo de profil" ></div>
+					<div><p><strong>{{ c.user.pseudo }}</strong></p></div>
+				</div>
+				<div>
+					<div>{{c.comment}}</div>
+				</div>
+			</div>
 
-{% for c in comments %}
-    <div class="comment1" >
-        <div class="comment">
-            <div>
-                <div><img class="picturesprofil"  alt="Photo de profil" ></div>
-                <div><p><strong>{{ c.user.pseudo }}</strong></p></div>
-            </div>
-            <div>
-                <div>{{c.comment}}</div>
-            </div>
-        </div>
-
-        <div class="comment">
-            <div>
-                <div>{{c.note}}/5</div>
-            </div>
-        </div>
-        
-    </div>          {% if c.statut == 'not_checked' %}
-                    <form method="post" action="{{ path('employe', {'id': c.id}) }}">
-							<button type="submit">Check</button>
-						{% endif %}
-						</form>
-{% endfor %}
-
+			<div class="comment">
+				<div>
+					<div><strong>{{c.note}}/5</strong></div>
+				</div>
+			</div>
+			
+		</div>          
+		<div>
+			{% if c.statut == 'not_checked' %}
+			<form method="post" action="{{ path('employe', {'id': c.id}) }}">
+			<button type="submit" class="checkbutton">Check</button>
+			{% endif %}
+			</form>
+		</div>
+		
+</div>
+	{% endfor %}
 		
 		{% endblock %}

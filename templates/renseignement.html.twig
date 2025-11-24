@@ -141,6 +141,7 @@
 {{form_end(form)}}
 {% endif %}
 {% for comment in comments %}
+{% if comment.statut == 'checked' %}
     <div class="comment1" >
         <div class="comment">
             <div>
@@ -159,6 +160,6 @@
         </div>
         
     </div>
-
+{% endif %}
 {% endfor %}
 {% endblock %}
