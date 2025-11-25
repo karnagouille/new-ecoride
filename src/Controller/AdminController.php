@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Carpooling;
-use App\Entity\CreditTransaction;
 use App\Repository\UserRepository;
 use App\Form\NewemployeaccountType;
 use App\Repository\CarpoolingRepository;
@@ -22,17 +21,39 @@ final class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
 
     #[Route('/admin', name: 'admin')]
-    public function index(UserRepository $userRepository): Response
+    public function index(EntityManagerInterface $em,UserRepository $userRepository, User $user): Response
     {
         $employes = $userRepository->findAllemployees();
 
+
         return $this->render('adminaccount/admin.html.twig',[
             'employes'=>$employes,
+            'user'=> $user,
+            
         ]);
     }
 
 
 
+    #[Route('/admin/toggle/{id}', name: 'find')]
+    public function find(EntityManagerInterface $em,UserRepository $userRepository,int $id): Response
+    {
+        
+
+        $user = $userRepository->find($id);
+
+        if($user->isActive()){
+            $user->setIsActive(false);
+        }else{
+            $user->setIsActive(true);
+        }
+        $em->persist($user);
+        $em->flush();
+
+        return $this->render('adminaccount/admin.html.twig',[
+            'user'=> $user,
+        ]);
+    }
 
     #[Route('/admin/form', name: 'admin_form')]
     public function Adminform(EntityManagerInterface $em,Request $request,UserPasswordHasherInterface $passwordHasher): Response
