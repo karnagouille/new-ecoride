@@ -86,8 +86,6 @@ private Collection $participants;
 
 
 
-
-
     public function isActive(): ?bool
     {
         return $this->isActive;

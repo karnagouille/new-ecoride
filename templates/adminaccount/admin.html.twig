@@ -45,7 +45,14 @@
 			{% endif %}
 		</nav>
 
+{{ form_start(form) }}
+{{ form_row(form.email) }}
+<button type="submit" class="btn btn-primary">Rechercher</button>
+{{ form_end(form) }}
 
+
+
+</form>
 
 <table class="table table-hover table-dark">
     <thead>
@@ -58,25 +65,26 @@
         </tr>
     </thead>
     <tbody>
-    {% for employe in employes %}
+    {% for user in users %}
         <tr>
-            <th scope="row">{{ employe.id }}</th>
-            <td>{{ employe.lastname }}</td>
-            <td>{{ employe.name }}</td>
-            <td>{{ employe.email }}</td>
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
 
             <td>
-                <form method="post" action="{{ path('find', {'id': user.id}) }}">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="isActive" 
-                               id="switchCheckDefault-{{ user.id }}" 
-                               onchange="this.form.submit()" 
-                               {% if user.isActive %}checked{% endif %}>
-                        <label class="form-check-label" for="switchCheckDefault-{{ user.id }}">
-                            {% if user.isActive %}Activer{% else %}Désactiver{% endif %}
-                        </label>
-                    </div>
-                </form>
+                <form method="post">
+    <input type="hidden" name="toggle_user_id" value="{{ user.id }}">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox"
+               onchange="this.form.submit()"
+               {% if user.isActive %}checked{% endif %}>
+        <label class="form-check-label">
+            {% if user.isActive %}Activer{% else %}Désactiver{% endif %}
+        </label>
+    </div>
+</form>
+
             </td>
         </tr>
     {% endfor %}
