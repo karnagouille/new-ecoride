@@ -1022,27 +1022,6 @@ color: rgb(48, 219, 57);
 
 /*#endregion créer un trajet*/
 
-<<<<<<< HEAD
-/*#region  Admin*/
-.canvas{
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    text-align: center;
-}
-.table{
-    margin-top: 7em;
-}
-
-.employeform{
-    margin-top: 7em;
-    margin-left:40%;
-    
-}
-
-
-/*#endregion Admin*/
-=======
 /*#region  employe*/
 
 
@@ -1080,4 +1059,4 @@ margin-top: 5em;
     width: 150px;
     border-radius: 100px;
 }
->>>>>>> note
+/*#endregion  employe*/
