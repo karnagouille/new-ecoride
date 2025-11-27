@@ -49,116 +49,35 @@
             {% endif %}
 		</nav>
 
- <div class="information">  
-        <div class="infopseudo">            
-            <div class=pseudo> 
-                <div>
-                    <div><strong>{{conducteur.pseudo}}</strong></div>
-                </div>
-            </div>
-            <div >
-                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
-            </div>
-            <div>
-                <p><strong>5/5</strong></p>
-            </div>
-        </div>
+			{% for c in comments %}
+<div class="employecomment1">
+		<div class="employecomment2" >
+			<div class="comment">
+				<div>
+					<div><img class="pictureemploye" src="{{ asset('uploads/' ~ c.user.photo) }}" alt="Photo de profil" ></div>
+					<div><p><strong>{{ c.user.pseudo }}</strong></p></div>
+				</div>
+				<div>
+					<div>{{c.comment}}</div>
+				</div>
+			</div>
 
-        <div class="info">
-            <div class="pricetime">
-
-                <div>  
-                    <div><strong>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! €</strong></div>
-                </div>
-                <div>  
-                    <div style="font-size:25px;" ><strong>{{ trajet.startAt|date('d/m/Y') }}</div>
-                </div>
-                <div>
-                    <div>{{trajet.passenger}} Passager(s)</div>
-                </div>
-
-            </div>
-
-            <div>
-                <div class="info2">
-                    
-                    <div>
-                        <div><u><strong>Départ {{ trajet.hour ? trajet.hour|date('H:i') : '' }} de {{trajet.startTown}} </strong></u></div>
-                    </div>
-                </div>
-
-                <div class="info2">
-                    <div>
-                        <div><strong></strong></div>
-                    </div>
-                    <div>
-                        <div><u><strong>Arrivée {{trajet.endTown}}</strong></u></div>
-                    </div>
-                </div>
-
-                <div class="info2">
-                    
-                    <div>
-                        <div><em><strong>Durée environ {{trajet.traveltime}} </strong></em></div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="preference">
-                <div>
-                    <strong>préférence: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo eum reiciendis optio quod suscipit odit? Accusantium veritatis laudantium porro, nesciunt rem ratione nam corporis quae cupiditate dolor nulla, tenetur et?</strong>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="car"> 
-
-            <div class="places">
-                
-                <div>
-                    <p ><strong>{{conducteur.lastname}}/{{conducteur.name}}</strong></p>
-                </div>               
-            </div>
-
-            <div>
-                <img src="/ecoridee/image/batmobile.jpg" alt="voiture ecologique" class="carimg2">
-            </div>
-
-            <div class="brand">
-                <div><strong>Batlmobile</strong>,</div>
-                <div><strong>Renault</strong></div>
-            </div>
-
-            <div>
-                <img src="/ecoridee/tools/voiture-electrique.png" alt="electric car" class="eleccar">
-            </div>
-        </div>
-    </div>
-
-<div class="titlecomment">
-    <div>
-        <strong>COMMENTAIRES</strong>
-    </div>
+			<div class="comment">
+				<div>
+					<div><strong>{{c.note}}/5</strong></div>
+				</div>
+			</div>
+			
+		</div>          
+		<div>
+			{% if c.statut == 'not_checked' %}
+			<form method="post" action="{{ path('employe', {'id': c.id}) }}">
+			<button type="submit" class="checkbutton">Check</button>
+			{% endif %}
+			</form>
+		</div>
+		
 </div>
-
-    <div class="comment1" >
-        <div class="comment">
-            <div>
-                <div><img src="/ecoridee/image/voiturier3.jpg" alt="usercomment" class="userimg"></div>
-            </div>
-            <div>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio facilis numquam eum officia modi perspiciatis, ut dicta, quae voluptates, quasi pariatur rerum doloribus voluptate assumenda accusantium nesciunt quaerat error harum.</div>
-            </div>
-        </div>
-
-        <div class="notecomment">
-        <div>
-            <strong>4/5</strong>
-        </div>
-        </div>
-    </div>
-
-
+	{% endfor %}
 		
 		{% endblock %}

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Form\CommentaireType;
+use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\CarpoolingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,9 +30,9 @@ final class RenseignementController extends AbstractController
         $comment = new Comment();
         $comment->setUser($currentUser);
         $comment->setDriver($conducteur);
-        $comment->setTrajet($trajet); // 👈 important pour relier le commentaire au trajet
+        $comment->setTrajet($trajet); 
 
-        $form = $this->createForm(CommentaireType::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,6 +59,16 @@ final class RenseignementController extends AbstractController
             ['id' => 'DESC']
         );
 
+        $user = $this->getUser();
+        $comments =$commentRepository->findBy(['user'=>$user]);
+
+        $notes = [];
+        foreach ($comments as $c){
+            $notes[]= $c->getNote();
+        }
+
+        $average = count($notes) ? array_sum($notes) / count($notes) : 0;
+
         return $this->render('renseignement.html.twig', [
             'conducteur' => $conducteur,
             'comment' => $comment,
@@ -67,14 +77,27 @@ final class RenseignementController extends AbstractController
             'form' => $form->createView(),
             'comments' => $comments,
             'canComment' => $canComment,
+            'average' => $average,
         ]);
     }
 
     #[Route('/renseignementshow/{id}', name: 'renseignementshow', methods: ['GET'])]
-    public function commentShow(Comment $comment): Response
+    public function commentShow(Comment $comment, CommentRepository $commentRepository): Response
     {
+
+        $user = $this->getUser();
+        $comments =$commentRepository->findBy(['user'=>$user]);
+
+        $notes = [];
+        foreach ($comments as $c){
+            $notes[]= $c->getNote();
+        }
+
+        $average = count($notes) ? array_sum($notes) / count($notes) : 0;
+
         return $this->render('renseignement.html.twig', [
             'comment' => $comment,
+            'average' => $average,
         ]);
     }
 }
