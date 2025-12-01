@@ -3,26 +3,86 @@
 {% block title %}Détails de la voiture{% endblock %}
 
 {% block body %}
-<h1>Détails de la voiture</h1>
 
-<div class="card">
+ 
+        <div class="car">
+        <h1>Détails de la voiture</h1>
+            {{ form_start(form) }}
+                    <div class="accountext">
+						<div>
+							<label for="">Numéro de la plaque :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.registration) }}
+                        </div>
+					</div>
 
-{{ form_start(form) }}
-    {{ form_row(form.registration) }}
-    {{ form_row(form.date_first_registration) }}
-    {{ form_row(form.model) }}
-    {{ form_row(form.color) }}
-    {{ form_row(form.brand) }}
-    {{ form_row(form.energy) }}
-    {{ form_row(form.preference) }}    
-{{ form_end(form) }}
+					<div class="accountext">
+						<div>
+							<label for="">Première imatriculation :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.date_first_registration) }}
+						</div>
+					</div>
 
-    <form method="post" action="{{ path('car_remove', {'id': car.id}) }}">
-    {# <input type="hidden" name="_method" value="DELETE"> #}
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ car.id) }}">
-    <button type="submit">Supprimer</button>
-</form>
-</div>
+					<div class="accountext">
+						<div>
+							<label for="">Modèle:</label>
+						</div>
+						<div>
+                            {{ form_widget(form.model) }}
+						</div>
+					</div>
 
-<a href="{{ path('myaccount') }}">Retour</a>
+					<div class="accountext">
+						<div>
+							<label for="">Couleur  :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.color) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Marque  :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.brand) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Energie :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.energy) }}
+						</div>
+					</div>
+
+					<div class="accountext">
+						<div>
+							<label for="">Préférences :</label>
+						</div>
+						<div>
+                            {{ form_widget(form.preference) }}
+						</div>
+					</div>
+                    <br>
+                    
+            {{ form_end(form) }}
+            <br>
+            <form method="post" action="{{ path('car_remove', {'id': car.id}) }}">
+                {# <input type="hidden" name="_method" value="DELETE"> #}
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ car.id) }}">
+                <button type="submit" class="find" >Supprimer</button>
+            </form>
+            <br>
+            <div><a class="find" href="{{ path('myaccount') }}">Retour</a></div>
+            
+        </div>
+
+
 {% endblock %}

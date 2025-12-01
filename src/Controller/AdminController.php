@@ -28,14 +28,15 @@ final class AdminController extends AbstractController
         $form->handleRequest($request);
 
 
-       if ($request->isMethod('POST') && $request->request->has('toggle_user_id')) {
-    $id = $request->request->get('toggle_user_id');
-    $user = $userRepository->find($id);
-    if ($user) {
-        $user->setIsActive(!$user->isActive());
-        $em->flush();
+        if ($request->isMethod('POST') && $request->request->has('toggle_user_id')) {
+            $id = $request->request->get('toggle_user_id');
+            $user = $userRepository->find($id);
+
+        if ($user) {
+            $user->setIsActive(!$user->isActive());
+            $em->flush();
+        }
     }
-}
 
         $users = [];
         if ($form->isSubmitted() && $form->isValid()) {

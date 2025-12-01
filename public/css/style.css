@@ -678,7 +678,7 @@ html, body {
 }
 
 .accountext > div:first-child {
-    width: 250px;
+    width: 350px;
     text-align: right;
     margin-right: 10px;
 }
@@ -804,6 +804,15 @@ color: rgb(23, 161, 30) ;
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+/*  Modification du formulaire voiture */
+
+.car{
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
 }
 
 /* Formulaire */
@@ -1060,3 +1069,17 @@ margin-top: 5em;
     border-radius: 100px;
 }
 /*#endregion  employe*/
+
+/*#region admin */
+
+
+.canvas{
+    display: flex;
+    margin-left: 5%;
+    gap: 5%;
+    text-align: center;
+}
+
+
+
+/*#endregion  admin*/

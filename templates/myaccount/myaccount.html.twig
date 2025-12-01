@@ -61,7 +61,8 @@
 			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" >
 			<div>{{user.lastname}},{{user.name}}</div>
 			<div>{{user.email}}</div>
-			<strong><a href="{{ path('profile_edit', {'id': user.id}) }}">Modifier</a></strong>
+			<div><strong><a href="{{ path('profile_edit', {'id': user.id}) }}" class="find">Modifier</a></strong></div>
+			<br>
 
 
 			<div>
@@ -242,7 +243,7 @@
 								</div>
 							</div>
 						</div>
-        <button class="arrived" data-url="{{ path('renseignement', {'id': t.id}) }}">Commentaire</button>
+        <button class="arrived driverpassenger" data-url="{{ path('renseignement', {'id': t.id}) }}" >Commentaire</button>
 					</div>          
 			{% endfor %}
         </div>

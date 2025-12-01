@@ -6,7 +6,33 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="{{ asset('script/main.js') }}" defer></script>
+{% endblock %}
+    <header>
+        <nav class="container titleshadow">
+            <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
+            <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
+            <div><a href="#" class="decoration navlink">Contact</a></div>
+            <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
 
+            {% if is_granted('ROLE_EMPLOYE') %}
+            <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
+            {% endif %}
+            {% if app.user %}
+            <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
+            {% else %}        
+            <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
+            {% endif %}
+            
+            
+        </nav>
+    </header>
 
 
 
@@ -22,30 +48,30 @@
             </div>
         
         <div class="log">
-
+            
             <div class="accountext">
                 <div>{{ form_row(registrationForm.pseudo,{
-            label:"Pseudo"}) }}</div>
+            label:"Pseudo : "}) }}</div>
             </div>
 
             <div class="accountext">
                 <div>{{ form_row(registrationForm.lastname,{
-            label:"Nom de Famille"}) }}</div>
+            label:"Nom de Famille : "}) }}</div>
             </div>
 
-            <div class="accountext">
+            <div class="accountext ">
                 <div>{{ form_row(registrationForm.name,{
-            label:"Prénom"}) }}</div>
+            label:"Prénom : "}) }}</div>
             </div>
 
             <div class="accountext">
                 <div>{{ form_row(registrationForm.email,{
-            label:"Adresse Mail"}) }}</div>
+            label:"Adresse Mail : "}) }}</div>
             </div>
 
             <div class="accountext">
                 <div>{{ form_row(registrationForm.plainPassword,{
-            label:"Mot de Passe"}) }}</div>
+            label:"Mot de Passe : "}) }}</div>
             </div>
         
 
@@ -55,9 +81,6 @@
         </div>
         <button type="submit" class="btn">s'enregistré</button>
     </div>
-
-
-
 
     {{ form_end(registrationForm) }}
 {% endblock %}
