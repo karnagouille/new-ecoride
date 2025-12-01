@@ -81,6 +81,21 @@ private Collection $participants;
     #[ORM\Column(nullable: false)]
     private ?float $credit = 20;
 
+    #[ORM\Column]
+    private ?bool $isActive = true;
+
+
+
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): static
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
 
 
     public function getUserIdentifier(): string
@@ -380,5 +395,7 @@ public function getCarpoolings(): Collection
 
         return $this;
     }
+
+   
 
 }

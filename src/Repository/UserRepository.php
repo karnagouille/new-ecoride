@@ -17,15 +17,16 @@ class UserRepository extends ServiceEntityRepository
     }
 
 
-        public function findAllEmployees()
-{
-    $allUsers = $this->findAll(); // récupère tous les utilisateurs
 
-    // ne garde que ceux qui ont ROLE_EMPLOYE
-    return array_filter($allUsers, function($user) {
-        return in_array('ROLE_EMPLOYE', $user->getRoles());
-    });
+public function searchByEmail(string $email): array
+{
+    return $this->createQueryBuilder('u')
+        ->where('u.email LIKE :email')
+        ->setParameter('email', '%' . $email . '%')
+        ->getQuery()
+        ->getResult();
 }
+
 
 
 
