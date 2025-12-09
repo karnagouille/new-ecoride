@@ -33,9 +33,14 @@
                 <div>
                     <div><strong>{{conducteur.pseudo}}</strong></div>
                 </div>
+                <div class="places">
+                    <div>
+                        <p><strong>{{conducteur.lastname}}/{{conducteur.name}}</strong></p>
+                    </div>               
+                </div>
             </div>
-            <div >
-                <div class="userimg"><img class="pictures" src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
+            <div>
+                <div><img class="userimg"  src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
             </div>
             <div>
                 <p><strong>{{ average|round(2) }}/5</strong></p>
@@ -44,9 +49,9 @@
 
         <div class="info">
             <div class="pricetime">
-
+            {% set transaction = trajet.creditTransactions.first %}
                 <div>  
-                    <div><strong> €</strong></div>
+                    <div><strong>{{ transaction ? transaction.amount : 'Non défini' }}€ </strong></div>
                 </div>
                 <div>  
                     <div style="font-size:25px;" ><strong>{{ trajet.startAt|date('d/m/Y') }}</div>
@@ -61,7 +66,7 @@
                 <div class="info2">
                     
                     <div>
-                        <div><u><strong>Départ {{ trajet.hour ? trajet.hour|date('H:i') : '' }} de {{trajet.startTown}} </strong></u></div>
+                        <div><u><strong>Départ : {{ trajet.hour ? trajet.hour|date('H:i') : '' }} de {{trajet.startTown}} </strong></u></div>
                     </div>
                 </div>
 
@@ -70,7 +75,7 @@
                         <div><strong></strong></div>
                     </div>
                     <div>
-                        <div><u><strong>Arrivée {{trajet.endTown}}</strong></u></div>
+                        <div><u><strong>Arrivée : {{trajet.endTown}}</strong></u></div>
                     </div>
                 </div>
 
@@ -80,36 +85,20 @@
                         <div><em><strong>Durée environ {{trajet.traveltime}} </strong></em></div>
                     </div>
                 </div>
-
             </div>
+
             <div class="preference">
-                <div>
-                    <strong>préférence: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo eum reiciendis optio quod suscipit odit? Accusantium veritatis laudantium porro, nesciunt rem ratione nam corporis quae cupiditate dolor nulla, tenetur et?</strong>
-                </div>
+                <div><strong>{{ carpooling.car.preference }}</strong></div>
             </div>
-
         </div>
 
+
         <div class="car"> 
-
-            <div class="places">
-                
-                <div>
-                    <p ><strong>{{conducteur.lastname}}/{{conducteur.name}}</strong></p>
-                </div>               
-            </div>
-
-            <div>
-                <img src="/ecoridee/image/batmobile.jpg" alt="voiture ecologique" class="carimg2">
-            </div>
-
-            <div class="brand">
-                <div><strong>Batlmobile</strong>,</div>
-                <div><strong>Renault</strong></div>
-            </div>
-
-            <div>
-                <img src="/ecoridee/tools/voiture-electrique.png" alt="electric car" class="eleccar">
+            <div><strong>Voiture :</strong></div>
+            <div class="brand">            
+                <div><strong>Model: {{ carpooling.car.model }}</strong></div>
+                <div><strong>Couleur: {{ carpooling.car.color }}</strong></div>
+                <div><strong>Energy: {{ carpooling.car.energy }}</strong></div>
             </div>
         </div>
     </div>
@@ -122,6 +111,7 @@
 {% if canComment %}
 
 {{form_start(form)}}
+
     <div class="comment1" >
         <div class="comment">
             <div>
@@ -142,12 +132,17 @@
 {% endif %}
 {% for comment in comments %}
 {% if comment.statut == 'checked' %}
+<div class = "comment0">
     <div class="comment1" >
+
         <div class="comment">
             <div>
                 <div><img class="picturesprofil" src="{{ asset('uploads/' ~ participant.photo) }}" alt="Photo de profil" ></div>
                 <div><p><strong>{{ comment.user.pseudo }}</strong></p></div>
             </div>
+        </div>
+
+        <div class="comment">
             <div>
                 <div>{{comment.comment}}</div>
             </div>
@@ -160,6 +155,7 @@
         </div>
         
     </div>
+</div>
 {% endif %}
 {% endfor %}
 {% endblock %}

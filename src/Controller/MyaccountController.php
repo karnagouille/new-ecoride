@@ -157,6 +157,8 @@ public function show(Car $car, EntityManagerInterface $em, string $slug): Respon
     
 }
 
+
+
 #[Route('car/{id}/remove', name: 'car_remove',methods:['POST'])]
 public function remove(EntityManagerInterface $em,Request $request,Car $car): Response
 {
@@ -170,6 +172,11 @@ public function remove(EntityManagerInterface $em,Request $request,Car $car): Re
     return $this->redirectToRoute('myaccount');
 
 }
+
+
+
+
+
 
 #[Route('/car/{id}/edit', name: 'car_edit',)]
 public function edit(Request $request, Car $car, EntityManagerInterface $em): Response

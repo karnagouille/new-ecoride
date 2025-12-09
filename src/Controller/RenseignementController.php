@@ -17,6 +17,9 @@ final class RenseignementController extends AbstractController
     #[Route('/renseignement/{id}', name: 'renseignement', methods: ['GET', 'POST'])]
     public function comment(CommentRepository $commentRepository,EntityManagerInterface $em,Request $request,CarpoolingRepository $carpoolingRepository,int $id): Response {
 
+
+        $carpooling = $carpoolingRepository->find($id);
+
         $currentUser = $this->getUser();
         $trajet = $carpoolingRepository->find($id);
 
@@ -78,6 +81,7 @@ final class RenseignementController extends AbstractController
             'comments' => $comments,
             'canComment' => $canComment,
             'average' => $average,
+            'carpooling'=>  $carpooling,
         ]);
     }
 
