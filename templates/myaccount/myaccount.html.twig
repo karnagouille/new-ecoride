@@ -20,43 +20,14 @@
     <script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
 	<header>
-		<nav class="container titleshadow">
-			<div>
-				<a href="{{ path('home') }}" class="decoration navlink">Accueil</a>
-			</div>
-			<div>
-				<a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a>
-			</div>
-			<div>
-				<a href="#" class="decoration navlink">Contact</a>
-			</div>
-			<div>
-				<a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a>
-			</div>
-			{% if is_granted('ROLE_ADMIN') %}
-            <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
-            {% endif %}
-
-			{% if is_granted('ROLE_EMPLOYEE') %}
-            <div><a href="{{ path('employe') }}" class="decoration navlink">Gestion</a></div>
-            {% endif %}
-
-			{% if app.user %}
-				<div>
-					<a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a>
-				</div>
-			{% else %}
-				<div>
-					<a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a>
-				</div>
-			{% endif %}
-
-			<div class="credit">{{user.credit}}</div>
-		</nav>
-	</header>
-
+        <nav class="creditnav">
+            <div class="credit">Crédits : {{user.credit}}</div>
+        </nav>
+    </header>
+	
 	<div class="userprofil">
 		<div class="mainuser">
+			
 			<div><strong>{{user.pseudo}}</strong></div>
 			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" >
 			<div>{{user.lastname}},{{user.name}}</div>

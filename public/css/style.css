@@ -208,6 +208,16 @@ html, body {
     flex-direction: column;
     align-items: center;
 }
+.legalnotice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Roboto Slab", serif;
+    text-align: center;
+margin : 5em 20em 5em 20em;
+
+}
+
 
 /*#endregion index*/
 
@@ -532,7 +542,7 @@ html, body {
 .comment {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background: linear-gradient(rgb(69, 157, 216), rgb(153, 102, 255));
     gap: 1em;
     padding-bottom: 1em;
@@ -746,8 +756,15 @@ html, body {
 
 
 /* photo et information personnelle */
+.creditnav{
+    display: flex;
+    justify-content: end;
+    gap: 1.5em;
+    margin-right: 5em;
+    font-size:2em;
+    text-shadow: 2px 2px 5px white;
 
-
+}
 .credit{
 color: rgb(23, 161, 30) ;
 }
@@ -1038,6 +1055,10 @@ color: rgb(48, 219, 57);
 
 /*#region  employe*/
 
+.titlecomment{
+    display: flex;
+    justify-content: center;
+}
 
 .employecomment1{
 display: flex;
