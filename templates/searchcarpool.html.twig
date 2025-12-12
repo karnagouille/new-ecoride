@@ -65,19 +65,22 @@
 </div>
     {% for trajet in trajets %}
 {% if trajet.statut == constant('App\\Entity\\Carpooling::STATUT_RIEN')or trajet.statut == constant('App\\Entity\\Carpooling::STATUT_EN_COURS') %}
+
     <div href="/ecoridee/HTML/renseignement.html" class="reserved">        
             <div class="backgroundhistorical">
                 <div class="profilhistorical">
-                <div class="profil">
-                    <div>
-                        <div>{{trajet.user.pseudo}}</div>
-                    </div>
-                    <div>
-                        <div class="userimg">
-                            <a href="{{ path('renseignement', {'id': trajet.id}) }}"><img class="picturesprofil" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></a>
-                            
+                    <div class="profil">
+
+                        <div>
+                            <div class="pseudo">{{trajet.user.pseudo}}</div>
                         </div>
-                    </div>
+
+                        <div>
+                            <div class="userimg">
+                                <a href="{{ path('renseignement', {'id': trajet.id}) }}">
+                                <img class="picturesprofil" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></a>
+                            </div>
+                        </div>
 
                 </div>
                     <div class="destination">
@@ -130,6 +133,7 @@
             <div><a class="reservedbutton" href="{{ path('participer', {'id': trajet.id}) }}"><strong>Participer</strong></a></div>
         </div> 
     </div>
+
     {% elseif trajet.statut == constant('App\\Entity\\Carpooling::STATUT_TERMINE') %}
 {% endif %}
 {% endfor %}

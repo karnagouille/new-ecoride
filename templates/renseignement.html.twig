@@ -13,9 +13,11 @@
 {% endblock %}
 
 
+<div class="info0">
+    <div class="information">
 
-    <div class="information">  
-        <div class="infopseudo">            
+        <div class="infopseudo">  
+
             <div class=pseudo> 
                 <div>
                     <div><strong>{{conducteur.pseudo}}</strong></div>
@@ -26,17 +28,21 @@
                     </div>               
                 </div>
             </div>
+
             <div>
-                <div><img class="userimg"  src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
+                <div><img class="userimg2"  src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
             </div>
+
             <div>
-                <p><strong>{{ average|round(2) }}/5</strong></p>
+                <p><strong> Note : {{ average|round(2) }}/5</strong></p>
             </div>
+
         </div>
 
         <div class="info">
             <div class="pricetime">
-            {% set transaction = trajet.creditTransactions.first %}
+
+                {% set transaction = trajet.creditTransactions.first %}
                 <div>  
                     <div><strong>{{ transaction ? transaction.amount : 'Non défini' }}€ </strong></div>
                 </div>
@@ -51,7 +57,6 @@
 
             <div>
                 <div class="info2">
-                    
                     <div>
                         <div><u><strong>Départ : {{ trajet.hour ? trajet.hour|date('H:i') : '' }} de {{trajet.startTown}} </strong></u></div>
                     </div>
@@ -59,15 +64,11 @@
 
                 <div class="info2">
                     <div>
-                        <div><strong></strong></div>
-                    </div>
-                    <div>
                         <div><u><strong>Arrivée : {{trajet.endTown}}</strong></u></div>
                     </div>
                 </div>
 
                 <div class="info2">
-                    
                     <div>
                         <div><em><strong>Durée environ {{trajet.traveltime}} </strong></em></div>
                     </div>
@@ -75,9 +76,9 @@
             </div>
 
             <div class="preference">
-                <div><strong>{{ carpooling.car.preference }}</strong></div>
+                <div><strong> Préférence : {{ carpooling.car.preference }}</strong></div>
             </div>
-        </div>
+    </div>
 
 
         <div class="car"> 
@@ -89,7 +90,7 @@
             </div>
         </div>
     </div>
-
+</div>
 <div class="titlecomment">
     <div>
         <strong>COMMENTAIRES</strong>
@@ -124,7 +125,7 @@
 
         <div class="comment">
             <div>
-                <div><img class="picturesprofil" src="{{ asset('uploads/' ~ participant.photo) }}" alt="Photo de profil" ></div>
+                <div><img class="userimg3 " src="{{ asset('uploads/' ~ participant.photo) }}" alt="Photo de profil" ></div>
                 <div><p><strong>{{ comment.user.pseudo }}</strong></p></div>
             </div>
         </div>
