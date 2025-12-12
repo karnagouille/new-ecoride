@@ -13,18 +13,14 @@ html, body {
     background-size: cover;
 }
 
-
-
-
 .container {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
-    gap: 1.5em;
+    gap: 1em;
     font-size:2em;
 
 }
-
 
 .titleshadow{
     text-shadow: 2px 2px 5px white;
@@ -64,9 +60,10 @@ html, body {
     align-items: center;
     text-align: center;
     font-size: 1.3em;
-    height: 1000px;
+    height:60em;
     border-radius: 100%;
     gap:1.2em;
+    
 }
 
 .tittle {
@@ -87,25 +84,26 @@ html, body {
 .input {
     border: 2px solid black;
     width: 15em;
-    height: 40px;
-    border-radius: 30px;
+    height: 2em;
+    border-radius: 1em;
     text-align: center;
-    font-size: 15px;
+    font-size: 1em;
 }
 
 .inputdate {
-    width: 130px;
-    height: 38px;
-    border-radius: 40px;
+    width: 7em;
+    height: 2em;
+    border-radius: 1em;
     text-align: center;
 }
 
 .find {
-    width: 100px;
-    height: 2em;
-    border-radius: 50px;
+    width: 10em;
+    height: 3em;
+    border-radius: 3em;
     background: linear-gradient(rgb(69, 157, 216), rgb(48, 219, 57));
     box-shadow: 0 4px 10px;
+    margin-top: 1em;
 }
 
 .find:active{
@@ -117,7 +115,7 @@ html, body {
 
 .advantages {
     text-align: center;
-    padding: 50px 20px;
+    padding: 2em 1em;
     background-color: #f9f9f9;
     margin-top: 1em;
     border-top-left-radius: 50%;
@@ -142,7 +140,7 @@ html, body {
     border: 1px solid #ccc;
     border-radius: 0.8em;
     padding: 1em;
-    max-width: 250px;
+    max-width: 15em;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
 }
@@ -167,14 +165,33 @@ html, body {
     display: flex;
     text-align: center;
     font-size: 2em;
-    line-height: 50px;
+    line-height: 2em;
     gap: 1.5em;
     color: rgb(214, 161, 63);
     text-shadow: 1px 1px rgb(0, 0, 0);
     background-color: rgb(252, 252, 252);
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
 }
+
+@media screen and (max-width:1024px) {
+    .carpool {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2em;
+    line-height: 2em;
+    gap: 1.5em;
+    color: rgb(214, 161, 63);
+    text-shadow: 1px 1px rgb(0, 0, 0);
+    background-color: rgb(252, 252, 252);
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+}
+}
+
+
+
 
 .presentation1 {
     display: flex;
@@ -185,14 +202,25 @@ html, body {
     align-content: center;
 }
 .presentation3 {
-    height: 700px;
-    flex-direction: column;
-    align-content: end;
+    display: flex;
+    height: 20em;
+    align-items: end;
+    
+    padding-bottom: 1em;
 }
 
+@media screen and (max-width:1024px) {
+    .presentation3 {
+    display: flex;
+    justify-content: end;
+    align-items: baseline;
+} 
+}
+
+
 .carpoolimg {
-    width: 500px;
-    height: 400px;
+    width: 15em;
+    height: 13em;
     display: flex;
     justify-content: flex-start;
     border-radius: 1em;
@@ -245,7 +273,7 @@ button{
 }
 
 .order2 {
-    height: 2.5em;
+    height: 1.8em;
     width: 120px;
     border-radius: 2em;    
     text-align: center;   
@@ -686,8 +714,6 @@ html, body {
 .accountext{
     display: flex;
     align-items: center;
-    width: 100%;
-    max-width: 500px;
     gap: 10px;
     
 }
@@ -771,18 +797,19 @@ color: rgb(23, 161, 30) ;
 
 .userprofil{
     display: flex;
-    text-align: center;    width: 100%;
+    text-align: center;    
+    width: 100%;
 
 }
 
 .mainuser{
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    width: 450px;
-    min-height: 880px;
+    width: 30em;
+    min-height: 100%;
     text-align: center;
-    padding: 20px;
+    padding: 1em;
     position: fixed;
-    padding-bottom: 10%;
+    margin-bottom: 3;
 }
 
 .picturesprofil{
@@ -844,6 +871,11 @@ align-items: center;
     gap: 10px;
     
 }
+
+.carshow{
+    padding-bottom: 2em;
+}
+
 
 /* Créer un trajet / trajet en cours */
 .currentjourney{
@@ -1025,23 +1057,21 @@ color: rgb(48, 219, 57);
 
     display: flex;
     flex-direction: column;
-    align-items: center;    
-    gap: 30px;
-    font-size: 20px;
+    align-items:start;    
+    gap: 1.5em;
+    font-size: 1em;
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    margin-left: 700px;
-    margin-right: 300px ;
-    padding-top: 50px;
-    padding-bottom: 30px;
-    padding-right: 120px;
-    border-radius: 30px;
-    margin-top: 100px;
-    margin-bottom: 300px;
+    margin:5em 40em 5em 40em;
+    border-radius: 2em;
+    padding-right: 5em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    text-align: center;
 }
 
 .submitbutton{
-    padding-left: 100px;
-    padding-top: 30px;
+    margin-top: 2em;
+    margin-left: 17em;
 }
 
 .inputroute {

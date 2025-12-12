@@ -175,7 +175,6 @@ public function remove(EntityManagerInterface $em,Request $request,Car $car): Re
 
 
 
-
 #[Route('/car/{id}/edit', name: 'car_edit',)]
 public function edit(Request $request, Car $car, EntityManagerInterface $em): Response
 { 

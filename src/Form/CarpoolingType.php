@@ -56,10 +56,9 @@ class CarpoolingType extends AbstractType
             ])
 
             ->add('price',MoneyType::class,[
-            'label' => 'Prix du trajet (€)',
-            'required' => true,
-            'currency' => 'EUR',
-            'mapped' => false,
+                'required' => true,
+                'currency' => 'EUR',
+                'mapped' => false,
             ])
 
             
@@ -96,20 +95,8 @@ class CarpoolingType extends AbstractType
             ->add('car', EntityType::class, [
                 'class' => Car::class,
                 'choices' => $options['user_cars'], // options filtrées par user
-                'choice_label' => fn(Car $car) => $car->getModel(), // nom affiché
-])
-            ->add('note',ChoiceType::class,[
-                'label'=>false,
-                'required'=>false,
-                'choices'=>[
-                    '5' => '5',
-                    '4+'=> '4+',
-                    '3+'=> '3+',
-                    '2+'=> '2+',
-                    '1+'=> '1+',
-                ],
-                
-                ]);
+                'choice_label' => fn(Car $car) => $car->getModel(), 
+            ]);
     }
 
 

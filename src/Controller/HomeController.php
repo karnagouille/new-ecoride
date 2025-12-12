@@ -30,4 +30,48 @@ final class HomeController extends AbstractController
             'trajets' => [],
         ]);
     }
+
+#[Route('/homesearch', name: 'homesearch' ,methods: [ 'GET'])]
+    public function search(Request $request, CarpoolingRepository $carpoolingRepository): Response
+    {
+        $user = $this->getuser();
+        $form = $this->createForm(SearchCarpoolingType::class, null, [
+            'method' => 'GET',
+        ]);
+        $form->handleRequest($request);
+
+
+        $trajets = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $carpooling = $form->getData(); 
+            $priceOrder = $form->get('price')->getData(); // 'asc' ou 'desc'
+            $travelTime = $form->get('traveltime')->getData();
+            $isElectric = $form->get('electric')->getData();
+            $note = $form->get('note')->getData();
+            
+
+
+            $trajets = $carpoolingRepository->searchCarpool(
+                $carpooling->getStartTown(),
+                $carpooling->getEndTown(),
+                $carpooling->getPassenger(),
+                $carpooling->getStartAt(),
+                $carpooling->getHour(),
+                $priceOrder,
+                $travelTime,
+                $isElectric,
+                $note,
+            );
+            return $this->redirectToRoute('searchcarpool');
+        }
+        return $this->render('searchcarpool.html.twig', [
+            'form' => $form->createView(),
+            'trajets' => $trajets,
+            'user'=> $user
+        ]);
+    }
+
+
 }

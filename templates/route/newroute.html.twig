@@ -14,26 +14,7 @@
     
 
 
-<div class="userprofil">
-    <div class="mainuser">
-        <div><p><strong>Pseudo</strong></p></div>
-        <div><img src="/ecoridee/image/voiturier.jpg" alt="" class="userimg"></div>
-        <div><p><strong> Kirrua Zoldik</strong></p></div>
-        <div><p><u>kukurumontain@gmail.com</u></p></div>
 
-        <div>
-            <div class="driverpassengers">
-                <div>
-                    <button class="driverpassenger navlink2" id="btn">Chauffeur</button>
-                </div>
-                <div>
-                    <button class="driverpassenger navlink2" id="btnpassager" >Passager</button>
-                </div>
-            </div>
-            
-
-        </div>
-    </div>
 
 {{ form_start(form) }}
     <div action="" class="trajetcreation">
@@ -84,7 +65,10 @@
 
 
             <div class="accountext">
-                <label for="">Véhicule :</label>
+                <div>
+                    <label for="">Véhicule :</label>
+                </div>
+                
                 <div>{{ form_widget(form.car, {'attr': {'class': 'inputroute'}}) }}</div>
             </div>
 
@@ -111,14 +95,17 @@
                 <div>
                     <label for="">Prix:</label>
                 </div>
-                <div>{{ form_widget(form.price) }}</div> 
+                <div>
+                    {{ form_widget(form.price) }}
+                </div> 
             </div>
             <div class="submitbutton">
                 <div>
                     <button type="submit" class="btn">Enregistré</button>
                 </div>
             </div>
-        </div>
     </div>
-    {{ form_end(form) }}
+{{ form_end(form) }}
+
+    
     {% endblock %}

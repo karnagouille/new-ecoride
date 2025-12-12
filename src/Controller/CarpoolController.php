@@ -102,7 +102,6 @@ final class CarpoolController extends AbstractController
             return $this->redirectToRoute('currentjourney');
             }
 
-
             $em->persist($participant);
 
     

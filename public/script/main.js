@@ -5,7 +5,7 @@ const filter = document.getElementById("filter");
 const btn = document.getElementById("btn");
 btn?.addEventListener("click", (event) => {
     event.preventDefault();
-    filter?.classList.remove("hidden");
+    filter?.classList.toggle("hidden");
 });
 
 // Formulaire critères de recherche

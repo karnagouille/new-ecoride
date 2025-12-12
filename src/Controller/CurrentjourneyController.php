@@ -47,7 +47,7 @@ final class CurrentjourneyController extends AbstractController
             case Carpooling::STATUT_EN_COURS:
                 $trajet->setStatut(Carpooling::STATUT_TERMINE);
 
-                
+
                 $platformUserId = 1;
                 // Décrémentation de tous les participants
                 $platformUser = $doctrine->getRepository(User::class)->find($platformUserId);

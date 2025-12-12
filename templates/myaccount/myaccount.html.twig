@@ -36,13 +36,13 @@
 			<br>
 
 
-			<div>
+			
 				<div class="driverpassengers">
 					<div>
 						<button class="driverpassenger navlink2" id="btn">Chauffeur</button>
 					</div>
 					<div>
-						<button class="driverpassenger navlink2" id="btnpassager">Passager</button>
+						<button class="driverpassenger navlink2">Passager</button>
 					</div>
 				</div>
 
@@ -121,7 +121,7 @@
 					<h2>Mes voitures</h2>
 					<ul>
 						{% for car in cars %}
-							<li>
+							<li class="carshow">
 								{{ car.model }}
 								-
 								{{ car.brand ? car.brand.libelle : 'Pas de marque' }}
@@ -133,7 +133,7 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+		
 
 
 		<div class="currentjourney">

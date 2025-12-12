@@ -19,8 +19,6 @@
     </header>
 
 
-
-
 <div class="searchcar">
     <div class="searchcar">
         {{ form_start(form, {attr: { 'data-turbo': "false" }}) }}
@@ -30,7 +28,7 @@
             {{ form_widget(form.passenger) }}
             {{ form_widget(form.startAt) }}
             {{ form_widget(form.hour) }}
-                <button class="find" type="submit">Rechercher</button>
+                
 
         <div class="order1">
             <button class="sort" id="btns" type="button">TRIEZ PAR 🡇</button>
@@ -57,7 +55,9 @@
                 </div>
 
             </div>
+            <button class="find" type="submit">Rechercher</button>
         </div>
+        
                     {{ form_end(form) }}
     </div>
 </div>
@@ -78,9 +78,7 @@
                             
                         </div>
                     </div>
-                    <div>
-                        <div></div>
-                    </div>                
+
                 </div>
                     <div class="destination">
                         <div>
