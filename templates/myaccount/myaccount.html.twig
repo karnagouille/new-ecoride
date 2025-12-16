@@ -1,4 +1,4 @@
- {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Mon compte
 {% endblock %}
@@ -16,130 +16,139 @@
 	{% endblock %}
 
 	{% block javascripts %}
-    
-    <script src="{{ asset('script/main.js') }}" defer></script>
+
+		<script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
 	<header>
-        <nav class="creditnav">
-            <div class="credit">Crédits : {{user.credit}}</div>
-        </nav>
-    </header>
-	
+		<nav class="creditnav">
+			<div class="credit">Crédits :
+				{{user.credit}}</div>
+		</nav>
+	</header>
+
 	<div class="userprofil">
 		<div class="mainuser">
-			
-			<div><strong>{{user.pseudo}}</strong></div>
-			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil" >
+
+			<div>
+				<strong>{{user.pseudo}}</strong>
+			</div>
+			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil">
 			<div>{{user.lastname}},{{user.name}}</div>
 			<div>{{user.email}}</div>
-			<div><strong><a href="{{ path('profile_edit', {'id': user.id}) }}" class="find">Modifier</a></strong></div>
+			<div>
+				<strong>
+					<a href="{{ path('profile_edit', {'id': user.id}) }}" class="find">Modifier</a>
+				</strong>
+			</div>
 			<br>
 
 
-			
-				<div class="driverpassengers">
-					<div>
-						<button class="driverpassenger navlink2" id="btn">Chauffeur</button>
-					</div>
-					<div>
-						<button class="driverpassenger navlink2">Passager</button>
-					</div>
+			<div class="driverpassengers">
+				<div>
+					<button class="driverpassenger navlink2" id="btn">Chauffeur</button>
 				</div>
-
-					{{ form_start(form) }}
-				<div action="" class="userform hidden" id="filter">
-					<div>
-						<p style="font-size: 30px;">
-							<strong><u>Profile Voiture</u></strong>
-						</p>
-					</div>
-
-
-					<div class="accountext">
-						<div>
-							<label for="">Numéro de la plaque :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.registration) }}
-                        </div>
-					</div>
-
-					<div class="accountext">
-						<div>
-							<label for="">Première imatriculation :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.date_first_registration) }}
-						</div>
-					</div>
-
-					<div class="accountext">
-						<div>
-							<label for="">Modèle:</label>
-						</div>
-						<div>
-                            {{ form_widget(form.model) }}
-						</div>
-					</div>
-
-					<div class="accountext">
-						<div>
-							<label for="">Couleur  :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.color) }}
-						</div>
-					</div>
-
-					<div class="accountext">
-						<div>
-							<label for="">Marque  :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.brand) }}
-						</div>
-					</div>
-
-					<div class="accountext">
-						<div>
-							<label for="">Energie :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.energy) }}
-						</div>
-					</div>
-
-					<div class="accountext">
-						<div>
-							<label for="">Préférences :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.preference) }}
-						</div>
-					</div>
-					{{ form_end(form) }}
-					<h2>Mes voitures</h2>
-					<ul>
-						{% for car in cars %}
-							<li class="carshow">
-								{{ car.model }}
-								-
-								{{ car.brand ? car.brand.libelle : 'Pas de marque' }}
-								<a href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a>
-							</li>
-						{% else %}
-							<li>Aucune voiture enregistrée</li>
-						{% endfor %}
-					</ul>
+				<div>
+					<button class="driverpassenger navlink2">Passager</button>
 				</div>
 			</div>
-		
+
+			{{ form_start(form) }}
+			<div action="" class="userform hidden" id="filter">
+				<div>
+					<p style="font-size: 30px;">
+						<strong>
+							<u>Profile Voiture</u>
+						</strong>
+					</p>
+				</div>
+
+
+				<div class="accountext">
+					<div>
+						<label for="">Numéro de la plaque :</label>
+					</div>
+					<div>
+						{{ form_widget(form.registration) }}
+					</div>
+				</div>
+
+				<div class="accountext">
+					<div>
+						<label for="">Première imatriculation :</label>
+					</div>
+					<div>
+						{{ form_widget(form.date_first_registration) }}
+					</div>
+				</div>
+
+				<div class="accountext">
+					<div>
+						<label for="">Modèle:</label>
+					</div>
+					<div>
+						{{ form_widget(form.model) }}
+					</div>
+				</div>
+
+				<div class="accountext">
+					<div>
+						<label for="">Couleur  :</label>
+					</div>
+					<div>
+						{{ form_widget(form.color) }}
+					</div>
+				</div>
+
+				<div class="accountext">
+					<div>
+						<label for="">Marque  :</label>
+					</div>
+					<div>
+						{{ form_widget(form.brand) }}
+					</div>
+				</div>
+
+				<div class="accountext">
+					<div>
+						<label for="">Energie :</label>
+					</div>
+					<div>
+						{{ form_widget(form.energy) }}
+					</div>
+				</div>
+
+				<div class="accountext">
+					<div>
+						<label for="">Préférences :</label>
+					</div>
+					<div>
+						{{ form_widget(form.preference) }}
+					</div>
+				</div>
+				{{ form_end(form) }}
+				<h2>Mes voitures</h2>
+				<ul>
+					{% for car in cars %}
+						<li class="carshow">
+							{{ car.model }}
+							-
+							{{ car.brand ? car.brand.libelle : 'Pas de marque' }}
+							<a href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a>
+						</li>
+					{% else %}
+						<li>Aucune voiture enregistrée</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
 
 
 		<div class="currentjourney">
 			<div class="journey">
 				<div>
-					<strong><a href="{{ path('newroute') }}" class="createlook routestyle">Créer un trajet</a></strong>
+					<strong>
+						<a href="{{ path('newroute') }}" class="createlook routestyle">Créer un trajet</a>
+					</strong>
 				</div>
 				<strong>
 					<a href="{{path('currentjourney')}}" class="createlook routestyle ">Trajet en cours</a>
@@ -147,11 +156,15 @@
 			</div>
 			<div class="historical">
 				<div>
-					<p><strong><u>Historique trajets</u></strong></p>
+					<p>
+						<strong>
+							<u>Historique trajets</u>
+						</strong>
+					</p>
 				</div>
 				{% for t in trajets %}
-				{% set transaction = t.creditTransactions.first %}
-				<div class="historicals">
+					{% set transaction = t.creditTransactions.first %}
+					<div class="historicals">
 
 						<div href="/ecoridee/HTML/renseignement.html" class="reserved">
 							<div class="backgroundhistorical">
@@ -180,7 +193,8 @@
 
 												<div>
 													<p>
-														<strong>🏁 Départ 🏁 : {{ t.startTown }}</strong>
+														<strong> Départ  : 
+															{{ t.startTown }}</strong>
 													</p>
 												</div>
 											</div>
@@ -189,7 +203,7 @@
 											<div class="startfinish">
 												<div>
 													<p>
-														<strong>🎯 Arrivée 🎯:{{ t.endTown }}</strong>
+														<strong> Arrivée : {{ t.endTown }}</strong>
 													</p>
 												</div>
 											</div>
@@ -198,7 +212,10 @@
 
 									<div class="priceplacehistorical">
 										<div>
-											<p><strong>{{ t.hour ? t.hour|date('H:i') : '' }} H</strong></p>
+											<p>
+												<strong>{{ t.hour ? t.hour|date('H:i') : '' }}
+													H</strong>
+											</p>
 										</div>
 										<div>
 											<p>
@@ -206,20 +223,17 @@
 													Passager</strong>
 											</p>
 										</div>
-										<div>
-											<p>Prix : {{ transaction ? transaction.amount : 'Non défini' }} €</p>
+										<div><strong><p>Prix : {{ transaction ? transaction.amount : 'Non défini' }}€</p></strong>
+											
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-        <button class="arrived driverpassenger" data-url="{{ path('renseignement', {'id': t.id}) }}" >Commentaire</button>
-					</div>          
-			{% endfor %}
-        </div>
-    </div>
-</div>
+						<button class="arrived driverpassenger" data-url="{{ path('renseignement', {'id': t.id}) }}">Commentaire</button>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
-    </div>
-	{% endblock %}
-
+	</div>
+</div></div>{% endblock %}

@@ -1,149 +1,202 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock %}
+{% block title %}Covoiturage
+{% endblock %}
 
 {% block body %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="{{ asset('script/main.js') }}" defer></script>
-{% endblock %}
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<script src="{{ asset('script/main.js') }}" defer></script>
+	{% endblock %}
 
 
-<div class="info0">
-    <div class="information">
+	<div class="info0">
+		<div class="information">
 
-        <div class="infopseudo">  
+			<div class="infopseudo">
 
-            <div class=pseudo> 
-                <div>
-                    <div><strong>{{conducteur.pseudo}}</strong></div>
-                </div>
-                <div class="places">
-                    <div>
-                        <p><strong>{{conducteur.lastname}}/{{conducteur.name}}</strong></p>
-                    </div>               
-                </div>
-            </div>
+				<div class="pseudo">
+					<div>
+						<div>
+							<strong>{{conducteur.pseudo}}</strong>
+						</div>
+					</div>
+					<div class="places">
+						<div>
+							<p>
+								<strong>{{conducteur.lastname}}/{{conducteur.name}}</strong>
+							</p>
+						</div>
+					</div>
+				</div>
 
-            <div>
-                <div><img class="userimg2"  src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil" ></div>
-            </div>
+				<div>
+					<div><img class="userimg2" src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil"></div>
+				</div>
 
-            <div>
-                <p><strong> Note : {{ average|round(2) }}/5</strong></p>
-            </div>
+				<div>
+					<p>
+						<strong>
+							Note :
+							{{ average|round(2) }}/5</strong>
+					</p>
+				</div>
 
-        </div>
+			</div>
 
-        <div class="info">
-            <div class="pricetime">
+			<div class="info">
+				<div class="pricetime">
 
-                {% set transaction = trajet.creditTransactions.first %}
-                <div>  
-                    <div><strong>{{ transaction ? transaction.amount : 'Non défini' }}€ </strong></div>
-                </div>
-                <div>  
-                    <div style="font-size:25px;" ><strong>{{ trajet.startAt|date('d/m/Y') }}</div>
-                </div>
-                <div>
-                    <div>{{trajet.passenger}} Passager(s)</div>
-                </div>
+					{% set transaction = trajet.creditTransactions.first %}
+					<div>
+						<div>
+							<strong>{{ transaction ? transaction.amount : 'Non défini' }}€
+							</strong>
+						</div>
+					</div>
+					<div>
+						<div style="font-size:25px;">
+							<strong>{{ trajet.startAt|date('d/m/Y') }}</div>
+						</div>
+						<div>
+							<div>{{trajet.passenger}}
+								Passager(s)</div>
+						</div>
 
-            </div>
+					</div>
 
-            <div>
-                <div class="info2">
-                    <div>
-                        <div><u><strong>Départ : {{ trajet.hour ? trajet.hour|date('H:i') : '' }} de {{trajet.startTown}} </strong></u></div>
-                    </div>
-                </div>
+					<div>
+						<div class="info2">
+							<div>
+								<div>
+									<u>
+										<strong>Départ :
+											{{ trajet.hour ? trajet.hour|date('H:i') : '' }}
+											de
+											{{trajet.startTown}}
+										</strong>
+									</u>
+								</div>
+							</div>
+						</div>
 
-                <div class="info2">
-                    <div>
-                        <div><u><strong>Arrivée : {{trajet.endTown}}</strong></u></div>
-                    </div>
-                </div>
+						<div class="info2">
+							<div>
+								<div>
+									<u>
+										<strong>Arrivée :
+											{{trajet.endTown}}</strong>
+									</u>
+								</div>
+							</div>
+						</div>
 
-                <div class="info2">
-                    <div>
-                        <div><em><strong>Durée environ {{trajet.traveltime}} </strong></em></div>
-                    </div>
-                </div>
-            </div>
+						<div class="info2">
+							<div>
+								<div>
+									<em>
+										<strong>Durée environ
+											{{trajet.traveltime}}
+										</strong>
+									</em>
+								</div>
+							</div>
+						</div>
+					</div>
 
-            <div class="preference">
-                <div><strong> Préférence : {{ carpooling.car.preference }}</strong></div>
-            </div>
-    </div>
+					<div class="preference">
+						<div>
+							<strong>
+								Préférence :
+								{{ carpooling.car.preference }}</strong>
+						</div>
+					</div>
+				</div>
 
 
-        <div class="car"> 
-            <div><strong>Voiture :</strong></div>
-            <div class="brand">            
-                <div><strong>Model: {{ carpooling.car.model }}</strong></div>
-                <div><strong>Couleur: {{ carpooling.car.color }}</strong></div>
-                <div><strong>Energy: {{ carpooling.car.energy }}</strong></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="titlecomment">
-    <div>
-        <strong>COMMENTAIRES</strong>
-    </div>
-</div>
-{% if canComment %}
+				<div class="car">
+					<div>
+						<strong>Voiture :</strong>
+					</div>
+					<div class="brand">
+						<div>
+							<strong>Model:
+								{{ carpooling.car.model }}</strong>
+						</div>
+						<div>
+							<strong>Couleur:
+								{{ carpooling.car.color }}</strong>
+						</div>
+						<div>
+							<strong>Energy:
+								{{ carpooling.car.energy }}</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="titlecomment">
+			<div>
+				<strong>COMMENTAIRES</strong>
+			</div>
+		</div>
+		{% if canComment %}
 
-{{form_start(form)}}
-<div  class = "comment0">
-    <div class="comment1" >
+			{{form_start(form)}}
+			<div class="comment0">
+				<div class="comment1bis">
 
-        <div class="comment">
-            <div>
-                <div>{{form_widget(form.comment)}}</div>
-            </div>
-        </div>
-        <div class="comment">
-            <div>
-                <div>Note {{form_widget(form.note)}}</div>
-            </div>
-        </div>
-        <button type="submit">Valider</button>
-        <br>
-    </div>
-</div>
-{{form_end(form)}}
-{% endif %}
-{% for comment in comments %}
-{% if comment.statut == 'checked' %}
-<div class = "comment0">
-    <div class="comment1" >
+					<div class="comment">
+						<div>
+							<div>{{form_widget(form.comment)}}</div>
+						</div>
+					</div>
+					<div class="comment">
+						<div>
+							<div>Note
+								{{form_widget(form.note)}}</div>
+						</div>
+					</div>
+					<button type="submit">Valider</button>
+					<br>
+				</div>
+			</div>
+			{{form_end(form)}}
+		{% endif %}
+		{% for comment in comments %}
+			{% if comment.statut == 'checked' %}
+				<div class="comment0">
+					<div class="comment1">
 
-        <div class="comment">
-            <div>
-                <div><img class="userimg3 " src="{{ asset('uploads/' ~ participant.photo) }}" alt="Photo de profil" ></div>
-                <div><p><strong>{{ comment.user.pseudo }}</strong></p></div>
-            </div>
-        </div>
+						<div class="comment">
+							<div>
+								<div><img class="userimg3 " src="{{ asset('uploads/' ~ participant.photo) }}" alt="Photo de profil"></div>
+								<div>
+									<p>
+										<strong>{{ comment.user.pseudo }}</strong>
+									</p>
+								</div>
+							</div>
+						</div>
 
-        <div class="comment">
-            <div>
-                <div>{{comment.comment}}</div>
-            </div>
-        </div>
+						<div class="comment">
+							<div>
+								<div>{{comment.comment}}</div>
+							</div>
+						</div>
 
-        <div class="comment">
-            <div>
-                <div>{{comment.note}}/5</div>
-            </div>
-        </div>
-        
-    </div>
-</div>
-{% endif %}
-{% endfor %}
-{% endblock %}
+						<div class="comment">
+							<div>
+								<div>{{comment.note}}/5</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	{% endblock %}

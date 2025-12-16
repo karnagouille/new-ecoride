@@ -1,88 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de la voiture{% endblock %}
+{% block title %}Détails de la voiture
+{% endblock %}
 
 {% block body %}
 
- 
-        <div class="car">
-        <h1>Détails de la voiture</h1>
-            {{ form_start(form) }}
-                    <div class="accountext">
-						<div>
-							<label for="">Numéro de la plaque :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.registration) }}
-                        </div>
-					</div>
 
-					<div class="accountext">
-						<div>
-							<label for="">Première imatriculation :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.date_first_registration) }}
-						</div>
-					</div>
+	<div class="car">
+		<h1>Détails de la voiture</h1>
+		{{ form_start(form) }}
+		<div class="accountext">
+			<div>
+				<label for="">Numéro de la plaque :</label>
+			</div>
+			<div>
+				{{ form_widget(form.registration) }}
+			</div>
+		</div>
 
-					<div class="accountext">
-						<div>
-							<label for="">Modèle:</label>
-						</div>
-						<div>
-                            {{ form_widget(form.model) }}
-						</div>
-					</div>
+		<div class="accountext">
+			<div>
+				<label for="">Première imatriculation :</label>
+			</div>
+			<div>
+				{{ form_widget(form.date_first_registration) }}
+			</div>
+		</div>
 
-					<div class="accountext">
-						<div>
-							<label for="">Couleur  :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.color) }}
-						</div>
-					</div>
+		<div class="accountext">
+			<div>
+				<label for="">Modèle:</label>
+			</div>
+			<div>
+				{{ form_widget(form.model) }}
+			</div>
+		</div>
 
-					<div class="accountext">
-						<div>
-							<label for="">Marque  :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.brand) }}
-						</div>
-					</div>
+		<div class="accountext">
+			<div>
+				<label for="">Couleur  :</label>
+			</div>
+			<div>
+				{{ form_widget(form.color) }}
+			</div>
+		</div>
 
-					<div class="accountext">
-						<div>
-							<label for="">Energie :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.energy) }}
-						</div>
-					</div>
+		<div class="accountext">
+			<div>
+				<label for="">Marque  :</label>
+			</div>
+			<div>
+				{{ form_widget(form.brand) }}
+			</div>
+		</div>
 
-					<div class="accountext">
-						<div>
-							<label for="">Préférences :</label>
-						</div>
-						<div>
-                            {{ form_widget(form.preference) }}
-						</div>
-					</div>
-                    <br>
-                    
-            {{ form_end(form) }}
-            <br>
-            <form method="post" action="{{ path('car_remove', {'id': car.id}) }}">
-                {# <input type="hidden" name="_method" value="DELETE"> #}
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ car.id) }}">
-                <button type="submit" class="find" >Supprimer</button>
-            </form>
-            <br>
-            <div><a class="find" href="{{ path('myaccount') }}">Retour</a></div>
-            
-        </div>
+		<div class="accountext">
+			<div>
+				<label for="">Energie :</label>
+			</div>
+			<div>
+				{{ form_widget(form.energy) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Préférences :</label>
+			</div>
+			<div>
+				{{ form_widget(form.preference) }}
+			</div>
+		</div>
+		<br>
+
+		{{ form_end(form) }}
+		<br>
+		<form
+			method="post" action="{{ path('car_remove', {'id': car.id}) }}">
+			{# <input type="hidden" name="_method" value="DELETE"> #}
+			<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ car.id) }}">
+			<button type="submit" class="find">Supprimer</button>
+		</form>
+		<br>
+		<div>
+			<a class="find" href="{{ path('myaccount') }}">Retour</a>
+		</div>
+
+	</div>
 
 
 {% endblock %}

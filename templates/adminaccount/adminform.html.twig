@@ -16,46 +16,44 @@
 	{% endblock %}
 
 	{% block javascripts %}
-    
-    <script src="{{ asset('script/main.js') }}" defer></script>
+
+		<script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
 
-{{ form_start(form, {'method': 'POST'}) }}
+	{{ form_start(form, {'method': 'POST'}) }}
 
 
+	<div class="employeform">
 
-<div class="employeform">
-    
-    <div class="col-md-4">
-        <label for="validationDefault01" class="form-label">Pseudo</label>
-        {{ form_widget(form.pseudo) }}
-    </div>
-    <div class="col-md-4">
-        <label for="validationDefault01" class="form-label">Nom</label>
-        {{ form_widget(form.lastname) }}
-    </div>
-    <div class="col-md-4">
-        <label for="validationDefault02" class="form-label">Prénom</label>
-        {{ form_widget(form.name) }}
-    </div>
-    <div class="col-md-4">
-        <label for="validationDefaultUsername" class="form-label">Adresse Mail</label>
-        {{ form_widget(form.email) }}
-    </div>
-    <div class="col-md-4">
-        <label for="validationDefault03" class="form-label">Mot de passe</label>
-        {{ form_widget(form.password) }}
-    </div>
+		<div class="col-md-4">
+			<label for="validationDefault01" class="form-label">Pseudo</label>
+			{{ form_widget(form.pseudo) }}
+		</div>
+		<div class="col-md-4">
+			<label for="validationDefault01" class="form-label">Nom</label>
+			{{ form_widget(form.lastname) }}
+		</div>
+		<div class="col-md-4">
+			<label for="validationDefault02" class="form-label">Prénom</label>
+			{{ form_widget(form.name) }}
+		</div>
+		<div class="col-md-4">
+			<label for="validationDefaultUsername" class="form-label">Adresse Mail</label>
+			{{ form_widget(form.email) }}
+		</div>
+		<div class="col-md-4">
+			<label for="validationDefault03" class="form-label">Mot de passe</label>
+			{{ form_widget(form.password) }}
+		</div>
 
-    <div class="col-md-4">
-        <br>
-        <button class="btn btn-primary" type="submit">Submit form</button>
-    </div>
+		<div class="col-md-4">
+			<br>
+			<button class="btn btn-primary" type="submit">Submit form</button>
+		</div>
 
-</div>
+	</div>
 
-{{ form_end(form) }}
-
+	{{ form_end(form) }}
 
 
-        {% endblock %}
+{% endblock %}

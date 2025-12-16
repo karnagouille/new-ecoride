@@ -2,7 +2,8 @@
 
 /*navbar*/
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -13,41 +14,38 @@ html, body {
     background-size: cover;
 }
 
-.container { 
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1em;
-    font-size:2em;
-
+    font-size: 2em;
 }
 
-.titleshadow{
+.titleshadow {
     text-shadow: 2px 2px 5px white;
 }
 .navlink {
     text-align: center;
 }
-.navlink:hover{
+.navlink:hover {
     color: rgb(48, 219, 57);
     transition: all 0.3s ease-out;
 }
-.navlink:focus{
+.navlink:focus {
     color: rgb(48, 219, 57);
 }
 
-.navlink2:hover{
+.navlink2:hover {
     color: rgb(243, 247, 243);
     transition: all 0.3s ease-out;
 }
-.navlink2:focus{
+.navlink2:focus {
     color: rgb(244, 250, 244);
 }
 .decoration {
     text-decoration: none;
 }
-
-
 
 /* BODY PAGE D'ACCUEIL*/
 
@@ -60,10 +58,9 @@ html, body {
     align-items: center;
     text-align: center;
     font-size: 1.3em;
-    height:60em;
+    height: 60em;
     border-radius: 100%;
-    gap:1.2em;
-    
+    gap: 1.2em;
 }
 
 .tittle {
@@ -87,28 +84,40 @@ html, body {
     height: 2em;
     border-radius: 1em;
     text-align: center;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 .inputdate {
-    width: 7em;
+    width: 8em;
     height: 2em;
     border-radius: 1em;
     text-align: center;
+    font-size: 1.3em;
 }
 
-.find {
+.findCheck {
     width: 10em;
     height: 3em;
     border-radius: 3em;
     background: linear-gradient(rgb(69, 157, 216), rgb(48, 219, 57));
     box-shadow: 0 4px 10px;
     margin-top: 1em;
+    font-size: 1em;
 }
 
-.find:active{
+.finddelete {
+    width: 10em;
+    height: 3em;
+    border-radius: 3em;
+    background: linear-gradient(rgb(69, 157, 216), rgb(247, 51, 3));
+    box-shadow: 0 4px 10px;
+    margin-top: 1em;
+    font-size: 1em;
+}
+
+.findCheck:active {
     transform: scale(0.9);
-    color:  #ffffff; ;
+    color: #ffffff;
 }
 
 /* AVANTAGES */
@@ -174,24 +183,21 @@ html, body {
     border-bottom-right-radius: 2em;
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width: 1024px) {
     .carpool {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-size: 2em;
-    line-height: 2em;
-    gap: 1.5em;
-    color: rgb(214, 161, 63);
-    text-shadow: 1px 1px rgb(0, 0, 0);
-    background-color: rgb(252, 252, 252);
-    border-bottom-left-radius: 2em;
-    border-bottom-right-radius: 2em;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-size: 2em;
+        line-height: 2em;
+        gap: 1.5em;
+        color: rgb(214, 161, 63);
+        text-shadow: 1px 1px rgb(0, 0, 0);
+        background-color: rgb(252, 252, 252);
+        border-bottom-left-radius: 2em;
+        border-bottom-right-radius: 2em;
+    }
 }
-}
-
-
-
 
 .presentation1 {
     display: flex;
@@ -205,18 +211,17 @@ html, body {
     display: flex;
     height: 20em;
     align-items: end;
-    
+
     padding-bottom: 1em;
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width: 1024px) {
     .presentation3 {
-    display: flex;
-    justify-content: end;
-    align-items: baseline;
-} 
+        display: flex;
+        justify-content: end;
+        align-items: baseline;
+    }
 }
-
 
 .carpoolimg {
     width: 15em;
@@ -236,26 +241,25 @@ html, body {
     flex-direction: column;
     align-items: center;
 }
-.legalnotice{
+.legalnotice {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: "Roboto Slab", serif;
     text-align: center;
-margin : 5em 20em 5em 20em;
-
+    margin: 5em 20em 5em 20em;
 }
-
 
 /*#endregion index*/
 
 /*#region Covoiturage */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
 
-button{
+button {
     cursor: pointer;
 }
 
@@ -272,13 +276,12 @@ button{
     align-items: center;
     text-align: center;
 }
-
 .order2 {
-    height: 1.8em;
-    width: 120px;
-    border-radius: 2em;    
-    text-align: center;   
-    font-size: 1.2em;
+    width: 7em;
+    height: 2em;
+    border-radius: 1em;
+    text-align: center;
+    font-size: 1.3em;
 }
 
 .sort {
@@ -294,20 +297,23 @@ button{
 
 /****** PROFIL UTILISATEUR ******/
 
-.profil{
+.profil {
     text-shadow: 2px 2px 5px white;
     font-size: 1.2em;
 }
 
-
 .filtered {
-    display: flex;    
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
     gap: 1em;
     background-color: #f3f7f4;
-    border-radius: 20px;
+    width: 50em;
+    border-radius: 1em;
     box-shadow: 0 4px 10px;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
-
 
 .backdriver {
     background-color: #ffffff;
@@ -349,7 +355,7 @@ a {
 
 .souligne {
     text-decoration: underline;
-    
+    text-align: center;
 }
 
 .title {
@@ -361,14 +367,21 @@ a {
 /****** Premier block : pseudo;image,note ******/
 
 .userimg {
-
-    border-radius:7em;
+    border-radius: 7em;
     transition: transform 0.3s ease-in-out;
-    box-shadow: 10px 5px 5px  rgb(20, 20, 20);
+    box-shadow: 10px 5px 5px rgb(20, 20, 20);
     width: 7em;
-    height:7em;
+    height: 7em;
 }
-.
+
+.userimgsearch {
+    border-radius: 6em;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 10px 5px 5px rgb(20, 20, 20);
+    width: 5em;
+    height: 5em;
+}
+
 .carimg:hover {
     transform: scale(1.05);
 }
@@ -378,39 +391,38 @@ a {
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    
+    padding-right: 1em;
 }
 
-.pseudo{
+.pseudo {
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 10px;
 }
 
-.reserved{
-
+.reserved {
     display: flex;
     align-items: center;
-    font-size: 20px;  
-    gap: 20px; 
-    padding-bottom: 20px;
+    font-size: 1em;
+    gap: 1em;
+    padding-bottom: 1em;
     justify-content: center;
     margin-top: 1em;
-    
 }
 
-.reservedbutton{
+.reservedbutton {
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    font-size: 20px;
-    border-radius: 20px;
-    width: 150px;
+    font-size: 1em;
+    border-radius: 1em;
+    width: 5em;
     box-shadow: 2px 2px 5px;
+    text-shadow: 2px 2px 5px white;
 }
 
-.reservedbutton:active{
+.reservedbutton:active {
     transform: scale(0.9);
-    color:  rgb(23, 218, 55);
+    color: rgb(23, 218, 55);
 }
 /****** Deuxième block : départ, destination ******/
 
@@ -421,30 +433,29 @@ a {
 
 .destination {
     margin-bottom: 25px;
-    
-    flex-direction: column; 
-    align-items: center;    
-    justify-content: center; 
-    text-align: center;      
-    gap: 10px;              
+    text-shadow: 2px 2px 5px white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    font-size: 1.1em;
+    padding-left: 1em;
 }
-
-
 
 .startfinish {
     display: flex;
-
-    font-size: 20px;
-    justify-content: center; 
-    align-items: center;     
+    text-shadow: 2px 2px 5px white;
+    font-size: 1.2em;
+    justify-content: center;
+    align-items: center;
 }
 
-.start{
+.start {
     text-align: center;
-
 }
 
-.line{
+.line {
     padding-left: 10px;
 }
 /****** Troisième block : nombes de place disponibles ******/
@@ -468,18 +479,21 @@ a {
 /*#region Renseignement */
 
 /* INFORMARTION SUR LE PROFIL UTILISATEUR AINSI QUE SUR LE TRAJET      */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
 
-.info0{
+.info0 {
     display: flex;
     justify-content: center;
 }
 
 .information {
-    background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
+    background-image: url(/image/covoit.jpg);
+    background-size: 100%;
+    background-position-y: 30%;
     display: flex;
     justify-content: center;
     margin-top: 3em;
@@ -489,35 +503,30 @@ html, body {
     text-align: center;
     padding-bottom: 1em;
     box-shadow: 2px 2px 5px;
-    
 }
 
-
-.infopseudo{
+.infopseudo {
     padding-right: 1em;
     padding-left: 1em;
     padding-top: 1em;
     padding-right: 2em;
+    text-shadow: 2px 2px 5px white;
 }
 /*  PSEUDO, PHOTO DE PROFIL ET NOTE    */
 .pseudo {
     margin-top: 1em;
     padding-bottom: 1em;
-    
 }
 /*  INFORMATION SUR LE TRAJET , PRIX,DATE DE DEPART,TEMPS TRAJET, HEURE,POINT DE DEPART ET D'ARRIVEE, PREFERENCE DU PILOTE.  */
 .info {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    background: linear-gradient(rgb(69, 157, 216), rgb(153, 102, 255));
-    box-shadow: 2px 2px 5px;
+    text-shadow: 2px 2px 5px white;
     padding-left: 3em;
     padding-right: 3em;
     border-radius: 2em;
 }
-
-
 
 .pricetime {
     display: flex;
@@ -544,7 +553,7 @@ html, body {
 .car {
     padding-top: 20px;
     text-align: center;
-    
+    text-shadow: 2px 2px 5px white;
     padding-left: 2em;
     padding-top: 100px;
 }
@@ -569,15 +578,12 @@ html, body {
 
 .userimg3 {
     width: 6em;
-    border-radius:3em;
+    border-radius: 3em;
     margin-left: 1em;
     transition: transform 0.3s ease-in-out;
     box-shadow: 10px 5px 5px rgb(73, 73, 73);
     margin-right: 1em;
 }
-
-
-
 
 .brand {
     display: flex;
@@ -592,16 +598,15 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(rgb(69, 157, 216), rgb(153, 102, 255));
     gap: 1em;
     padding-bottom: 1em;
     border-radius: 1em;
 }
 .notecomment {
     display: flex;
-    align-items: end;
+    align-items: baseline;
     padding-right: 1em;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 .titlecomment {
     display: flex;
@@ -611,21 +616,38 @@ html, body {
     padding-bottom: 1em;
 }
 
-.comment0{
+.comment0 {
     display: flex;
     justify-content: center;
-    
 }
 .comment1 {
     display: flex;
     justify-content: space-between;
     padding-left: 1em;
     padding-right: 2em;
-    background: linear-gradient(rgb(69, 157, 216), rgb(153, 102, 255));
+    background-image: url(/image/comment.jpg);
+    background-size: 100%;
+    background-position-y: 30%;
+
+    background-repeat: no-repeat;
+
     gap: 2em;
-    width:50em ;
+    width: 50em;
     padding-top: 1em;
 
+    text-align: center;
+    border-radius: 1em;
+    box-shadow: 2px 2px 5px;
+    margin-bottom: 1em;
+}
+.comment1bis {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1em;
+    padding-right: 2em;
+    gap: 2em;
+    width: 50em;
+    padding-top: 1em;
     text-align: center;
     border-radius: 1em;
     box-shadow: 2px 2px 5px;
@@ -635,18 +657,18 @@ html, body {
 /*#endregion Renseignement*/
 
 /*#region connexion */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
 
-.inputlog{
+.inputlog {
     display: flex;
     align-items: center;
     width: 100%;
     max-width: 450px;
     gap: 1em;
-    
 }
 .inputlog > div:first-child {
     width: 125px;
@@ -654,15 +676,15 @@ html, body {
     margin-left: 1em;
 }
 
-.inputsize{
+.inputsize {
     width: 250px;
     height: 2em;
     border-radius: 50px;
 }
-.username{
+.username {
     padding-bottom: 1em;
 }
-.log{
+.log {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -670,17 +692,15 @@ html, body {
     gap: 1em;
 }
 
-.imglog{
+.imglog {
     width: 200px;
     padding-top: 80px;
-
 }
-.infolog{
+.infolog {
     font-size: 2em;
-
 }
 
-.checkbox{
+.checkbox {
     margin-right: 20%;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -688,7 +708,7 @@ html, body {
     justify-content: center;
 }
 
-.connexion{
+.connexion {
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
     font-size: 2em;
     text-align: center;
@@ -696,48 +716,46 @@ html, body {
     border-radius: 10px;
 }
 
-.account{
+.account {
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
 }
 
-.accounts:hover{
-    color: rgb(150, 119, 212) ;
+.accounts:hover {
+    color: rgb(150, 119, 212);
 }
 /*#endregion connexion*/
 
 /*#region création de compte*/
 
-.titleaccount{
+.titleaccount {
     display: flex;
     justify-content: center;
     font-size: 30px;
 }
 
-.accountcreation{
-
+.accountcreation {
     display: flex;
     flex-direction: column;
-    align-items: center;    
+    align-items: center;
     gap: 30px;
     font-size: 20px;
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    margin-left: 30% ;
-    margin-right: 30% ;
+    margin-left: 30%;
+    margin-right: 30%;
     padding-top: 20px;
     padding-bottom: 30px;
     border-radius: 30px;
 }
 
-.labelaccount{
+.labelaccount {
     text-align: center;
 }
-.accountext{
+.accountext {
     display: flex;
     align-items: center;
     gap: 10px;
-    
 }
 
 .accountext > div:first-child {
@@ -746,13 +764,13 @@ html, body {
     margin-right: 10px;
 }
 
-.buttonaccounts{
+.buttonaccounts {
     display: flex;
     justify-content: center;
     margin-top: 50px;
 }
 
-.buttonaccount{
+.buttonaccount {
     width: 190px;
     height: 35px;
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
@@ -761,26 +779,23 @@ html, body {
     box-shadow: 2px 2px 5px;
 }
 
-
 /*#endregion connexion au compte*/
 
 /*#region  réinitialiser le mdp*/
 
-
-.resetpass{
-    display:flex ;
+.resetpass {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 200px;
     font-size: 25px;
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    margin-left:20% ;
-    margin-right:20% ;
+    margin-left: 20%;
+    margin-right: 20%;
     border-radius: 30px;
-    
 }
 
-.inputmail{
+.inputmail {
     width: 500px;
     height: 40px;
     border-radius: 10px;
@@ -788,7 +803,7 @@ html, body {
     font-size: 20px;
 }
 
-.buttonmail{
+.buttonmail {
     width: 200px;
     height: 40px;
     background: linear-gradient(rgb(69, 157, 216), rgb(48, 219, 57));
@@ -796,35 +811,40 @@ html, body {
     border-radius: 10px;
     box-shadow: 2px 2px 5px;
     margin-top: 20px;
-
 }
 /*#endregion réinitialiser le mdp*/
 
 /*#region  Mon Compte */
 
-
 /* photo et information personnelle */
 
-.creditnav{
+.creditnav {
     display: flex;
     justify-content: end;
     gap: 1.5em;
     margin-right: 5em;
-    font-size:2em;
+    font-size: 2em;
     text-shadow: 2px 2px 5px white;
-
 }
-.credit{
-color: rgb(23, 161, 30) ;
+.credit {
+    color: rgb(23, 161, 30);
 }
 
-.userprofil{
+.userprofil {
     display: flex;
-    text-align: center;    
+    text-align: center;
     width: 100%;
 }
 
-.mainuser{
+.userprofilcurrentjourney {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 3em;
+    width: 100%;
+}
+
+.mainuser {
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
     width: 30em;
     min-height: 100%;
@@ -834,44 +854,47 @@ color: rgb(23, 161, 30) ;
     margin-bottom: 3;
 }
 
-.picturesprofil{
-    width: 7em;
+.picturesprofil {
+    width: 6em;
     border-radius: 5em;
 }
 
-.pictures{
+.picturesprofilsearch {
+    width: 5em;
+    border-radius: 3em;
+}
+
+.pictures {
     max-width: 500px;
     border-radius: 75px;
-
 }
 /* chauffeur / passager */
 
-.driverpassenger{
+.driverpassenger {
     display: flex;
     align-items: center;
     background: linear-gradient(rgb(69, 157, 216), rgb(15, 15, 15));
     font-size: 1.5em;
-    border-radius: 10px; 
+    border-radius: 10px;
     color: rgb(241, 238, 238);
     border: none;
     border: solid black;
     box-shadow: 2px 2px 5px;
 }
 
-.driverpassenger:active{
+.driverpassenger:active {
     transform: scale(0.9);
 }
 
-.driverpassenger:hover{
-    color:rgb(14, 241, 67);
-    
+.driverpassenger:hover {
+    color: rgb(14, 241, 67);
 }
 
-.driverpassenger:focus{
-    color:rgb(14, 241, 67);
+.driverpassenger:focus {
+    color: rgb(14, 241, 67);
 }
 
-.driverpassengers{
+.driverpassengers {
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -879,29 +902,26 @@ color: rgb(23, 161, 30) ;
 
 /*  Modification du formulaire voiture */
 
-.car{
-display: flex;
-justify-content: center;
-flex-direction: column;
-align-items: center;
+.car {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Formulaire */
-.userform{
+.userform {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
 }
 
-.carshow{
+.carshow {
     padding-bottom: 2em;
 }
 
-
 /* Créer un trajet / trajet en cours */
-.currentjourney{
-    
+.currentjourney {
     display: flex;
     flex-direction: column;
     gap: 100px;
@@ -909,64 +929,57 @@ align-items: center;
     margin-left: 25%;
     font-size: 30px;
     flex-grow: 1;
-    
 }
 
-.createlook:hover{
-color: rgb(48, 219, 57);
+.createlook:hover {
+    color: rgb(48, 219, 57);
 }
 
-.routestyle{
+.routestyle {
     display: flex;
     align-items: center;
     background: linear-gradient(rgb(69, 157, 216), rgb(15, 15, 15));
     font-size: 1em;
-    border-radius: 20px;   
+    border-radius: 20px;
     color: rgb(252, 251, 250);
-    padding:5px 10px 5px 10px;
+    padding: 5px 10px 5px 10px;
 }
 
 /* Historique */
 
 .backgroundhistorical {
-
     background-image: url(/image/covoit.jpg);
     background-size: cover;
     width: 800px;
     border: 1px solid rgb(153, 102, 255);
     box-shadow: 0 4px 10px;
     border-radius: 20px;
-
 }
 
-.historical{
+.historical {
+    font-size: 40px;
+    width: 1000px;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+}
+.historical2 {
     font-size: 40px;
     width: 1000px;
     padding-left: 100px;
     display: flex;
     flex-direction: column;
 
-
-}
-.historical2{
-    font-size: 40px;
-    width: 1000px;
-    padding-left: 100px;
-    display: flex;
-    flex-direction: column;
-    margin-left: 25%;
-
 }
 
-.journey{
+.journey {
     display: flex;
     gap: 100px;
     justify-content: start;
     margin-left: 300px;
 }
 
-.historicals{
-    
+.historicals {
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -982,21 +995,26 @@ color: rgb(48, 219, 57);
     display: none !important;
 }
 
-.driverhistorical{
+.driverhistorical {
     display: flex;
 }
 
 .profilhistorical {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 1em 3em 1em 3em;
 }
 
 .priceplacehistorical {
-    font-size: 20px;
+    font-size: 1.2em;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    padding-left: 50px;
+
+    justify-content: space-between;
+
+    padding-left: 2em;
+    text-shadow: 2px 2px 5px white;
 }
 
 .reservedstartstop {
@@ -1009,13 +1027,11 @@ color: rgb(48, 219, 57);
     margin-top: 200px;
 }
 
-
-
-.start{
+.start {
     display: flex;
     align-items: center;
     font-size: 0.7em;
-    border-radius: 10px;   
+    border-radius: 10px;
     background-color: rgb(14, 241, 67);
     border: none;
     gap: 30px;
@@ -1024,11 +1040,11 @@ color: rgb(48, 219, 57);
     border: solid black;
 }
 
-.stop{
+.stop {
     display: flex;
     align-items: center;
     font-size: 0.7em;
-    border-radius: 10px;   
+    border-radius: 10px;
     background-color: #d41818;
     border: none;
     gap: 30px;
@@ -1041,33 +1057,34 @@ color: rgb(48, 219, 57);
     display: flex;
     align-items: center;
     font-size: 0.7em;
-    border-radius: 10px;   
+    border-radius: 10px;
     background-color: rgb(69, 157, 216);
     border: none;
     box-shadow: 2px 2px 5px;
     padding: 5px 10px 5px 10px;
-    border: solid black;   
+    border: solid black;
 }
-.stop:active{
+.stop:active {
     transform: scale(0.9);
 }
 
-.start:active{
+.start:active {
     transform: scale(0.9);
 }
-.finish:active{
+.finish:active {
     transform: scale(0.9);
 }
 
-.startstop{
+.startstop {
     display: flex;
     justify-content: center;
     gap: 2em;
     margin-left: 0.5em;
-
 }
 
-.start:hover, .stop:hover, .finish:hover{
+.start:hover,
+.stop:hover,
+.finish:hover {
     color: #ffffff;
 }
 
@@ -1075,17 +1092,14 @@ color: rgb(48, 219, 57);
 
 /*#region  créer un trajet*/
 
-
-
-.trajetcreation{
-
+.trajetcreation {
     display: flex;
     flex-direction: column;
-    align-items:start;    
+    align-items: start;
     gap: 1.5em;
     font-size: 1em;
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    margin:5em 40em 5em 40em;
+    margin: 5em 40em 5em 40em;
     border-radius: 2em;
     padding-right: 5em;
     padding-top: 2em;
@@ -1093,7 +1107,7 @@ color: rgb(48, 219, 57);
     text-align: center;
 }
 
-.submitbutton{
+.submitbutton {
     margin-top: 2em;
     margin-left: 17em;
 }
@@ -1109,42 +1123,41 @@ color: rgb(48, 219, 57);
 
 /*#region  employe*/
 
-.titlecomment{
+.titlecomment {
     display: flex;
     justify-content: center;
 }
 
-.employecomment1{
-display: flex;
-justify-content: center;
-align-items: center;
-margin-bottom: 2%;
-gap: 1%;
-margin-top: 5em;
-
-    
+.employecomment1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    gap: 1em;
+    margin-top: 5em;
 }
 
-.employecomment2{
+.employecomment2 {
     display: flex;
-    width: 1000px;
+    width: 45em;
     justify-content: center;
-    background: linear-gradient(rgb(69, 157, 216), rgb(153, 102, 255));
-    gap: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
+    background-image: url(/image/controle.jpg);
+    background-size: cover;
+    color: #f3f7f4;
+    gap: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
     text-align: center;
-    border-radius: 20px;
+    border-radius: 1em;
     box-shadow: 2px 2px 5px;
 }
 
-
-.checkbutton{
+.checkbutton {
     border-radius: 30px;
 }
 
-.pictureemploye{
+.pictureemploye {
     width: 150px;
     border-radius: 100px;
 }
@@ -1152,14 +1165,11 @@ margin-top: 5em;
 
 /*#region admin */
 
-
-.canvas{
+.canvas {
     display: flex;
     margin-left: 5%;
     gap: 5%;
     text-align: center;
 }
-
-
 
 /*#endregion  admin*/

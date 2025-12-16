@@ -1,141 +1,156 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock %}
+{% block title %}Covoiturage
+{% endblock %}
 
 {% block body %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="{{ asset('script/main.js') }}" defer></script>
-{% endblock %}
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<script src="{{ asset('script/main.js') }}" defer></script>
+	{% endblock %}
 
-    <header>
-        <nav class="creditnav">
-            <div class="credit">Crédits : {{user.credit}}</div>
-        </nav>
-    </header>
+	<header>
+		<nav class="creditnav">
+			<div class="credit">Crédits :
+				{{user.credit}}</div>
+		</nav>
+	</header>
 
 
-<div class="searchcar">
-    <div class="searchcar">
-        {{ form_start(form, {attr: { 'data-turbo': "false" }}) }}
+	<div class="searchcar">
+		<div class="searchcar">
+			{{ form_start(form, {attr: { 'data-turbo': "false" }}) }}
 
-            {{form_widget(form.startTown) }}
-            {{ form_widget(form.endTown) }}
-            {{ form_widget(form.passenger) }}
-            {{ form_widget(form.startAt) }}
-            {{ form_widget(form.hour) }}
-                
+			{{form_widget(form.startTown) }}
+			{{ form_widget(form.endTown) }}
+			{{ form_widget(form.passenger) }}
+			{{ form_widget(form.startAt) }}
+			{{ form_widget(form.hour) }}
 
-        <div class="order1">
-            <button class="sort" id="btns" type="button">TRIEZ PAR 🡇</button>
-            
-            <div class="filtered hidden" id="filters">
-                    <label class="souligne"><strong>PRIX</strong></label>
-                <div class="title">
-                    <strong> {{ form_widget(form.price) }}€</strong>
-                </div>
 
-                <div class="title">
-                    <label class="souligne"><strong>TEMPS</strong></label>
-                    {{ form_widget(form.traveltime) }}
-                </div>
+			<div class="order1">
+				<button class="sort" id="btns" type="button">TRIEZ PAR 🡇</button>
 
-                <div class="title">
-                    <label class="souligne"><strong>VOITURE ECO</strong></label>
-                    {{ form_widget(form.electric) }}
-                </div>
+				<div class="filtered hidden" id="filters">
+					
+					<div class="title">
+						<label class="souligne"><strong>PRIX</strong></label>
+						<strong>{{ form_widget(form.price) }}</strong>
+					</div>
 
-                <div class="title">
-                    <label class="souligne"><strong>NOTE</strong></label>
-                    {{ form_widget(form.note) }}
-                </div>
+					<div class="title">
+						<label class="souligne"><strong>TEMPS MOYEN</strong></label>
+						{{ form_widget(form.traveltime) }}
+					</div>
 
-            </div>
-            <button class="find" type="submit">Rechercher</button>
-        </div>
-        
-                    {{ form_end(form) }}
-    </div>
+					<div class="title">
+						<label class="souligne"><strong>VOITURE ECO</strong></label>
+						{{ form_widget(form.electric) }}
+					</div>
+
+					<div class="title">
+						<label class="souligne"><strong>NOTE</strong></label>
+						{{ form_widget(form.note) }}
+					</div>
+
+				</div>
+				<button class="findCheck" type="submit">Rechercher</button>
+			</div>
+
+			{{ form_end(form) }}
+		</div>
+	</div>
+
 </div>
+{% for trajet in trajets %}
+	{% if trajet.statut == constant('App\\Entity\\Carpooling::STATUT_RIEN')or trajet.statut == constant('App\\Entity\\Carpooling::STATUT_EN_COURS') %}
 
-</div>
-    {% for trajet in trajets %}
-{% if trajet.statut == constant('App\\Entity\\Carpooling::STATUT_RIEN')or trajet.statut == constant('App\\Entity\\Carpooling::STATUT_EN_COURS') %}
+		<div href="/ecoridee/HTML/renseignement.html" class="reserved">
+			<div class="backgroundhistorical">
+				<div class="profilhistorical">
+					<div class="profil">
 
-    <div href="/ecoridee/HTML/renseignement.html" class="reserved">        
-            <div class="backgroundhistorical">
-                <div class="profilhistorical">
-                    <div class="profil">
+						<div>
+							<div class="pseudo">{{trajet.user.pseudo}}</div>
+						</div>
 
-                        <div>
-                            <div class="pseudo">{{trajet.user.pseudo}}</div>
-                        </div>
+						<div>
+							<div class="userimgsearch">
+								<a href="{{ path('renseignement', {'id': trajet.id}) }}">
+									<img class="picturesprofilsearch" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil"></a>
+							</div>
+						</div>
 
-                        <div>
-                            <div class="userimg">
-                                <a href="{{ path('renseignement', {'id': trajet.id}) }}">
-                                <img class="picturesprofil" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil" ></a>
-                            </div>
-                        </div>
+					</div>
+					<div class="destination">
+						<div>
+							<div class="time">
 
-                </div>
-                    <div class="destination">
-                        <div>
-                            <div class="time">
-                                
-                                <div>
-                                    </p><strong>{{ trajet.startAt|date('d/m/Y') }}</strong><p>
-                                </div>
-                                    <em>Durée environ {{ trajet.travelTime }} H</em>
-                                </p>
-                                    
-                            </div>
-                            <div class="startfinish">
-                            
-                                <div>
-                                    <p><strong> Départ : {{ trajet.startTown }}</strong></p>
-                                </div>
-                            </div> 
-                            
-                            <div >------------------------------------------------------------</div>
-                            <div class="startfinish">
-                                <div>
-                                    <p><strong>Arrivée : {{ trajet.endTown }} </strong></p>
-                                </div>
-                            </div> 
-                        </div>                               
-                    </div>
+								<div></p>
+								<strong>{{ trajet.startAt|date('d/m/Y') }}</strong>
+								<p></p>
+							</div>
+							<em>Durée environ
+								{{ trajet.travelTime }}
+								H</em>
+						</p>
 
-                    <div class="priceplacehistorical">
-                        <div>
-                                <strong>{{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong>
-                            {% if trajet.electric %}
-                            <img class ="eleccar" src="{{ asset('image/voiture-electrique.png') }}" alt="icone voiture electrique">
-                            {% endif %}
-                        </div>
-                            <div>
-                            </div>
-                        <div>
-                            <p><strong>{{ trajet.passenger }} place(s)</strong></p>
-                        </div>
-                        {% set transaction = trajet.creditTransactions.first %}
-                        <div>
-                            <strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong>
-                        </div>
+					</div>
+					<div class="startfinish">
 
-                    </div>               
-                </div>
-            </div>  
-            <div><a class="reservedbutton" href="{{ path('participer', {'id': trajet.id}) }}"><strong>Participer</strong></a></div>
-        </div> 
-    </div>
+						<div>
+							<p>
+								<strong>
+									Départ :
+									{{ trajet.startTown }}</strong>
+							</p>
+						</div>
+					</div>
 
-    {% elseif trajet.statut == constant('App\\Entity\\Carpooling::STATUT_TERMINE') %}
-{% endif %}
-{% endfor %}
-{% endblock %}
+					<div>
+						----------------------------------------------------</div>
+					<div class="startfinish">
+						<div>
+							<p>
+								<strong>Arrivée :
+									{{ trajet.endTown }}
+								</strong>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
+			<div class="priceplacehistorical">
+				<div>
+					<strong>{{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong>
+					{% if trajet.electric %}
+						<img class="eleccar" src="{{ asset('image/voiture-electrique.png') }}" alt="icone voiture electrique">
+					{% endif %}
+				</div>
+
+				<div>
+					<p>
+						<strong>{{ trajet.passenger }}
+							place(s)</strong>
+					</p>
+				</div>
+
+				{% set transaction = trajet.creditTransactions.first %}
+				<div>
+					<strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div>
+		<a class="reservedbutton" href="{{ path('participer', {'id': trajet.id}) }}">
+			<strong>Participer</strong>
+		</a>
+	</div>
+</div></div>{% elseif trajet.statut == constant('App\\Entity\\Carpooling::STATUT_TERMINE') %}{% endif %}{% endfor %}{% endblock %}

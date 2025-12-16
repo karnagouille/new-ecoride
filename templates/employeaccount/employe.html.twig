@@ -1,58 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock %}
+{% block title %}Covoiturage
+{% endblock %}
 
 {% block body %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="{{ asset('script/main.js') }}" defer></script>
-{% endblock %}
-    
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<script src="{{ asset('script/main.js') }}" defer></script>
+	{% endblock %}
+
 	<div class="titlecomment">
-		<div><h4><strong><em><u>Liste des commentaires à controller</u></em></strong></h4></div>
+		<div>
+			<h4>
+				<strong>
+					<em>
+						<u>Liste des commentaires à controller</u>
+					</em>
+				</strong>
+			</h4>
+		</div>
 	</div>
 
-	
-			{% for c in comments %}
-<div class="employecomment1">
-		<div class="employecomment2" >
-			<div class="comment">
-				<div>
-					<div><img class="pictureemploye" src="{{ asset('uploads/' ~ c.user.photo) }}" alt="Photo de profil" ></div>
-					<div><p><strong>{{ c.user.pseudo }}</strong></p></div>
+
+	{% for c in comments %}
+		<div class="employecomment1">
+			<div class="employecomment2">
+				<div class="comment">
+					<div>
+						<div><img class="pictureemploye" src="{{ asset('uploads/' ~ c.user.photo) }}" alt="Photo de profil"></div>
+						<div>
+							<p>
+								<strong>{{ c.user.pseudo }}</strong>
+							</p>
+						</div>
+					</div>
+					<div>
+						<div>{{c.comment}}</div>
+					</div>
 				</div>
-				<div>
-					<div>{{c.comment}}</div>
+
+				<div class="notecomment">
+					<div>
+						<div>
+							<strong>{{c.note}}/5</strong>
+						</div>
+					</div>
 				</div>
+
+			</div>
+			<div>
+				{% if c.statut == 'not_checked' %}
+					<form method="post" action="{{ path('employe', {'id': c.id}) }}">
+						<button type="submit" class="findCheck">Check</button>
+					{% endif %}
+				</form>
 			</div>
 
-			<div class="comment">
-				<div>
-					<div><strong>{{c.note}}/5</strong></div>
-				</div>
-			</div>
-			
-		</div>          
-		<div>
-			{% if c.statut == 'not_checked' %}
-			<form method="post" action="{{ path('employe', {'id': c.id}) }}">
-			<button type="submit" class="find">Check</button>
-			{% endif %}
-			</form>
+			{% for comment in comments %}
+				<form
+					method="post" action="{{ path('remove', {'id': comment.id}) }}">
+					{# <input type="hidden" name="_method" value="DELETE"> #}
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+					<button type="submit" class="finddelete">Supprimer</button>
+				</form>
+			{% endfor %}
 		</div>
-
-		{% for comment in comments %}
-		<form method="post" action="{{ path('remove', {'id': comment.id}) }}">
-                {# <input type="hidden" name="_method" value="DELETE"> #}
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-                <button type="submit" class="find" >Supprimer</button>
-            </form>
-		{% endfor %}
-</div>
 	{% endfor %}
-		
-		{% endblock %}
+
+{% endblock %}

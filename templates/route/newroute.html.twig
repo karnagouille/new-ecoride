@@ -1,111 +1,109 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock %}
+{% block title %}Covoiturage
+{% endblock %}
 
 {% block body %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="{{ asset('script/main.js') }}" defer></script>
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<script src="{{ asset('script/main.js') }}" defer></script>
+	{% endblock %}
+
+
+	{{ form_start(form) }}
+	<div action="" class="trajetcreation">
+		<div class="accountext">
+			<div>
+				<label for="">Ville de Départ :</label>
+			</div>
+			<div>
+				{{ form_widget(form.startTown) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Heure de départ :</label>
+			</div>
+			<div>
+				{{ form_widget(form.hour) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Temps de trajet:</label>
+			</div>
+			<div>
+				{{ form_widget(form.traveltime) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Ville d'Arrivée :</label>
+			</div>
+			<div>
+				{{ form_widget(form.endTown) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Date de Départ:</label>
+			</div>
+			<div>
+				{{ form_widget(form.startAt) }}
+			</div>
+		</div>
+
+
+		<div class="accountext">
+			<div>
+				<label for="">Véhicule :</label>
+			</div>
+
+			<div>{{ form_widget(form.car, {'attr': {'class': 'inputroute'}}) }}</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Véhicule électrique:</label>
+			</div>
+			<div>
+				{{ form_widget(form.electric) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Place disponible:</label>
+			</div>
+			<div>
+				{{ form_widget(form.passenger) }}
+			</div>
+		</div>
+
+
+		<div class="accountext">
+			<div>
+				<label for="">Prix:</label>
+			</div>
+			<div>
+				{{ form_widget(form.price) }}
+			</div>
+		</div>
+		<div class="submitbutton">
+			<div>
+				<button type="submit" class="btn">Enregistré</button>
+			</div>
+		</div>
+	</div>
+	{{ form_end(form) }}
+
+
 {% endblock %}
-    
-
-
-
-
-{{ form_start(form) }}
-    <div action="" class="trajetcreation">
-            <div class="accountext">
-                <div>
-                    <label for="">Ville de Départ :</label>
-                </div>
-                <div>
-                    {{ form_widget(form.startTown) }}
-                </div>
-            </div>
-
-            <div class="accountext">
-                <div>
-                    <label for="">Heure de départ :</label>
-                </div>
-                <div>
-                    {{ form_widget(form.hour) }}
-                </div>
-            </div>
-
-            <div class="accountext">
-                <div>
-                    <label for="">Temps de trajet:</label>
-                </div>
-                <div>
-                    {{ form_widget(form.traveltime) }}
-                </div>
-            </div>
-
-            <div class="accountext">
-                <div>
-                    <label for="" >Ville d'Arrivée :</label>
-                </div>
-                <div>
-                    {{ form_widget(form.endTown) }}
-                </div>
-            </div>
-
-            <div class="accountext">
-                <div>
-                    <label for="">Date de Départ:</label>
-                </div>
-                <div>
-                    {{ form_widget(form.startAt) }}
-                </div>
-            </div>
-
-
-            <div class="accountext">
-                <div>
-                    <label for="">Véhicule :</label>
-                </div>
-                
-                <div>{{ form_widget(form.car, {'attr': {'class': 'inputroute'}}) }}</div>
-            </div>
-
-            <div class="accountext">
-                <div>
-                    <label for="">Véhicule électrique:</label>
-                </div>
-                <div>
-                    {{ form_widget(form.electric) }}
-                </div>
-            </div>
-
-            <div class="accountext">
-                <div>
-                    <label for="">Place disponible:</label>
-                </div>
-                <div>
-                    {{ form_widget(form.passenger) }}
-                </div>
-            </div>
-
-
-            <div class="accountext">
-                <div>
-                    <label for="">Prix:</label>
-                </div>
-                <div>
-                    {{ form_widget(form.price) }}
-                </div> 
-            </div>
-            <div class="submitbutton">
-                <div>
-                    <button type="submit" class="btn">Enregistré</button>
-                </div>
-            </div>
-    </div>
-{{ form_end(form) }}
-
-    
-    {% endblock %}
