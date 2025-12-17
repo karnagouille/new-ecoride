@@ -29,15 +29,13 @@
 	<div class="userprofil">
 		<div class="mainuser">
 
-			<div>
-				<strong>{{user.pseudo}}</strong>
-			</div>
+			<div><h1>{{user.pseudo}}</h1></div>
 			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil">
 			<div>{{user.lastname}},{{user.name}}</div>
 			<div>{{user.email}}</div>
 			<div>
 				<strong>
-					<a href="{{ path('profile_edit', {'id': user.id}) }}" class="find">Modifier</a>
+					<a href="{{ path('profile_edit', {'id': user.id}) }}" class="findCheck">Modifier</a>
 				</strong>
 			</div>
 			<br>
@@ -54,13 +52,7 @@
 
 			{{ form_start(form) }}
 			<div action="" class="userform hidden" id="filter">
-				<div>
-					<p style="font-size: 30px;">
-						<strong>
-							<u>Profile Voiture</u>
-						</strong>
-					</p>
-				</div>
+				<div><h2><strong>Ajouter une voiture</strong></h2></div>
 
 
 				<div class="accountext">
@@ -133,7 +125,8 @@
 							{{ car.model }}
 							-
 							{{ car.brand ? car.brand.libelle : 'Pas de marque' }}
-							<a href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a>
+
+							<div><strong><a class="findCheck" href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a></strong></div>
 						</li>
 					{% else %}
 						<li>Aucune voiture enregistrée</li>

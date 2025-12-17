@@ -31,6 +31,7 @@ final class NewrouteController extends AbstractController
             'user_cars' => $userCars,
             ]);
 
+
             $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()){ 
@@ -38,14 +39,15 @@ final class NewrouteController extends AbstractController
             $trajet->setUser($user);
             $em->persist($trajet);
 
+            $prixDuTrajet = (float) $form->get('price')->getData();
                     // Créer une transaction initiale pour que le prix soit défini
             $transaction = new CreditTransaction();
             $transaction->setCarpooling($trajet);
-            $transaction->setAmount(10); // montant par défaut, exemple 10€
-            $transaction->setSender($user); // ou plateforme selon ton ancienne logique
-            $transaction->setReceiver($user); // conducteur
-            $em->persist($transaction);
+            $transaction->setAmount($prixDuTrajet); 
+            $transaction->setSender($user); 
+            $transaction->setReceiver($user); 
 
+            $em->persist($transaction);
             $em->flush();
             return $this->redirectToRoute('myaccount');
         }

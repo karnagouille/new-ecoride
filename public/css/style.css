@@ -857,11 +857,14 @@ body {
 .picturesprofil {
     width: 6em;
     border-radius: 5em;
+
+    
 }
 
 .picturesprofilsearch {
     width: 5em;
     border-radius: 3em;
+
 }
 
 .pictures {
@@ -918,6 +921,8 @@ body {
 
 .carshow {
     padding-bottom: 2em;
+    display: flex;
+    justify-content: space-around;
 }
 
 /* Créer un trajet / trajet en cours */
@@ -1063,7 +1068,7 @@ body {
     box-shadow: 2px 2px 5px;
     padding: 5px 10px 5px 10px;
     border: solid black;
-}
+}&
 .stop:active {
     transform: scale(0.9);
 }
@@ -1164,12 +1169,21 @@ body {
 /*#endregion  employe*/
 
 /*#region admin */
+.searchmail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    margin: 5em 0em 3em 3em;
+    font-family: "Roboto Slab", serif;;
+}
 
 .canvas {
     display: flex;
-    margin-left: 5%;
-    gap: 5%;
+    justify-content: center;
+    gap: 5em;
     text-align: center;
 }
+
 
 /*#endregion  admin*/

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Carpooling;
+use App\Entity\CreditTransaction;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -37,13 +38,23 @@ public function searchCarpool($startTown, $endTown, $passenger, $startAt,$hour,$
         $qb->andWhere('c.hour = :hour')->setParameter('hour', $hour);
     }
 
-    if ($price) {
+
+if ($price) {
+    $qb->leftJoin('App\Entity\CreditTransaction','t','WITH','t.carpooling = c' )
+    ->groupBy('c.id');
+
     if ($price === 'asc') {
-        $qb->orderBy('c.price', 'ASC');
+        $qb->orderBy('MIN(t.amount)', 'ASC');
     } else {
-        $qb->orderBy('c.price', 'DESC');
+        $qb->orderBy('MIN(t.amount)', 'DESC');
     }
-    }
+}
+
+
+
+
+
+
     if ($traveltime) {
         [$min, $max] = explode('-', $traveltime);
         $qb->andWhere('c.traveltime BETWEEN :min AND :max')
