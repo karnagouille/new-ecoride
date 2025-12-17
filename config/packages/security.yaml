@@ -36,6 +36,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/employe, roles: ROLE_EMPLOYE }
         - { path: ^/myaccount, roles: ROLE_USER }
+        - { path: ^/carpool, roles: ROLE_USER }
 
 # Configuration spécifique pour l'environnement de test
 when@test:

@@ -9,7 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class ConnexionController extends AbstractController
 {
-    #[Route('/login', name: 'login')]
+    #[Route('/app_login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // Récupère l'erreur de connexion s'il y en a
@@ -18,8 +18,12 @@ final class ConnexionController extends AbstractController
         // Récupère le dernier nom d'utilisateur saisi
         $lastUsername = $authenticationUtils->getLastUsername();
 
+
         return $this->render('login.html.twig', [
             'last_username' => $lastUsername, // ← important
+            'error' => $error
         ]);
     }
+
+
 }
