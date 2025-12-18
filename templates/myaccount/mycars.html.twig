@@ -6,7 +6,9 @@
 {% block body %}
 
 
-	<div class="car">
+<div class="trajetcreation">
+
+	<div class="trajetcreation1">
 		<h1>Détails de la voiture</h1>
 		{{ form_start(form) }}
 		<div class="accountext">
@@ -74,19 +76,32 @@
 		<br>
 
 		{{ form_end(form) }}
-		<br>
-		<form
-			method="post" action="{{ path('car_remove', {'id': car.id}) }}">
-			{# <input type="hidden" name="_method" value="DELETE"> #}
-			<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ car.id) }}">
-			<button type="submit" class="find">Supprimer</button>
-		</form>
-		<br>
-		<div>
-			<a class="find" href="{{ path('myaccount') }}">Retour</a>
+	<div class="profilform">
+			<form
+				method="post" action="{{ path('car_remove', {'id': car.id}) }}">
+				{# <input type="hidden" name="_method" value="DELETE"> #}
+				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ car.id) }}">
+
+
+			<div class="profilform">
+				
+				<div>
+					<button type="submit" class="find">Supprimer</button>
+				</div>
+			</div>
+
+			<div class="profilform">
+				
+				<div>
+					<a class="findCheck" href="{{ path('myaccount') }}">Retour</a>
+				</div>
+			</div>
+				
+			</form>
+	</div>		
+
 		</div>
-
-	</div>
-
+	</div>	
+</div>
 
 {% endblock %}

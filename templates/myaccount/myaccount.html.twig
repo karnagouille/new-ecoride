@@ -33,9 +33,9 @@
 			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil">
 			<div>{{user.lastname}},{{user.name}}</div>
 			<div>{{user.email}}</div>
-			<div>
+			<div class="modify">
 				<strong>
-					<a href="{{ path('profile_edit', {'id': user.id}) }}" class="findCheck">Modifier</a>
+					<a href="{{ path('profile_edit', {'id': user.id}) }}" class="findCheck2">Modifier</a>
 				</strong>
 			</div>
 			<br>
@@ -126,7 +126,7 @@
 							-
 							{{ car.brand ? car.brand.libelle : 'Pas de marque' }}
 
-							<div><strong><a class="findCheck" href="{{ path('car_show', {'slug': car.slug}) }}">Voir détails</a></strong></div>
+							<div><strong><a class="findCheck2" href="{{ path('car_show', {'slug': car.slug}) }}">détails</a></strong></div>
 						</li>
 					{% else %}
 						<li>Aucune voiture enregistrée</li>

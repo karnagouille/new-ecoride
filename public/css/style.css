@@ -95,14 +95,32 @@ body {
     font-size: 1.3em;
 }
 
-.findCheck {
-    width: 10em;
-    height: 3em;
+.findCheck1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7em;
+    height: 2em;
     border-radius: 3em;
     background: linear-gradient(rgb(69, 157, 216), rgb(48, 219, 57));
     box-shadow: 0 4px 10px;
-    margin-top: 1em;
+    margin-top: 0.5em;
     font-size: 1em;
+    padding:  0.5em 0.5em 0.5em 0.5em;
+}
+
+.findCheck2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7em;
+    height: 2em;
+    border-radius: 3em;
+    background: linear-gradient(rgb(69, 157, 216), rgb(48, 219, 57));
+    box-shadow: 0 4px 10px;
+    margin-top: 0.5em;
+    font-size: 1em;
+    
 }
 
 .finddelete {
@@ -266,8 +284,8 @@ button {
 .searchcar {
     display: flex;
     justify-content: center;
-    margin-top: 5%;
-    gap: 100px;
+    margin-top: 5em;
+    
 }
 
 .order1 {
@@ -415,7 +433,8 @@ a {
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
     font-size: 1em;
     border-radius: 1em;
-    width: 5em;
+    width: 6em;
+    padding: 0.5em  0.5em  0.5em  0.5em;
     box-shadow: 2px 2px 5px;
     text-shadow: 2px 2px 5px white;
 }
@@ -833,8 +852,13 @@ body {
 .userprofil {
     display: flex;
     text-align: center;
-   
 }
+
+.modify{
+    display: flex;
+    justify-content: center;
+}
+
 
 .userprofilcurrentjourney {
     display: flex;
@@ -923,6 +947,7 @@ body {
     padding-bottom: 1em;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 /* Créer un trajet / trajet en cours */
@@ -1099,17 +1124,34 @@ body {
 
 .trajetcreation {
     display: flex;
+    justify-content: center;
+
+}
+
+.trajetcreation1{
+margin-top: 10em;
+background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
+display: flex;
+flex-direction: column;
+padding: 0em 2em 2em 0em;
+border-radius: 1em;
+gap: 1em;
+text-align: center;
+}
+
+.detailprofil{
+    display: flex;
+    justify-content: center;
+     margin-top: 3em;
+   
+}
+
+.profilform{
+    display: flex;
+    justify-content: center;
     flex-direction: column;
-    align-items: start;
-    gap: 1.5em;
-    font-size: 1em;
-    background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    margin: 5em 40em 5em 40em;
-    border-radius: 2em;
-    padding-right: 5em;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    text-align: center;
+    margin-top: 0.5em;
+    gap: 1em;
 }
 
 .submitbutton {

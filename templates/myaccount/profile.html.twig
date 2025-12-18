@@ -4,26 +4,87 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Détails du profile</h1>
-
-	<div class="card">
 
 
-		{{ form_start(profileform) }}
-		{{ form_row(profileform.name) }}
-		{{ form_row(profileform.lastname) }}
-		{{ form_row(profileform.email) }}
-		{{ form_row(profileform.photo) }}
-		{{ form_row(profileform.pseudo) }}
-		{{ form_end(profileform) }}
+	
+<div class="trajetcreation">
 
-		<form
-			method="post" action="{{ path('profile_show', {'id': user.id}) }}">
-			{# <input type="hidden" name="_method" value="DELETE"> #}
-			<input type="hidden" name="_token">
-			<button type="submit">Supprimer</button>
+	<div class="trajetcreation1">
+<div><h1><u>Détails du profile</u></h1></div>
+		<div class="accountext">
 
+			<div>
+				{{ form_start(profileform) }}
+			</div>
 		</div>
 
-		<a href="{{ path('myaccount') }}">Retour</a>
+		<div class="accountext">
+			<div>
+				<label for="">Prénom :</label>
+			</div>
+			<div>
+				{{ form_row(profileform.name) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Nom :</label>
+			</div>
+			<div>
+				{{ form_row(profileform.lastname) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Adresse Mail :</label>
+			</div>
+			<div>
+				{{ form_row(profileform.email) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Photo de profil :</label>
+			</div>
+			<div>
+				{{ form_row(profileform.photo) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Pseudonyme :</label>
+			</div>
+			<div>
+				{{ form_row(profileform.pseudo) }}
+			</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for=""></label>
+			</div>
+			<div>
+				{{ form_end(profileform) }}
+			</div>
+		</div>
+<div class="profilform">
+	<form method="post" action="{{ path('profile_show', {'id': user.id}) }}">
+				{# <input type="hidden" name="_method" value="DELETE"> #}
+				<input type="hidden" name="_token">
+
+		<div class="profilform">
+			<div>
+				<div class="findCheck"><a  href="{{ path('myaccount') }}">Retour</a></div>
+			</div>
+		</div>
+	</form>
+</div>
+			
+		</div>
+	</div>
+</div>
 	{% endblock %}
