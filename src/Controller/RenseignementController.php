@@ -19,15 +19,15 @@ final class RenseignementController extends AbstractController
 
 
         $carpooling = $carpoolingRepository->find($id);
-
         $currentUser = $this->getUser();
         $trajet = $carpoolingRepository->find($id);
+        $conducteur = $trajet->getUser();
 
+        
         if (!$trajet) {
             throw $this->createNotFoundException("Trajet non trouvé.");
         }
 
-        $conducteur = $trajet->getUser();
 
         // Création d'un nouveau commentaire
         $comment = new Comment();
@@ -57,13 +57,11 @@ final class RenseignementController extends AbstractController
         }
 
 
+
         $comments = $commentRepository->findBy(
-            ['driver' => $conducteur, 'trajet' => $trajet],
+            ['driver' => $conducteur],
             ['id' => 'DESC']
         );
-
-        $user = $this->getUser();
-        $comments =$commentRepository->findBy(['user'=>$user]);
 
         $notes = [];
         foreach ($comments as $c){
@@ -86,7 +84,7 @@ final class RenseignementController extends AbstractController
     }
 
     #[Route('/renseignementshow/{id}', name: 'renseignementshow', methods: ['GET'])]
-    public function commentShow(Comment $comment, CommentRepository $commentRepository): Response
+    public function commentShow( CommentRepository $commentRepository): Response
     {
 
         $user = $this->getUser();
@@ -100,7 +98,7 @@ final class RenseignementController extends AbstractController
         $average = count($notes) ? array_sum($notes) / count($notes) : 0;
 
         return $this->render('renseignement.html.twig', [
-            'comment' => $comment,
+            'comments' => $comments,
             'average' => $average,
         ]);
     }

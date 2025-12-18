@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Carpooling;
-use App\Entity\CreditTransaction;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -49,11 +48,6 @@ if ($price) {
         $qb->orderBy('MIN(t.amount)', 'DESC');
     }
 }
-
-
-
-
-
 
     if ($traveltime) {
         [$min, $max] = explode('-', $traveltime);
