@@ -155,7 +155,7 @@
 						</strong>
 					</p>
 				</div>
-				{% for t in trajets %}
+				{% for t in trajets|slice(-5) %}
 					{% set transaction = t.creditTransactions.first %}
 					<div class="historicals">
 

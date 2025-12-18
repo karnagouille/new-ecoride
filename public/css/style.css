@@ -833,7 +833,7 @@ body {
 .userprofil {
     display: flex;
     text-align: center;
-    width: 100%;
+   
 }
 
 .userprofilcurrentjourney {
@@ -847,11 +847,14 @@ body {
 .mainuser {
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
     width: 30em;
-    min-height: 100%;
+    
+    position:fixed;
     text-align: center;
     padding: 1em;
-    position: fixed;
-    margin-bottom: 3;
+    height: 50em;
+    overflow-y: auto;
+    
+    
 }
 
 .picturesprofil {
@@ -867,10 +870,7 @@ body {
 
 }
 
-.pictures {
-    max-width: 500px;
-    border-radius: 75px;
-}
+
 /* chauffeur / passager */
 
 .driverpassenger {
@@ -920,19 +920,19 @@ body {
 }
 
 .carshow {
-    padding-bottom: 2em;
+    padding-bottom: 1em;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 /* Créer un trajet / trajet en cours */
 .currentjourney {
     display: flex;
     flex-direction: column;
-    gap: 100px;
-    margin-top: 10%;
-    margin-left: 25%;
-    font-size: 30px;
+    gap: 2em;
+    margin-top: 5em;
+    margin-left: 15em;
+    font-size: 2em;
     flex-grow: 1;
 }
 
@@ -985,15 +985,15 @@ body {
 }
 
 .historicals {
-    border-radius: 10px;
+    border-radius: 0.8em;
     display: flex;
     align-items: center;
-    font-size: 20px;
-    gap: 20px;
-    padding-bottom: 20px;
-    padding-top: 30px;
-    padding-left: 100px;
-    padding-right: 100px;
+    font-size: 0.5em;
+    gap: 1em;
+    padding-bottom: 1em;
+    padding-top: 1.2em;
+    padding-left: 5em;
+
 }
 
 .hidden {
