@@ -13,7 +13,7 @@
     {% endblock %}
     {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
-   
+
     <script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
 </head>
@@ -28,7 +28,7 @@
             {% if is_granted('ROLE_EMPLOYE') %}
             <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
             {% endif %}
-            <div><a href="#" class="decoration navlink">Contact</a></div>
+            <div><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
             {% if app.user %}
             <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
             {% else %}        

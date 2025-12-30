@@ -13,6 +13,13 @@
 		<script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
 
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 
 	<div class="search">
 		<div class="tittle">

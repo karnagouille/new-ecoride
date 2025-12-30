@@ -778,9 +778,9 @@ body {
 }
 
 .accountext > div:first-child {
-    width: 250px;
+    width: 300px;
     text-align: right;
-    margin-right: 10px;
+    margin-right: 1em;
 }
 
 .buttonaccounts {

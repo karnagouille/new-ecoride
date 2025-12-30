@@ -27,7 +27,7 @@
             {% if is_granted('ROLE_EMPLOYE') %}
             <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
             {% endif %}
-            <div><a href="#" class="decoration navlink">Contact</a></div>
+            <div><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
             {% if app.user %}
             <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
             {% else %}        
@@ -39,7 +39,37 @@
 <body>
     {% block body %}
     
-    
+    {{form_start(form)}}
+    <div class="trajetcreation1">
+	
+		<div class="accountext">
+			<div>
+				<label for="">Nom</label>
+			</div>
+			<div>{{ form_widget(form.name) }}</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Adresse mail</label>
+			</div>
+			<div>{{ form_widget(form.email) }}</div>
+		</div>
+
+		<div class="accountext">
+			<div>
+				<label for="">Votre message</label>
+			</div>
+			<div>{{ form_widget(form.message) }}</div>
+		</div>
+            <div>
+				<button class="findCheck1" type="submit">Envoyer</button>
+			</div>
+			
+	</div>
+	
+{{form_end(form)}}
+
     
     
     
