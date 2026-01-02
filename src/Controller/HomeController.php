@@ -17,7 +17,7 @@ final class HomeController extends AbstractController
     ){}
 
     // Page d'accueil avec formulaire
-    #[Route('/home', name: 'home')]
+    #[Route('/ ', name: 'home')]
     public function index(Request $request, CarpoolingRepository $carpoolingRepository): Response
     {
         $form = $this->createForm(SearchCarpoolingType::class,null,[
