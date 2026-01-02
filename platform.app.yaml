@@ -1,0 +1,28 @@
+name: app
+type: php:8.2
+disk: 1024
+
+build:
+    flavor: composer
+    dependencies:
+        php:
+            ext-mongodb: '*'
+
+runtime:
+    extensions:
+        - mongodb
+
+web:
+    locations:
+        "/":
+            root: "public"
+            index: ["index.php"]
+            allow: true
+
+hooks:
+    build: |
+        set -e
+        composer install --no-dev --optimize-autoloader
+
+relationships:
+    database: "mysql:10.9" # ou 'mongodb' si tu utilises MongoDB
