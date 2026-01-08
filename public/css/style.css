@@ -32,6 +32,22 @@ body {
 }
 
 
+/* Par défaut : desktop, tout est visible */
+.nav-mobile {
+    display: none;
+}
+
+/* Menu burger uniquement sur petits écrans */
+@media screen and (max-width: 1076px) {
+    .nav-mobile {
+        display: block;
+    }
+
+}
+
+
+
+
 .titleshadow {
     text-shadow: 2px 2px 5px white;
 }
@@ -1085,6 +1101,9 @@ body {
 .hidden {
     display: none !important;
 }
+
+
+
 
 .driverhistorical {
     display: flex;
