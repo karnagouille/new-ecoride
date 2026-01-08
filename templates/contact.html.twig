@@ -1,47 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% extends 'base.html.twig' %}
 
-    {% endblock %}
-    {% block javascripts %}
-            {% block importmap %}{#{{ importmap('app') }}#}{% endblock %}
-    <script src="{{ asset('script/main.js') }}" defer></script>
+{% block title %}Covoiturage
+{% endblock %}
+
+{% block body %}
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
-</head>
-<header>
-        <nav class="container titleshadow">
-            <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
-            <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
-            <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
-            {% if is_granted('ROLE_ADMIN') %}
-            <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
-            {% endif %}
-            {% if is_granted('ROLE_EMPLOYE') %}
-            <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
-            {% endif %}
-            <div><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
-            {% if app.user %}
-            <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
-            {% else %}        
-            <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
-            {% endif %}
-
-        </nav>
-    </header>
-<body>
-    {% block body %}
     
+<div class="contactform">
     {{form_start(form)}}
-    <div class="trajetcreation1">
-	
+	<div class="contactform1">
 		<div class="accountext">
 			<div>
 				<label for="">Nom</label>
@@ -65,10 +39,10 @@
             <div>
 				<button class="findCheck1" type="submit">Envoyer</button>
 			</div>
-			
-	</div>
-	
+	</div>		
 {{form_end(form)}}
+</div>
+	
 
     
     
@@ -79,5 +53,5 @@
     
     
     {% endblock %}
-</body>
-</html>
+
+

@@ -14,13 +14,28 @@ body {
     background-size: cover;
 }
 
-.container {
+.nav-desktop {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1em;
     font-size: 2em;
 }
+
+@media screen and (min-width: 1077px) {
+.nav-mobile {
+    display: none;
+
+}
+}
+
+@media screen and (max-width: 1077px) {
+.nav-desktop {
+    display: none;
+
+}
+}
+
 
 .titleshadow {
     text-shadow: 2px 2px 5px white;
@@ -48,6 +63,7 @@ body {
 }
 
 /* BODY PAGE D'ACCUEIL*/
+@media screen and (min-width: 900px) {
 
 .search {
     background-image: url(/image/covoit.jpg);
@@ -62,6 +78,8 @@ body {
     border-radius: 100%;
     gap: 1.2em;
 }
+}
+
 
 .tittle {
     color: rgb(216, 149, 26);
@@ -242,8 +260,8 @@ body {
 }
 
 .carpoolimg {
-    width: 15em;
-    height: 13em;
+    width: 10em;
+    height: 8em;
     display: flex;
     justify-content: flex-start;
     border-radius: 1em;
@@ -284,6 +302,8 @@ button {
 .searchcar {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 5em;
     
 }
@@ -774,7 +794,7 @@ body {
 .accountext {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1em;
 }
 
 .accountext > div:first-child {
@@ -1119,6 +1139,31 @@ body {
 }
 
 /*#endregion Utilisateur*/
+
+/*#region Contact */
+
+
+.contactform{
+    display: flex;
+    justify-content: center;
+}
+
+.contactform1{
+display: flex;
+flex-direction: column;
+text-align: center;
+width: 20em;
+margin-top: 10em;
+background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
+padding: 2em 2em 2em 2em;
+border-radius: 1em;
+gap: 1em;
+}
+
+
+
+
+/*#endregion Contact */
 
 /*#region  créer un trajet*/
 

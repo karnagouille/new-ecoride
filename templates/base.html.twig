@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     {% block stylesheets %}
@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
 
     {% endblock %}
     {% block javascripts %}
@@ -19,24 +20,51 @@
 </head>
 <header>
         <nav class="container titleshadow">
-            <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
-            <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
-            {% if app.user %}
-            <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
-            {% endif %}
-            {% if is_granted('ROLE_ADMIN') %}
-            <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
-            {% endif %}
-            {% if is_granted('ROLE_EMPLOYE') %}
-            <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
-            {% endif %}
-            <div><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
-            {% if app.user %}
-            <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
-            {% else %}        
-            <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
-            {% endif %}
+            <div class="nav-desktop">
+                <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
+                <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
+                {% if app.user %}
+                <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
+                {% endif %}
+                {% if is_granted('ROLE_EMPLOYE') %}
+                <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
+                {% endif %}
+                <div><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
+                {% if app.user %}
+                <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
+                {% else %}        
+                <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
+                {% endif %}
+            </div>
+            <div class="nav-mobile">
 
+            <button id="burger-button"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg></button>
+
+                <div class="nav-links hidden" id="nav-links">
+                    <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
+                    <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
+                    {% if app.user %}
+                    <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
+                    {% endif %}
+                    {% if is_granted('ROLE_EMPLOYE') %}
+                    <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
+                    {% endif %}
+                    <div><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
+                    {% if app.user %}
+                    <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
+                    {% else %}        
+                    <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
+                    {% endif %}
+                </div>
+            </div>
         </nav>
     </header>
 <body>

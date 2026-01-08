@@ -3,6 +3,7 @@
 // Formulaire Profil voiture
 const filter = document.getElementById("filter");
 const btn = document.getElementById("btn");
+
 btn?.addEventListener("click", (event) => {
     event.preventDefault();
     filter?.classList.toggle("hidden");
@@ -46,6 +47,16 @@ document.querySelectorAll('.arrived').forEach(button => {
     });
 });
 
+// Menu Burger
+
+
+const burger = document.getElementById('burger-button');
+const nav = document.getElementById('nav-links')
+
+burger.addEventListener('click',() => {
+    nav?.classList.toggle("hidden");
+
+})
 
 
 // ---------------- GRAPH CHART ----------------
