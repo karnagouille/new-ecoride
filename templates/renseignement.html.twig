@@ -54,8 +54,7 @@
 					{% set transaction = trajet.creditTransactions.first %}
 					<div>
 						<div>
-							<strong>{{ transaction ? transaction.amount : 'Non défini' }}€
-							</strong>
+							<strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong>
 						</div>
 					</div>
 					<div>
@@ -63,10 +62,8 @@
 							<strong>{{ trajet.startAt|date('d/m/Y') }}</div>
 						</div>
 						<div>
-							<div>{{trajet.passenger}}
-								Passager(s)</div>
+							<div>{{trajet.passenger}}Passager(s)</div>
 						</div>
-
 					</div>
 
 					<div>
@@ -167,6 +164,8 @@
 			</div>
 			{{form_end(form)}}
 		{% endif %}
+
+
 		{% for comment in comments %}
 			{% if comment.statut == 'checked' %}
 				<div class="comment0">

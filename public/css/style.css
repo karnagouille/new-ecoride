@@ -22,12 +22,7 @@ body {
     font-size: 2em;
 }
 
-@media screen and (min-width: 1077px) {
-.nav-mobile {
-    display: none;
 
-}
-}
 
 @media screen and (max-width: 1077px) {
 .nav-desktop {
@@ -533,16 +528,35 @@ body {
     background-image: url(/image/covoit.jpg);
     background-size: 100%;
     background-position-y: 30%;
+    
     display: flex;
     justify-content: center;
     margin-top: 3em;
-    width: 60em;
+    max-width: 60em;
     border-radius: 2em;
     padding-top: 1em;
     text-align: center;
     padding-bottom: 1em;
     box-shadow: 2px 2px 5px;
 }
+@media screen and (max-width: 800px) {
+.information{
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
+    background-size: 100%;
+    justify-content: center;
+    margin-top: 3em;
+    max-width: 20em;
+    border-radius: 2em;
+    padding-top: 1em;
+    text-align: center;
+    padding-bottom: 1em;
+    box-shadow: 2px 2px 5px;
+}
+}
+
+
 
 .infopseudo {
     padding-right: 1em;
@@ -557,14 +571,32 @@ body {
     padding-bottom: 1em;
 }
 /*  INFORMATION SUR LE TRAJET , PRIX,DATE DE DEPART,TEMPS TRAJET, HEURE,POINT DE DEPART ET D'ARRIVEE, PREFERENCE DU PILOTE.  */
-.info {
+.info0 {
     display: flex;
-    flex-direction: column;
     gap: 1em;
     text-shadow: 2px 2px 5px white;
     padding-left: 3em;
     padding-right: 3em;
     border-radius: 2em;
+    margin-left: 2em;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    text-shadow: 2px 2px 5px white;
+    border-radius: 2em;
+}
+
+@media screen and (max-width: 800px) {
+.info0{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    text-shadow: 2px 2px 5px white;
+    border-radius: 2em;
+}
 }
 
 .pricetime {
@@ -572,6 +604,15 @@ body {
     justify-content: space-between;
     font-size: 1.3em;
     gap: 3em;
+}
+
+@media screen and (max-width: 800px) {
+.pricetime {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3em;
+    gap: 10px
+}
 }
 
 .info2 {
@@ -665,8 +706,8 @@ body {
     padding-left: 1em;
     padding-right: 2em;
     background-image: url(/image/comment.jpg);
-    background-size: 100%;
     background-position-y: 30%;
+    background-position: cover;
 
     background-repeat: no-repeat;
 
