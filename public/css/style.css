@@ -460,6 +460,8 @@ a {
     margin-top: 1em;
 }
 
+
+
 .reservedbutton {
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
     font-size: 1em;
@@ -1057,12 +1059,24 @@ body {
 .backgroundhistorical {
     background-image: url(/image/covoit.jpg);
     background-size: cover;
-    width: 800px;
+    
     border: 1px solid rgb(153, 102, 255);
     box-shadow: 0 4px 10px;
     border-radius: 20px;
 }
 
+
+@media screen and (max-width: 800px) {
+    .backgroundhistorical {
+    display: flex; 
+       
+    background-image: url(/image/covoit.jpg);
+    background-size: cover;
+    border: 1px solid rgb(153, 102, 255);
+    box-shadow: 0 4px 10px;
+    border-radius: 20px;
+}
+}
 .historical {
     font-size: 40px;
     width: 1000px;
@@ -1115,6 +1129,20 @@ body {
     align-items: stretch;
     padding: 1em 3em 1em 3em;
 }
+
+@media screen and (max-width: 800px) {
+    .profilhistorical {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    align-items: center;  
+    text-align: center; 
+    padding: 1em 3em 1em 3em;
+}
+}
+
+
 
 .priceplacehistorical {
     font-size: 1.2em;
