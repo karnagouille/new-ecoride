@@ -17,7 +17,9 @@ class ContactType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
-            ->add('message', TextareaType::class);
+            ->add('message', TextareaType::class,[
+                'attr' =>['class'=> 'width-message']
+            ]);
         ;
     }
 

@@ -12,7 +12,12 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 		<script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
-    
+
+	<div class ="titlecontact">
+		<h1><strong><u>Contactez notre support</u></strong></h1>
+		<p>Vous avez une question ou rencontrez un problème ?</p>
+		<p> Remplissez ce formulaire et notre équipe vous répondra dans les plus brefs délais.</p>
+	</div>
 <div class="contactform">
     {{form_start(form)}}
 	<div class="contactform1">
@@ -34,11 +39,14 @@
 			<div>
 				<label for="">Votre message</label>
 			</div>
-			<div>{{ form_widget(form.message) }}</div>
-		</div>
-            <div>
+			<div >{{ form_widget(form.message) }}</div>
+		</div >
+		<div class = "button-send">
+			<div>
 				<button class="findCheck1" type="submit">Envoyer</button>
 			</div>
+		</div>
+
 	</div>		
 {{form_end(form)}}
 </div>
