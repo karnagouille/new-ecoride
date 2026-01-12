@@ -39,6 +39,17 @@ if (profil) {
     }, false);
 }
 
+
+
+//bouton profil utilisateur
+
+const imgprofil = document.getElementById("imgprofil");
+const user = document.getElementById("profil");
+
+imgprofil?.addEventListener('click',()=>{
+user?.classList.toggle("hidden")
+});
+
 // Boutons “arrived”
 document.querySelectorAll('.arrived').forEach(button => {
     button.addEventListener('click', (event) => {

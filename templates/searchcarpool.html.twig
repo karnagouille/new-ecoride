@@ -72,20 +72,19 @@
 		<div class="reserved">
 			<div class="backgroundhistorical">
 				<div class="profilhistorical">
-					<div class="profil">
 
+					<div class="profil">
 						<div>
 							<div class="pseudo">{{trajet.user.pseudo}}</div>
 						</div>
-
 						<div>
 							<div class="userimgsearch">
 								<a href="{{ path('renseignement', {'id': trajet.id}) }}">
-									<img class="picturesprofilsearch" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil"></a>
+								<img class="picturesprofilsearch" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil"></a>
 							</div>
 						</div>
-
 					</div>
+
 					<div class="destination">
 						<div>
 							<div class="time">

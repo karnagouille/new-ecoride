@@ -26,11 +26,14 @@
 		</nav>
 	</header>
 
-	<div class="userprofil">
-		<div class="mainuser">
+</div>
+<button class="buttonprofil" id="imgprofil"><img class="picturesprofil2" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil"></button>
+	<div class="userprofil" >
+	
+
+		<div class="mainuser" id="profil">
 
 			<div><h1>{{user.pseudo}}</h1></div>
-			<img class="picturesprofil" src="{{ asset('uploads/' ~ user.photo) }}" alt="Photo de profil">
 			<div>{{user.lastname}},{{user.name}}</div>
 			<div>{{user.email}}</div>
 			<div class="modify">
@@ -155,6 +158,9 @@
 						</strong>
 					</p>
 				</div>
+
+
+
 				{% for t in trajets|slice(-5) %}
 					{% set transaction = t.creditTransactions.first %}
 					<div class="historicals">
@@ -162,6 +168,17 @@
 						<div href="/ecoridee/HTML/renseignement.html" class="reserved">
 							<div class="backgroundhistorical">
 								<div class="profilhistorical">
+
+									<div class="profil">
+										<div>
+											<div class="pseudo">{{t.user.pseudo}}</div>
+										</div>
+										<div>
+											<div class="userimgsearch">
+													<img class="picturesprofilsearch" src="{{ asset('uploads/' ~ t.user.photo) }}" alt="Photo de profil"></a>
+											</div>
+										</div>
+									</div>
 
 									<div class="destination">
 										<div>
@@ -192,7 +209,7 @@
 												</div>
 											</div>
 
-											<div>------------------------------------------------------------</div>
+											<div>--------------------</div>
 											<div class="startfinish">
 												<div>
 													<p>

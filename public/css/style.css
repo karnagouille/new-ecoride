@@ -931,8 +931,23 @@ body {
 .userprofil {
     display: flex;
     text-align: center;
+    
 }
 
+
+
+.buttonprofil{
+    padding: 0;          
+    border: none;         
+    background: none; 
+    position: fixed;
+    z-index: 2000;
+    
+   
+}
+.buttonprofil:hover {
+    transform: scale(1.1);
+}
 .modify{
     display: flex;
     justify-content: center;
@@ -950,22 +965,42 @@ body {
 .mainuser {
     background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
     width: 30em;
+    position: fixed;
+    text-align: center;
+    padding: 1em;
+    height: 50em;
+    overflow-y: auto;
+    border-radius: 2em;
+    position: fixed;
     
-    position:fixed;
+    
+}
+@media screen and (max-width: 1440px) {
+    .mainuser {
+    background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
+    width: 30em;
+    z-index: 1000;
     text-align: center;
     padding: 1em;
     height: 50em;
     overflow-y: auto;
     
     
-}
+}}
+
 
 .picturesprofil {
     width: 6em;
     border-radius: 5em;
-
-    
 }
+.picturesprofil2{
+    width: 10em;
+    border-radius: 5em;
+    box-shadow: 10px 5px 5px rgb(20, 20, 20);
+
+}
+
+
 
 .picturesprofilsearch {
     width: 5em;
@@ -1031,6 +1066,7 @@ body {
 
 /* Créer un trajet / trajet en cours */
 .currentjourney {
+    position: static;
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -1039,6 +1075,19 @@ body {
     font-size: 2em;
     flex-grow: 1;
 }
+@media screen and (max-width: 1440px) {
+.currentjourney {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin-top: 5em;
+    margin-left:0em;
+    font-size: 2em;
+    flex-grow: 1;
+}
+}
+
 
 .createlook:hover {
     color: rgb(48, 219, 57);
@@ -1052,6 +1101,7 @@ body {
     border-radius: 20px;
     color: rgb(252, 251, 250);
     padding: 5px 10px 5px 10px;
+    box-shadow: 5px 5px 5px rgb(243, 241, 241);
 }
 
 /* Historique */
@@ -1059,7 +1109,7 @@ body {
 .backgroundhistorical {
     background-image: url(/image/covoit.jpg);
     background-size: cover;
-    
+    width: 800px;
     border: 1px solid rgb(153, 102, 255);
     box-shadow: 0 4px 10px;
     border-radius: 20px;
@@ -1068,8 +1118,7 @@ body {
 
 @media screen and (max-width: 800px) {
     .backgroundhistorical {
-    display: flex; 
-       
+
     background-image: url(/image/covoit.jpg);
     background-size: cover;
     border: 1px solid rgb(153, 102, 255);
@@ -1080,10 +1129,19 @@ body {
 .historical {
     font-size: 40px;
     width: 1000px;
-    padding-left: 100px;
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 800px) {
+.historical {
+    font-size: 40px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+}
+
 .historical2 {
     font-size: 40px;
     width: 1000px;
@@ -1112,6 +1170,21 @@ body {
 
 }
 
+
+@media screen and (max-width: 800px) {
+
+.historicals {
+    border-radius: 0.8em;
+    
+    font-size: 0.5em;
+    gap: 1em;
+    padding-bottom: 1em;
+    padding-top: 1.2em;
+    padding-left: 5em;
+
+}
+}
+
 .hidden {
     display: none !important;
 }
@@ -1125,22 +1198,12 @@ body {
 
 .profilhistorical {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: stretch;
     padding: 1em 3em 1em 3em;
 }
 
-@media screen and (max-width: 800px) {
-    .profilhistorical {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    align-items: center;  
-    text-align: center; 
-    padding: 1em 3em 1em 3em;
-}
-}
+
 
 
 
@@ -1352,7 +1415,10 @@ text-align: center;
     margin: 5em 0em 3em 3em;
     font-family: "Roboto Slab", serif;;
 }
-
+.titlecanvas{
+    display: flex;
+    flex-direction: column;
+}
 .canvas {
     display: flex;
     justify-content: center;
