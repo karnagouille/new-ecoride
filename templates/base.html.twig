@@ -40,27 +40,27 @@
                 {% endif %}
             </div>
 
-            <div class="nav-mobile">
+            <div class="nav-mobile ">
 
-            <button  id="burger-button"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+            <button   id="burger-button"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
             </svg></button>
 
-                <div class="nav-links hidden" id="nav-links">
-                    <div><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
-                    <div><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
+                <div class=" hidden" id="nav-links">
+                    <div class="nav-title"><a href="{{ path('home') }}" class="decoration navlink">Accueil</a></div>
+                    <div  class="nav-title"><a href="{{ path('searchcarpool') }}" class="decoration navlink">Covoiturage</a></div>
                     {% if app.user %}
-                    <div><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
+                    <div  class="nav-title"><a href="{{ path('myaccount') }}" class="decoration navlink">Mon compte</a></div>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                    <div><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
+                    <div  class="nav-title"><a href="{{ path('admin') }}" class="decoration navlink">Admin</a></div>
                     {% endif %}
                     {% if is_granted('ROLE_EMPLOYE') %}
-                    <div><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
+                    <div  class="nav-title"><a href="{{ path('employecomment') }}" class="decoration navlink">Gestion</a></div>
                     {% endif %}
-                    <div><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
+                    <div  class="nav-title"><a href="{{ path('contact') }}" class="decoration navlink">Contact</a></div>
                     {% if app.user %}
-                    <div><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
+                    <div  class="nav-title"><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
                     {% else %}        
                     <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
                     {% endif %}

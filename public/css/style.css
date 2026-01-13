@@ -14,12 +14,15 @@ body {
     background-size: cover;
 }
 
+
+
 .nav-desktop {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1em;
     font-size: 2em;
+    
 }
 
 
@@ -27,7 +30,8 @@ body {
 @media screen and (max-width: 1077px) {
 .nav-desktop {
     display: none;
-
+    text-shadow: 2px 2px 5px white;
+    
 }
 }
 
@@ -35,17 +39,26 @@ body {
 /* Par défaut : desktop, tout est visible */
 .nav-mobile {
     display: none;
+    font-size: 2em;
+    position:initial;
+    
 }
 
-/* Menu burger uniquement sur petits écrans */
+/* Menu burger */
 @media screen and (max-width: 1076px) {
     .nav-mobile {
-        display: block;
+    display: block;
+    max-width: 7em;
+    padding: 1em 1em 1em 0em;
+    border-radius: 1em;
+    
     }
 
 }
 
-
+.nav-title{
+    margin-top: 0.5em;
+}
 
 
 .titleshadow {
@@ -54,6 +67,9 @@ body {
 .navlink {
     text-align: center;
 }
+
+
+
 .navlink:hover {
     color: rgb(48, 219, 57);
     transition: all 0.3s ease-out;
@@ -88,6 +104,7 @@ body {
     height: 60em;
     border-radius: 100%;
     gap: 1.2em;
+    margin-top: 2em;
 }
 }
 
