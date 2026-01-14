@@ -173,15 +173,32 @@ body {
     width: 10em;
     height: 3em;
     border-radius: 3em;
-    background: linear-gradient(rgb(69, 157, 216), rgb(247, 51, 3));
+    background: linear-gradient(rgb(218, 215, 207), rgb(247, 51, 3));
     box-shadow: 0 4px 10px;
     margin-top: 1em;
     font-size: 1em;
 }
 
-.findCheck:active {
+.findCheck:active{
     transform: scale(0.9);
-    color: #ffffff;
+    width: 10em;
+    height: 3em;
+    border-radius: 3em;
+    background: linear-gradient(rgb(242, 248, 242), rgb(11, 211, 21));
+    box-shadow: 0 4px 10px;
+    margin-top: 1em;
+    font-size: 1em;
+}
+
+.findCheck{
+    transform: scale(0.9);
+    width: 10em;
+    height: 3em;
+    border-radius: 3em;
+    background: linear-gradient(rgb(242, 248, 242), rgb(11, 211, 21));
+    box-shadow: 0 4px 10px;
+    margin-top: 1em;
+    font-size: 1em;
 }
 
 /* AVANTAGES */
@@ -741,15 +758,12 @@ body {
     padding-left: 1em;
     padding-right: 2em;
     background-image: url(/image/comment.jpg);
-    background-position-y: 30%;
+    background-position-y: 70%;
     background-position: cover;
-
     background-repeat: no-repeat;
-
     gap: 2em;
-    width: 50em;
+    width: 60em;
     padding-top: 1em;
-
     text-align: center;
     border-radius: 1em;
     box-shadow: 2px 2px 5px;
@@ -1417,11 +1431,12 @@ text-align: center;
 
 .employecomment2 {
     display: flex;
-    width: 45em;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     background-image: url(/image/controle.jpg);
     background-size: cover;
-    color: #f3f7f4;
+    color: #ebe9e6;
+    text-shadow: 2px 2px 5px rgb(214, 166, 8);
     gap: 1em;
     padding-left: 1em;
     padding-right: 1em;
@@ -1430,6 +1445,15 @@ text-align: center;
     border-radius: 1em;
     box-shadow: 2px 2px 5px;
 }
+
+.azert{
+    width: 50em;
+}
+.employecomment2 div.comment-text {
+    flex: 1 1 auto;   /* prend l’espace restant */
+    min-width: 0;     /* très important pour que text-overflow fonctionne dans flex */
+}
+
 
 .checkbutton {
     border-radius: 30px;

@@ -31,17 +31,19 @@
 			<div class="employecomment2">
 				<div class="comment">
 					<div>
-						<div><img class="pictureemploye" src="{{ asset('uploads/' ~ c.user.photo) }}" alt="Photo de profil"></div>
+						<div>
+							<img class="pictureemploye" src="{{ asset('uploads/' ~ c.user.photo) }}" alt="Photo de profil">
+						</div>
 						<div>
 							<p>
 								<strong>{{ c.user.pseudo }}</strong>
 							</p>
 						</div>
 					</div>
-					<div>
-						<div>{{c.comment}}</div>
-					</div>
 				</div>
+					<div class="azert">
+						<p>{{c.comment}}</p>
+					</div>
 
 				<div class="notecomment">
 					<div>
@@ -60,14 +62,13 @@
 				</form>
 			</div>
 
-			{% for comment in comments %}
-				<form
-					method="post" action="{{ path('remove', {'id': comment.id}) }}">
-					{# <input type="hidden" name="_method" value="DELETE"> #}
-					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+			{% if c.statut == 'not_checked' %}
+				<form method="post" action="{{ path('remove', {'id': c.id}) }}">
+					
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
 					<button type="submit" class="finddelete">Supprimer</button>
 				</form>
-			{% endfor %}
+			{% endif %}
 		</div>
 	{% endfor %}
 

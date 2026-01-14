@@ -62,7 +62,7 @@
                     {% if app.user %}
                     <div  class="nav-title"><a href="{{ path('app_logout') }}" class="decoration navlink">Déconnexion</a></div>
                     {% else %}        
-                    <div><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
+                    <div class="nav-title"><a href="{{ path('app_login') }}" class="decoration navlink">Connexion</a></div>
                     {% endif %}
                 </div>
             </div>

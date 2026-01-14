@@ -145,7 +145,7 @@ final class MyaccountController extends AbstractController
 
 
     #[Route('/car/{slug}', name: 'car_show')]
-public function show(Car $car, EntityManagerInterface $em, string $slug): Response
+public function show( EntityManagerInterface $em, string $slug): Response
 {
     $car = $em->getRepository(Car::class)->findOneBy(['slug' => $slug]);
 
