@@ -69,7 +69,18 @@
             </div>
         </nav>
     </header>
-
+    <main role="main">
     {% block body %}{% endblock %}
+    </main>
+{% if showFooter is not defined or showFooter %}
+<footer>
+    <div class="footer">
+        <p><strong>Ecoride@gmail.com</strong></p>
+        <a href="{{ path('legalnotice') }}">Mentions Légales</a>
+    </div>
+</footer>
+{% endif %}
+
+    
 </body>
 </html>
