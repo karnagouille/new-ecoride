@@ -179,27 +179,10 @@ body {
     font-size: 1em;
 }
 
-.findCheck:active{
-    transform: scale(0.9);
-    width: 10em;
-    height: 3em;
-    border-radius: 3em;
-    background: linear-gradient(rgb(242, 248, 242), rgb(11, 211, 21));
-    box-shadow: 0 4px 10px;
-    margin-top: 1em;
-    font-size: 1em;
-}
 
-.findCheck{
-    transform: scale(0.9);
-    width: 10em;
-    height: 3em;
-    border-radius: 3em;
-    background: linear-gradient(rgb(242, 248, 242), rgb(11, 211, 21));
-    box-shadow: 0 4px 10px;
-    margin-top: 1em;
-    font-size: 1em;
-}
+
+
+
 
 /* AVANTAGES */
 
@@ -974,7 +957,7 @@ body {
     position: fixed;
     z-index: 2000;
     
-   
+
 }
 .buttonprofil:hover {
     transform: scale(1.1);
@@ -1184,9 +1167,9 @@ body {
 
 .journey {
     display: flex;
+    margin-left: 6em;
     gap: 100px;
-    justify-content: start;
-    margin-left: 300px;
+
 }
 
 .historicals {
@@ -1320,6 +1303,9 @@ body {
     color: #ffffff;
 }
 
+/* Modification form voiture */
+
+
 /*#endregion Utilisateur*/
 
 /*#region Contact */
@@ -1387,14 +1373,14 @@ text-align: center;
 .detailprofil{
     display: flex;
     justify-content: center;
-     margin-top: 3em;
-   
+    margin-top: 3em;
+
 }
 
 .profilform{
     display: flex;
     justify-content: center;
-    flex-direction: column;
+
     margin-top: 0.5em;
     gap: 1em;
 }

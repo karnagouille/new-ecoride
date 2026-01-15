@@ -17,17 +17,17 @@ class SearchCarpoolingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     { $builder
             ->add('startTown', TextType::class, [
-                'label' => false,
+                'label' => 'Ville de départ',
                 'attr' => ['placeholder' => 'Départ', 'class' => 'input'],
                 'required'=>true,
             ])
             ->add('endTown', TextType::class, [
-                'label' => false,
+                'label' => 'Ville d’arrivée',
                 'attr' => ['placeholder' => 'Destination', 'class' => 'input'],
                 'required'=>true,
             ])
             ->add('passenger', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Nombre de passagers',
                 'required'=>false,
                 'choices' => [
                     '1 passager' => 1,
@@ -39,14 +39,14 @@ class SearchCarpoolingType extends AbstractType
                 'required'=>true,
             ])
             ->add('startAt', DateType::class, [
-                'label' => false,
+                'label' => 'Date de départ',
                 'widget' => 'single_text',
                 'attr' => ['class' => 'inputdate'],
                 'required'=>false,
             ])
 
             ->add('hour', TimeType::class, [
-                'label' => false,
+                'label' => 'Heure de départ',
                 'required'=>false,
                 'attr' => ['placeholder' => 'Heure de départ', 'class' => 'order2']
             ])
@@ -60,7 +60,7 @@ class SearchCarpoolingType extends AbstractType
             ]])
 
             ->add('traveltime', ChoiceType::class, [
-                'label' => false,
+                'label' => 'temps de trajet',
                 'required'=>false,
                 'mapped' => false,
                 'choices' => [
@@ -80,7 +80,7 @@ class SearchCarpoolingType extends AbstractType
                 'attr' => ['class' => 'input']
             ])
             ->add('electric', ChoiceType::class, [
-                'label' => false,
+                'label' => 'electrique',
                 'required'=>false,
                 'multiple' => false,
                 'mapped' => false,
@@ -90,7 +90,7 @@ class SearchCarpoolingType extends AbstractType
                 ]
             ])
             ->add('note', ChoiceType::class, [
-                'label' => false,
+                'label' => 'note',
                 'required'=>false,
                 'multiple' => false,
                 'mapped' => false,

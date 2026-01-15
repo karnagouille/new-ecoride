@@ -10,6 +10,7 @@
 
 	<div class="trajetcreation1">
 		<h1>Détails de la voiture</h1>
+		<div class ="formcar">
 		{{ form_start(form) }}
 		<div class="accountext">
 			<div>
@@ -76,6 +77,7 @@
 		<br>
 
 		{{ form_end(form) }}
+		</div>
 	<div class="profilform">
 			<form
 				method="post" action="{{ path('car_remove', {'id': car.id}) }}">
@@ -84,16 +86,16 @@
 
 
 			<div class="profilform">
-				
 				<div>
 					<button type="submit" class="find">Supprimer</button>
 				</div>
 			</div>
+				
 
 			<div class="profilform">
 				
 				<div>
-					<a class="findCheck" href="{{ path('myaccount') }}">Retour</a>
+					<a class="findCheck1" href="{{ path('myaccount') }}"><strong>Retour</strong></a>
 				</div>
 			</div>
 				

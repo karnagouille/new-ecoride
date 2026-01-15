@@ -29,7 +29,7 @@
 
 		<div class="searchcar">
 			<div>
-				{{ form_start(form) }}
+				{{ form_start(form, {'attr': {'role': 'search'}}) }}
 
 				{{form_widget(form.startTown) }}
 				{{ form_widget(form.endTown) }}
@@ -38,7 +38,7 @@
 				{{ form_widget(form.hour) }}
 			</div>
 			<div>
-				<button class="findCheck1" type="submit">Rechercher</button>
+				<button class="findCheck1" type="submit" >Rechercher</button>
 			</div>
 
 			{{ form_end(form, {'render_rest': false}) }}

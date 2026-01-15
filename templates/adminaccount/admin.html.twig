@@ -21,7 +21,7 @@
 	{% endblock %}
 <div class="searchmail">
 
-	{{ form_start(form) }}
+	{{ form_start(form, {'attr': {'role': 'search'}}) }}
 	<div>
 	<label for=""><strong>Rechercher un mail</strong></label>
 		<strong>{{ form_widget(form.email) }} </strong>
