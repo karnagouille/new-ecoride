@@ -567,12 +567,10 @@ body {
 .information {
     background-image: url(/image/covoit.jpg);
     background-size: 100%;
-    background-position-y: 30%;
-    
+    width: 59em;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 3em;
-    max-width: 60em;
     border-radius: 2em;
     padding-top: 1em;
     text-align: center;
@@ -587,7 +585,7 @@ body {
     background-size: 100%;
     justify-content: center;
     margin-top: 3em;
-    max-width: 20em;
+
     border-radius: 2em;
     padding-top: 1em;
     text-align: center;
@@ -665,17 +663,23 @@ body {
     font-size: 2em;
 }
 
+
+.hour-information{
+    font-size: 2em;
+}
 .preference {
     padding-bottom: 40px;
 }
 
 /* NOMBRE DE PLACE DISPONIBLE , PHOTO DU VEHICULE AVEC LA MARQUE LE MODELE ET LE SYMBOLE ECO PRESENT OU NON */
 .car {
+    display: flex;
+    gap: 3em;
     padding-top: 20px;
     text-align: center;
     text-shadow: 2px 2px 5px white;
     padding-left: 2em;
-    padding-top: 100px;
+
 }
 
 .carimg2 {

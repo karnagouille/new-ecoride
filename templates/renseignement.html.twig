@@ -53,30 +53,21 @@
 
 					{% set transaction = trajet.creditTransactions.first %}
 					<div>
-						<div>
-							<strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong>
-						</div>
-					</div>
-					<div>
 						<div style="font-size:25px;">
 							<strong>{{ trajet.startAt|date('d/m/Y') }}</div>
 						</div>
 						<div>
 							<div>{{trajet.passenger}}Passager(s)</div>
 						</div>
+						
 					</div>
 
 					<div>
 						<div class="info2">
+						
 							<div>
 								<div>
-									<u>
-										<strong>Départ :
-											{{ trajet.hour ? trajet.hour|date('H:i') : '' }}
-											de
-											{{trajet.startTown}}
-										</strong>
-									</u>
+									<u><strong>Départ :{{trajet.startTown}}</strong></u>
 								</div>
 							</div>
 						</div>
@@ -116,22 +107,20 @@
 
 
 				<div class="car">
+
 					<div>
-						<strong>Voiture :</strong>
+						<div class="hour-information"><strong> {{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong></div>
 					</div>
+				
+					
 					<div class="brand">
-						<div>
-							<strong>Model:
-								{{ carpooling.car.model }}</strong>
-						</div>
-						<div>
-							<strong>Couleur:
-								{{ carpooling.car.color }}</strong>
-						</div>
-						<div>
-							<strong>Energie:
-								{{ carpooling.car.energy }}</strong>
-						</div>
+						<div><strong>Voiture :</strong></div>
+						<div><strong>Model:{{ carpooling.car.model }}</strong></div>
+						<div><strong>Couleur:{{ carpooling.car.color }}</strong></div>
+						<div><strong>Energie:{{ carpooling.car.energy }}</strong></div>
+					</div>
+					<div>
+						<div class="hour-information"><strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong></div>
 					</div>
 				</div>
 			</div>
