@@ -13,118 +13,73 @@
 		<script src="{{ asset('script/main.js') }}" defer></script>
 	{% endblock %}
 
+<div class="reserved">
+<div class="backgroundhistorical">
+				<div class="profilhistorical">
 
-	<div class="info0">
-		<div class="information">
-
-			<div class="infopseudo">
-
-				<div class="pseudo">
-					<div>
+					<div class="profil">	
 						<div>
-							<strong>{{conducteur.pseudo}}</strong>
-						</div>
-					</div>
-					<div class="places">
-						<div>
-							<p>
-								<strong>{{conducteur.lastname}}/{{conducteur.name}}</strong>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<div><img class="userimg2" src="{{ asset('uploads/' ~ conducteur.photo) }}" alt="Photo de profil"></div>
-				</div>
-
-				<div>
-					<p>
-						<strong>
-							Note :
-							{{ average|round(2) }}/5</strong>
-					</p>
-				</div>
-
-			</div>
-
-			<div class="info">
-				<div class="pricetime">
-
-					{% set transaction = trajet.creditTransactions.first %}
-					<div>
-						<div style="font-size:25px;">
-							<strong>{{ trajet.startAt|date('d/m/Y') }}</div>
-						</div>
-						<div>
-							<div>{{trajet.passenger}}Passager(s)</div>
+							<div class="pseudo">{{trajet.user.pseudo}}</div>
 						</div>
 						
-					</div>
-
-					<div>
-						<div class="info2">
-						
-							<div>
-								<div>
-									<u><strong>Départ :{{trajet.startTown}}</strong></u>
-								</div>
-							</div>
+						<div class="userimgsearch">
+							<div><a href="{{ path('renseignement', {'id': trajet.id}) }}"></div>
+							<div><img class="picturesprofilsearch" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil"></a></div>
 						</div>
 
-						<div class="info2">
-							<div>
-								<div>
-									<u>
-										<strong>Arrivée :
-											{{trajet.endTown}}</strong>
-									</u>
-								</div>
-							</div>
-						</div>
-
-						<div class="info2">
-							<div>
-								<div>
-									<em>
-										<strong>Durée environ
-											{{trajet.traveltime}}H
-										</strong>
-									</em>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="preference">
 						<div>
-							<strong>
-								Préférence :
-								{{ carpooling.car.preference }}</strong>
+							<p><strong>Note : {{ average|round(2) }}/5</strong></p>
 						</div>
 					</div>
-				</div>
-
-
-				<div class="car">
-
-					<div>
-						<div class="hour-information"><strong> {{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong></div>
-					</div>
-				
 					
+					<div class="gapcollum2">
+						<div class="destination">
+								<div></p><strong>{{ trajet.startAt|date('d/m/Y') }}</strong></p></div>
+								<div><p><em>Durée environ {{ trajet.travelTime }} H</em></p></div>
+						</div>
+							
+						<div class="startfinish">
+							<div><p><strong>Départ : {{ trajet.startTown }}</strong></p></div>
+						</div>
+
+						<div>-----------------------------------</div>
+
+						<div class="startfinish">
+							<div>
+								<p><strong>Arrivée : {{ trajet.endTown }}</strong></p>
+							</div>
+						</div>
+
+						<div class="preference">
+							<div>
+								<div><strong>Préférence : {{ carpooling.car.preference }}</strong></div>
+							</div>
+						</div>
+					</div>	
+	
+						<div class="priceplacehistorical">
+							<div><strong>{{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong>{% if trajet.electric %} <img class="eleccar" src="{{ asset('image/voiture-electrique.png') }}" alt="icone voiture electrique">
+							{% endif %}
+							<p><strong>{{ trajet.passenger }} place(s)</strong></p>
+							</div>
+
+							
 					<div class="brand">
 						<div><strong>Voiture :</strong></div>
-						<div><strong>Model:{{ carpooling.car.model }}</strong></div>
-						<div><strong>Couleur:{{ carpooling.car.color }}</strong></div>
-						<div><strong>Energie:{{ carpooling.car.energy }}</strong></div>
+						<div><strong>Model : {{ carpooling.car.model }}</strong></div>
+						<div><strong>Couleur : {{ carpooling.car.color }}</strong></div>
+						<div><strong>Energie : {{ carpooling.car.energy }}</strong></div>
 					</div>
-					<div>
-						<div class="hour-information"><strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong></div>
-					</div>
+
+							{% set transaction = trajet.creditTransactions.first %}
+							<div>
+								<p><strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong></p>
+							</div>
+						</div>
+
 				</div>
 			</div>
-		</div>
+</div>
 		<div class="titlecomment">
 			<div>
 				<strong>COMMENTAIRES</strong>

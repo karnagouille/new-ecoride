@@ -302,7 +302,7 @@ body {
     font-size: 2em;
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    gap: 2em;
     align-items: center;
 }
 footer {
@@ -310,13 +310,10 @@ footer {
     bottom: 0;
     width: 100%;
 }
-.legalnotice {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Roboto Slab", serif;
-    text-align: center;
-    margin: 5em 20em 5em 20em;
+
+.legalnotice:hover {
+    color: rgb(69, 157, 216);
+    transition: all 0.3s ease-out;
 }
 
 /*#endregion index*/
@@ -465,6 +462,14 @@ a {
     padding-right: 1em;
 }
 
+@media screen and (max-width: 700px) {
+.profil {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-right: 1em;
+}}
 .pseudo {
     display: flex;
     flex-direction: column;
@@ -479,7 +484,7 @@ a {
     gap: 1em;
     padding-bottom: 1em;
     justify-content: center;
-    margin-top: 1em;
+    margin-top: 5em;
 }
 
 
@@ -506,7 +511,7 @@ a {
 }
 
 .destination {
-    margin-bottom: 25px;
+    margin-bottom: 1em;
     text-shadow: 2px 2px 5px white;
     flex-direction: column;
     align-items: center;
@@ -548,6 +553,35 @@ a {
     padding-right: 10px;
 }
 
+.reservedbutton-mobile1{
+    display: block;
+}
+
+@media screen and (max-width: 700px) {
+.reservedbutton-mobile1{
+    justify-content: center;
+    display: none;
+    
+}}
+
+.reservedbutton-mobile2{
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+.reservedbutton-mobile2{
+    justify-content: center;
+    display: block;
+    display: grid;
+    
+}}
+
+.searchcarform{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
 /*#endregion covoiturage*/
 
 /*#region Renseignement */
@@ -562,6 +596,7 @@ body {
 .info0 {
     display: flex;
     justify-content: center;
+    
 }
 
 .information {
@@ -581,8 +616,9 @@ body {
 .information{
     display: flex;
     flex-direction: column;
-    background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
-    background-size: 100%;
+    background-image: url(/image/covoit.jpg);
+    background-position: cover;
+    
     justify-content: center;
     margin-top: 3em;
 
@@ -1136,6 +1172,7 @@ body {
     border: 1px solid rgb(153, 102, 255);
     box-shadow: 0 4px 10px;
     border-radius: 20px;
+    text-align: center;
 }
 
 
@@ -1225,22 +1262,46 @@ body {
     align-items: stretch;
     padding: 1em 3em 1em 3em;
 }
+@media screen and (max-width: 700px) {
+.profilhistorical {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: stretch;
+    padding: 1em 3em 1em 3em;
+}}
 
 
+.gapcollum{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.gapcollum{
+    flex-direction: column;
+    gap: 1em;
+}
 
 
 
 .priceplacehistorical {
-    font-size: 1.2em;
     display: flex;
     flex-direction: column;
-
+    font-size: 1.2em;
     justify-content: space-between;
-
-    padding-left: 2em;
     text-shadow: 2px 2px 5px white;
 }
 
+@media screen and (max-width: 700px) {
+.priceplacehistorical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2em;
+    justify-content: space-between;
+    padding-left: 2em;
+    text-shadow: 2px 2px 5px white;
+}}
 .reservedstartstop {
     display: flex;
     font-size: 20px;

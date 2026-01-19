@@ -75,8 +75,9 @@
 {% if showFooter is not defined or showFooter %}
 <footer>
     <div class="footer">
-        <p><strong>Ecoride@gmail.com</strong></p>
-        <a href="{{ path('legalnotice') }}">Mentions Légales</a>
+        <div><p><strong>Ecoride@gmail.com</strong></p></div>
+        
+        <div class="legalnotice"><strong><a href="{{ path('legalnotice') }}">Mentions Légales</a></strong></div>
     </div>
 </footer>
 {% endif %}

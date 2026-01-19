@@ -21,15 +21,19 @@
 	</header>
 
 
-	<div class="searchcar">
+	<div class="searchcarform">
 		<div class="searchcar">
 			{{ form_start(form, {'attr': {'role': 'search'}}) }}
-
 			{{form_widget(form.startTown) }}
 			{{ form_widget(form.endTown) }}
 			{{ form_widget(form.passenger) }}
 			{{ form_widget(form.startAt) }}
 			{{ form_widget(form.hour) }}
+		</div>
+			
+			
+			
+			
 
 
 			<div class="order1">
@@ -63,93 +67,88 @@
 
 			{{ form_end(form) }}
 		</div>
-	</div>
+</div>		
 
 </div>
 {% for trajet in trajets %}
 	{% if trajet.statut == constant('App\\Entity\\Carpooling::STATUT_RIEN')or trajet.statut == constant('App\\Entity\\Carpooling::STATUT_EN_COURS') %}
-
+	
+	<div class="collumn">
 		<div class="reserved">
+
 			<div class="backgroundhistorical">
 				<div class="profilhistorical">
 
-					<div class="profil">
+					<div class="profil">	
 						<div>
 							<div class="pseudo">{{trajet.user.pseudo}}</div>
 						</div>
-						<div>
-							<div class="userimgsearch">
-								<a href="{{ path('renseignement', {'id': trajet.id}) }}">
-								<img class="picturesprofilsearch" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil"></a>
+						
+						<div class="userimgsearch">
+							<div><a href="{{ path('renseignement', {'id': trajet.id}) }}"></div>
+							<div><img class="picturesprofilsearch" src="{{ asset('uploads/' ~ trajet.user.photo) }}" alt="Photo de profil"></a></div>
+						</div>
+						
+					</div>
+					
+					<div class="gapcollum">
+						<div class="destination">
+								<div></p><strong>{{ trajet.startAt|date('d/m/Y') }}</strong></p></div>
+								<div><p><em>Durée environ{{ trajet.travelTime }}H</em></p></div>
+						</div>
+							
+						<div class="startfinish">
+							<div><p><strong>Départ :{{ trajet.startTown }}</strong></p></div>
+						</div>
+
+						<div>-----------------------------------</div>
+
+						<div class="startfinish">
+							<div>
+								<p><strong>Arrivée :{{ trajet.endTown }}</strong></p>
 							</div>
 						</div>
-					</div>
-
-					<div class="destination">
-						<div>
-							<div class="time">
-
-								<div></p>
-								<strong>{{ trajet.startAt|date('d/m/Y') }}</strong>
-								<p></p>
+					</div>	
+	
+						<div class="priceplacehistorical">
+							<div><strong>{{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong>{% if trajet.electric %}<img class="eleccar" src="{{ asset('image/voiture-electrique.png') }}" alt="icone voiture electrique">
+							{% endif %}
 							</div>
-							<em>Durée environ
-								{{ trajet.travelTime }}
-								H</em>
-						</p>
 
-					</div>
-					<div class="startfinish">
+							<div>
+								<p><strong>{{ trajet.passenger }}place(s)</strong></p>
+							</div>
 
-						<div>
-							<p>
-								<strong>
-									Départ :
-									{{ trajet.startTown }}</strong>
-							</p>
+							{% set transaction = trajet.creditTransactions.first %}
+							<div>
+								<p><strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong></p>
+							</div>
 						</div>
-					</div>
 
-					<div>-----------------------------------</div>
-					<div class="startfinish">
-						<div>
-							<p>
-								<strong>Arrivée :
-									{{ trajet.endTown }}
-								</strong>
-							</p>
-						</div>
-					</div>
 				</div>
 			</div>
-
-			<div class="priceplacehistorical">
-				<div>
-					<strong>{{ trajet.hour ? trajet.hour|date('H:i') : '' }}</strong>
-					{% if trajet.electric %}
-						<img class="eleccar" src="{{ asset('image/voiture-electrique.png') }}" alt="icone voiture electrique">
-					{% endif %}
-				</div>
-
-				<div>
-					<p>
-						<strong>{{ trajet.passenger }}
-							place(s)</strong>
-					</p>
-				</div>
-
-				{% set transaction = trajet.creditTransactions.first %}
-				<div>
-					<strong>{{ transaction ? transaction.amount : 'Non défini' }}€</strong>
-				</div>
-
-			</div>
-		</div>
+	<div class="reservedbutton-mobile1">
+		<a class="reservedbutton" href="{{ path('participer', {'id': trajet.id}) }}"><strong>Participer</strong></a>
+	</div>	
+	
 	</div>
-	<div>
-		<a class="reservedbutton" href="{{ path('participer', {'id': trajet.id}) }}">
-			<strong>Participer</strong>
-		</a>
-	</div>
+</div>	
+
+	<div class="reservedbutton-mobile2">
+		<a class="reservedbutton" href="{{ path('participer', {'id': trajet.id}) }}"><strong>Participer</strong></a>
+	</div>	
+	
 </div></div>{% elseif trajet.statut == constant('App\\Entity\\Carpooling::STATUT_TERMINE') %}{% endif %}{% endfor %}{% endblock %}
 {% set showFooter = false %}
+
+
+
+
+
+	
+					
+
+					
+
+					
+			
