@@ -1014,6 +1014,7 @@ body {
     position: fixed;
     z-index: 2000;
     
+    
 
 }
 .buttonprofil:hover {
@@ -1065,7 +1066,9 @@ body {
     border-radius: 5em;
 }
 .picturesprofil2{
-    width: 10em;
+    inline-size: 10em;
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: 5em;
     box-shadow: 10px 5px 5px rgb(20, 20, 20);
 
