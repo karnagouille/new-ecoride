@@ -1077,7 +1077,9 @@ body {
 
 
 .picturesprofilsearch {
-    width: 5em;
+    inline-size: 5em;
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: 3em;
     box-shadow: 10px 5px 5px rgb(20, 20, 20);
 }
