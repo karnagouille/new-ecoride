@@ -305,6 +305,18 @@ body {
     gap: 2em;
     align-items: center;
 }
+
+@media screen and (max-width: 1024px) {
+.footer {
+    color: rgb(0, 0, 0);
+    font-size: 2em;
+    display: block;
+    justify-content: center;
+    gap: 2em;
+    align-items: center;
+}}
+
+
 footer {
     position: static;
     bottom: 0;
@@ -1552,12 +1564,22 @@ text-align: center;
     display: flex;
     flex-direction: column;
 }
+
 .canvas {
     display: flex;
     justify-content: center;
     gap: 5em;
     text-align: center;
 }
+@media screen and (max-width: 1300px) {
+.canvas {
+    width: 30em;
+
+    display: block;
+    justify-content: center;
+    gap: 5em;
+    text-align: center;
+}}
 
 
 /*#endregion  admin*/
