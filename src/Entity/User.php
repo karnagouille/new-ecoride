@@ -26,28 +26,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
-
+    
     #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
-
+    
     #[ORM\Column(length: 255)]
     private ?string $password = null;
-
+    
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phonenumber = null;
-
+    
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
-
+    
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $date_birth = null;
-
+    
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
-
+    
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pseudo = null;
-
+    
+    #[ORM\Column]
+    private ?float $platformCredit = 0;
+    
+    #[ORM\Column(nullable: false)]
+    private ?float $credit = 20;
+    
+    #[ORM\Column]
+    private ?bool $isActive = true;
+    
     #[ORM\Column(type: 'json')]
 
     private array $roles = [];
@@ -75,14 +84,6 @@ private Collection $participants;
     #[ORM\OneToMany(targetEntity: CreditTransaction::class, mappedBy: 'receiver')]
     private Collection $receivedTransactions;
 
-    #[ORM\Column]
-    private ?float $platformCredit = 0;
-
-    #[ORM\Column(nullable: false)]
-    private ?float $credit = 20;
-
-    #[ORM\Column]
-    private ?bool $isActive = true;
 
 
 

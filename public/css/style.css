@@ -323,9 +323,9 @@ footer {
     width: 100%;
 }
 
-.legalnotice:hover {
-    color: rgb(69, 157, 216);
-    transition: all 0.3s ease-out;
+.legalnotice{
+    text-align: center;
+    margin: 5em 20em 5em 20em;
 }
 
 /*#endregion index*/
@@ -510,6 +510,16 @@ a {
     box-shadow: 2px 2px 5px;
     text-shadow: 2px 2px 5px white;
 }
+@media screen and (max-width: 700px) {
+.reservedbutton {
+    background: linear-gradient(rgb(69, 157, 216), rgb(81, 42, 158));
+    font-size: 1em;
+    border-radius: 1em;
+    width: 6em;
+    padding: 0.5em  0.5em  0.5em  1.5em;
+    box-shadow: 2px 2px 5px;
+    text-shadow: 2px 2px 5px white;
+}}
 
 .reservedbutton:active {
     transform: scale(0.9);
