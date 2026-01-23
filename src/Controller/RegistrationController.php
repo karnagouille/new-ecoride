@@ -53,8 +53,6 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-
-
             return $security->login($user, LoginAuthenticator::class, 'main');
         }
 
