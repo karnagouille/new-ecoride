@@ -87,7 +87,6 @@ final class MyaccountController extends AbstractController
     #[Route('/myaccount', name: 'myaccount',methods:['GET','POST'])]
     public function index(Request $request,EntityManagerInterface $em,SluggerInterface $slugger,CarpoolingRepository $carpoolingRepository,#[Autowire('%uploads_directory%')] string $uploadDirectory): Response
 {
-
         $car = new Car();    
         $form = $this->createForm(NewcarType::class, $car, [
         'csrf_token_id' => 'new_car_form',
@@ -96,7 +95,6 @@ final class MyaccountController extends AbstractController
         $form->handleRequest($request);
                 
         if($form->isSubmitted() && $form->isValid()){
-
 
         $brandName = $form->get('brand')->getData(); 
         $brand = $em->getRepository(\App\Entity\Brand::class)->findOneBy(['libelle' => $brandName]);
@@ -121,14 +119,10 @@ final class MyaccountController extends AbstractController
     }
     $user = $this->getUser();
     $trajets = $carpoolingRepository->findByUserOrParticipation($user);
-
     $cars = $em->getRepository(Car::class)->findBy([
         'user'=>$user,
     ]);
             $user = $this->getUser();
-
-
-
 
     return $this->render('myaccount/myaccount.html.twig',[
         

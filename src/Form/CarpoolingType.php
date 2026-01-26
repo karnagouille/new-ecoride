@@ -85,6 +85,7 @@ class CarpoolingType extends AbstractType
                 'required'=>false,
                 'expanded' => true,
                 'multiple' => false,
+                'placeholder' => false,
                 'choices' => [
                     'Oui' => true,
                     'Non' => false,
