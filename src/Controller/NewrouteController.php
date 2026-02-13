@@ -31,11 +31,8 @@ final class NewrouteController extends AbstractController
             'user_cars' => $userCars,
             ]);
 
-
             $form->handleRequest($request);
-
             if($form->isSubmitted() && $form->isValid()){ 
-
             $trajet->setUser($user);
             $em->persist($trajet);
 

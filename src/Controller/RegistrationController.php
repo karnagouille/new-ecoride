@@ -25,7 +25,8 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher,
+    Security $security, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -37,21 +38,12 @@ class RegistrationController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             $user->setCredit(20);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-
-            $this->emailVerifier->sendEmailConfirmation('verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('thebestecoride@gmail.com', 'ecoride'))
-                    ->to((string) $user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
 
             return $security->login($user, LoginAuthenticator::class, 'main');
         }

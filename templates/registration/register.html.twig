@@ -51,14 +51,17 @@
 			</div>
 
 			<div class="accountext">
-				<div>{{ form_row(registrationForm.plainPassword,{
+				<div>{{ form_row(registrationForm.plainPassword.first,{
             label:"Mot de Passe : "}) }}</div>
 			</div>
 
+			<div class="accountext">
+				<div>{{ form_row(registrationForm.plainPassword.second,{
+            label:"Confirmez votre mot de Passe : "}) }}</div>
+			</div>
 
-			{{ form_row(registrationForm.agreeTerms,{
-            label:"accepter les conditions"
-        }) }}
+
+			
 		</div>
 		<button type="submit" class="btn">s'enregistrer</button>
 	</div>

@@ -27,17 +27,11 @@ document.querySelectorAll('.start').forEach(startBtn => {
 
 // Photo de profil
 const profil = document.getElementById('profil');
-const preview = document.getElementById('preview');
-if (profil) {
+
     profil.addEventListener('change', function handleFiles() {
         const file = this.files[0];
-        if (file) {
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-            preview.onload = () => URL.revokeObjectURL(preview.src);
-        }
-    }, false);
-}
+        
+});
 
 
 

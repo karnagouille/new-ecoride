@@ -32,8 +32,8 @@ final class AdminController extends AbstractController
             $id = $request->request->get('toggle_user_id');
             $user = $userRepository->find($id);
 
-        if ($user) {
-            $user->setIsActive(!$user->isActive());
+        if ($user) { // Si l'utilisateur existe (n'est pas null)
+            $user->setIsActive(!$user->isActive()); // Inverse son état actuel : actif devient inactif et vice versa
             $em->flush();
         }
     }

@@ -85,7 +85,8 @@ final class MyaccountController extends AbstractController
 
 
     #[Route('/myaccount', name: 'myaccount',methods:['GET','POST'])]
-    public function index(Request $request,EntityManagerInterface $em,SluggerInterface $slugger,CarpoolingRepository $carpoolingRepository,#[Autowire('%uploads_directory%')] string $uploadDirectory): Response
+    public function index(Request $request,EntityManagerInterface $em,SluggerInterface $slugger,CarpoolingRepository 
+    $carpoolingRepository,): Response
 {
         $car = new Car();    
         $form = $this->createForm(NewcarType::class, $car, [
@@ -150,7 +151,14 @@ public function show( EntityManagerInterface $em, string $slug): Response
     return $this->redirectToRoute('car_edit', ['id' => $car->getId()]);
     
 }
+/* version simplifier la fonction va directement cherche l'entité car avec(Car $car) et me fourni ensuite sont ID , pas besoin de chercher dans le repo
 
+#[Route('/car/{id}', name: 'car_show')]
+public function show(Car $car): Response
+{
+    return $this->redirectToRoute('car_edit', ['id' => $car->getId()]);
+}
+*/
 
 
 #[Route('car/{id}/remove', name: 'car_remove',methods:['POST'])]
@@ -198,5 +206,6 @@ public function edit(Request $request, Car $car, EntityManagerInterface $em): Re
 
 
 }
+
 
 

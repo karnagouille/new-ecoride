@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+// Recherche de covoiturage
+
 final class CarpoolController extends AbstractController
 {
     #[Route('/carpool', name: 'searchcarpool' ,methods: [ 'GET'])]
@@ -54,7 +56,7 @@ final class CarpoolController extends AbstractController
             'user'=> $user
         ]);
     }
-
+// Changement de statut
     #[Route('/trajet/{id}/changer-statut', name: 'changer_statut')]
     public function changerStatut(Carpooling $trajet, EntityManagerInterface $em): Response
         {
@@ -77,6 +79,8 @@ final class CarpoolController extends AbstractController
         return $this->redirectToRoute('currentjourney');
     }
 
+    // Participation à un trajet
+
     #[Route('/trajet/{id}/participer', name: 'participer')]
     public function participer(EntityManagerInterface $em, int $id): Response
         {
@@ -92,7 +96,7 @@ final class CarpoolController extends AbstractController
             $participant->setCarpooling($trajet);
 
             $transaction = $trajet->getCreditTransactions()->first();
-            $amount = $transaction ? $transaction->getAmount() : 0; // 0 ou une valeur par défaut si aucune transaction
+            $amount = $transaction ? $transaction->getAmount() : 0; 
 
             
             if($participant->getUser()->getcredit() < $amount){
