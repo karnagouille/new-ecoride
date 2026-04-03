@@ -56,72 +56,53 @@
 			</div>
 
 			{{ form_start(form) }}
-			<div action="" class="userform hidden" id="filter">
+			<div action="" class="(userform) hidden" id="filter">
 				<div><h2><strong>Ajouter une voiture</strong></h2></div>
 
 
 				<div class="accountext">
-					<div>
-						<label for="">Numéro de la plaque :</label>
-					</div>
-					<div>
-						{{ form_widget(form.registration) }}
-					</div>
+						<label> 
+								<span>Numéro de la plaque : </span>
+								{{ form_widget(form.registration) }}
+						</label>
+				</div>
+				<div class="accountext">
+						<label> 
+								<span>Première imatriculation : </span>
+								{{ form_widget(form.date_first_registration) }}
+						</label>
+				</div>
+				<div class="accountext">
+						<label> 
+								<span>Model : </span>
+								{{ form_widget(form.model) }}
+						</label>
+				</div>
+				<div class="accountext">
+						<label> 
+								<span>Couleur : </span>
+								{{ form_widget(form.color) }}
+						</label>
+				</div>
+				<div class="accountext">
+						<label> 
+								<span>Marque : </span>
+								{{ form_widget(form.brand) }}
+						</label>
+				</div>
+				<div class="accountext">
+						<label> 
+								<span>Energie : </span>
+								{{ form_widget(form.energy) }}
+						</label>
+				</div>
+				<div class="accountext">
+						<label> 
+								<span>Préférences : </span>
+								{{ form_widget(form.preference) }}
+						</label>
 				</div>
 
-				<div class="accountext">
-					<div>
-						<label for="">Première imatriculation :</label>
-					</div>
-					<div>
-						{{ form_widget(form.date_first_registration) }}
-					</div>
-				</div>
-
-				<div class="accountext">
-					<div>
-						<label for="">Modèle:</label>
-					</div>
-					<div>
-						{{ form_widget(form.model) }}
-					</div>
-				</div>
-
-				<div class="accountext">
-					<div>
-						<label for="">Couleur  :</label>
-					</div>
-					<div>
-						{{ form_widget(form.color) }}
-					</div>
-				</div>
-
-				<div class="accountext">
-					<div>
-						<label for="">Marque  :</label>
-					</div>
-					<div>
-						{{ form_widget(form.brand) }}
-					</div>
-				</div>
-
-				<div class="accountext">
-					<div>
-						<label for="">Energie :</label>
-					</div>
-					<div>
-						{{ form_widget(form.energy) }}
-					</div>
-				</div>
-
-				<div class="accountext">
-					<div>
-						<label for="">Préférences :</label>
-					</div>
-					<div>
-						{{ form_widget(form.preference) }}
-					</div>
-				</div>
 				{{ form_end(form) }}
 				<h2>Mes voitures</h2>
 				<ul>

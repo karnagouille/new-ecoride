@@ -19,49 +19,54 @@
 
 	{{ form_errors(registrationForm) }}
 	{{ form_start(registrationForm) }}
-	<div class="log  ">
-		<div>
-			<div><img src="/image/connexion.png" alt="" class="imglog"></div>
-		</div>
-
-		<div>
-			<h1 class="h3 mb-3 font-weight-normal infolog titleshadow">S'ENREGISTRER</h1>
-		</div>
+	<div class="log ">
+		
 
 		<div class="log">
+			<div >
+				<div><img src="/image/connexion.png" alt="" class="imglog"></div>
+			</div>
 
-			<div class="accountext">
-				<div>{{ form_row(registrationForm.pseudo,{
-            label:"Pseudo : "}) }}</div>
+			<div >
+				<div><h1 class="h3 mb-3 font-weight-normal infolog titleshadow">S'ENREGISTRER</h1></div>
 			</div>
 
 			<div class="accountext">
-				<div>{{ form_row(registrationForm.lastname,{
-            label:"Nom : "}) }}</div>
+				<label>
+					<span>Pseudo</span>
+					{{ form_widget(registrationForm.pseudo) }}
+				</label>
 			</div>
-
-			<div class="accountext ">
-				<div>{{ form_row(registrationForm.name,{
-            label:"Prénom : "}) }}</div>
-			</div>
-
 			<div class="accountext">
-				<div>{{ form_row(registrationForm.email,{
-            label:"Mail : "}) }}</div>
+				<label>
+					<span>Nom</span>
+					{{ form_widget(registrationForm.lastname) }}
+				</label>
 			</div>
-
 			<div class="accountext">
-				<div>{{ form_row(registrationForm.plainPassword.first,{
-            label:"Mot de Passe : "}) }}</div>
+				<label>
+					<span>Prénom</span>
+					{{ form_widget(registrationForm.name) }}
+				</label>
 			</div>
-
 			<div class="accountext">
-				<div>{{ form_row(registrationForm.plainPassword.second,{
-            label:"Confirmez votre mot de Passe : "}) }}</div>
+				<label>
+					<span>Email</span>
+					{{ form_widget(registrationForm.email) }}
+				</label>
 			</div>
-
-
-			
+			<div class="accountext">
+				<label>
+					<span>Mot de passe</span>
+					{{ form_widget(registrationForm.plainPassword.first) }}
+				</label>
+			</div>
+			<div class="accountext">
+				<label>
+					<span>Comfirmer le mot de passe</span>
+					{{ form_widget(registrationForm.plainPassword.second) }}
+				</label>
+			</div>
 		</div>
 		<button type="submit" class="btn">s'enregistrer</button>
 	</div>
